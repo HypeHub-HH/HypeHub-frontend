@@ -1,32 +1,45 @@
-import { Box, Button, Container, Typography, buttonClasses } from "@mui/material";
+import { Box, Container, Typography, buttonClasses } from "@mui/material";
 import React from "react";
-import Logo from "../assets/logo-white-on-transparent-background.png";
 import JoinImage from "../assets/image-join.jpg";
 import Grid from "@mui/material/Unstable_Grid2";
 import { styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
+import CustomButton from "./CustomButton";
 
 const JoinBanner = () => {
+  const JoinText = styled(Typography)(({ theme }) => ({
+    fontFamily: "robot",
+    borderRadius: "2rem",
+    padding: "10%",
+    backgroundColor: "#E6ECF3",
+    [theme.breakpoints.down("md")]: {
+      fontSize: "0.9rem",
+    },
+  }));
+
   return (
-    <Box sx={{ backgroundColor: "greySecondary.main" }}>
-      <Grid container spacing={2}>
-        <Grid md={6} display={"flex"} justifyContent={"center"} marginTop={"10dvh"}>
+    <Container sx={{ backgroundColor: "greySecondary.main" }} fixed>
+      <Grid container spacing={2} display={"flex"} justifyContent={"center"} padding={"1dvw"}>
+        <Grid md={6} display={"flex"} justifyContent={"center"}>
           <Box component="img" src={JoinImage} alt="Join community image." borderRadius={"1rem"} sx={{ maxWidth: "80%", hight: "auto" }} />
         </Grid>
         <Grid md={6} display={"flex"} flexDirection={"column"} justifyContent={"center"} alignSelf={"center"}>
-          <Typography variant="h5" component="div" fontFamily="robot" align="center" padding="10%" backgroundColor="#E6ECF3" borderRadius={"2rem"} sx={{ flexGrow: 1 }}>
-            Welcome to our vibrant social media platform, the ultimate destination for style enthusiasts like you! Dive into a world where fashion is
-            more than just clothing; it's an expression of individuality, creativity, and passion. Here, we've created a haven for fashion aficionados
-            to share their favorite fashion items, clothes, and outfits with a community that truly understands and appreciates the art of dressing.
-          </Typography>
+          <JoinText variant="h5" component="div" align="justify">
+            Dive into a world where fashion is more than just clothing, it's an expression of individuality, creativity, and passion. Here, we've
+            created a haven for fashion aficionados to share their favorite fashion items, clothes, and outfits with a community that truly
+            understands and appreciates the art of dressing.
+          </JoinText>
           <Box display={"flex"} justifyContent={"center"} marginTop={"5%"}>
-            <Button variant="contained" color="secondary" size="large" >
-              Join the Community
-            </Button>
+            <CustomButton
+              backgroundColor="#0EA5E9"
+              color="secondary"
+              buttonText="Join the Community"
+              breakpointWidth="100dvw"
+              breakpointHeight="5dvh"
+            />
           </Box>
         </Grid>
       </Grid>
-    </Box>
+    </Container>
   );
 };
 

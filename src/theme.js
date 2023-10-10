@@ -12,7 +12,6 @@ const theme = createTheme({
         },
         greySecondary:{
             main: `#CBD5E1`,
-            light: `#CBD5E1`
         }
     },
     components: {
