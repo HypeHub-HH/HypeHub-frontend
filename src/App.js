@@ -1,21 +1,14 @@
-import { Container, Typography } from "@mui/material";
-import Navbar from "./components/Navbar";
-import JoinBanner from "./components/JoinBanner";
-import MainBanner from "./components/MainBanner";
-import Grid from "@mui/material/Unstable_Grid2";
+import { Route, Routes } from "react-router-dom";
+import Landing from "./pages/Landing";
+import Home from "./pages/Home";
 
 function App() {
-  return (
-    <>
-      <Navbar />
-
-            <JoinBanner />
-
-
-        <MainBanner />
-
-    </>
-  );
+  return <>
+  <Routes>
+    <Route path="/" element={<Landing/>}/>
+    <Route path="/tbd" element={<Home/>}/>
+  </Routes>
+  </>;
 }
 
 export default App;

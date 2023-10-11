@@ -1,14 +1,9 @@
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import { Stack } from "@mui/material";
-import LogoIcon from "../assets/logo-icon.png";
+import { Stack, Typography, Box, Toolbar, AppBar} from "@mui/material";
+import LogoIcon from "../../assets/logo-icon.png";
 import styled from "@emotion/styled";
-import CustomButton from "./CustomButton";
-import Divider from "@mui/material";
+import CustomButton from "../../components/ui/CustomButton";
+
 
 export default function Navbar() {
 

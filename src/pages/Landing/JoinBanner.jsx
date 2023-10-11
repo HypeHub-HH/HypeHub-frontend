@@ -1,9 +1,10 @@
 import { Box, Container, Typography, buttonClasses } from "@mui/material";
 import React from "react";
-import JoinImage from "../assets/image-join.jpg";
+import JoinImage from "../../assets/image-join.jpg";
 import Grid from "@mui/material/Unstable_Grid2";
 import { styled } from "@mui/material/styles";
-import CustomButton from "./CustomButton";
+import CustomButton from "../../components/ui/CustomButton";
+
 
 const JoinBanner = () => {
   const JoinText = styled(Typography)(({ theme }) => ({
