@@ -1,12 +1,9 @@
-import {Container} from "@mui/material";
-import React from "react";
-
+import { Container } from '@mui/material';
+import * as React from 'react';
 
 const MainBanner = () => {
   return (
-    <Container sx={{ backgroundColor: "greySecondary.main" }} display={"flex"} justifyContent={"center"}>
-
-    </Container>
+    <Container sx={{ backgroundColor: 'greySecondary.main' }} display={'flex'} justifycontent={'center'}></Container>
   );
 };
 

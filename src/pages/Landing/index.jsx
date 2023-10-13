@@ -1,14 +1,14 @@
-import React from "react";
-import Navbar from "./Navbar";
-import JoinBanner from "./JoinBanner";
-import MainBanner from "./MainBanner"
+import React from 'react';
+import Navbar from './Navbar';
+import JoinBanner from './JoinBanner';
+import MainBanner from './MainBanner';
 
 const Landing = () => {
   return (
     <>
-      <Navbar/>
-      <JoinBanner/>
-      <MainBanner/>
+      <Navbar />
+      <JoinBanner />
+      <MainBanner />
     </>
   );
 };
