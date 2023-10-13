@@ -4,7 +4,7 @@ import React from "react";
 
 const MainBanner = () => {
   return (
-    <Container sx={{ backgroundColor: "greySecondary.main" }} display={"flex"} justifyContent={"center"}>
+    <Container sx={{ backgroundColor: "greySecondary.main" }} display={"flex"} justifycontent={"center"}>
 
     </Container>
   );

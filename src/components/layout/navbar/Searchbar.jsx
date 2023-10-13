@@ -50,7 +50,7 @@ const Searchbar = () => {
       <SearchIconWrapper>
         <SearchIcon />
       </SearchIconWrapper>
-      <StyledInputBase placeholder="Search…" inputProps={{ "aria-label": "search" }} />
+      <StyledInputBase placeholder="Search User…" inputProps={{ "aria-label": "search" }} />
     </Search>
   );
 };
