@@ -18,8 +18,8 @@ const JoinBanner = () => {
   }));
 
   return (
-    <Box sx={{backgroundColor: "#CBD5E1"}}>
-    <Container sx={{ backgroundColor: "greySecondary.main" }} fixed>
+    <Box sx={{backgroundColor: "greySecondary.main"}}>
+    <Container maxWidth={"xl"}>
       <Grid container spacing={2} display={"flex"} justifycontent={"center"} padding={"1dvw"}>
         <Grid md={6} display={"flex"} justifyContent={"center"}>
           <Box component="img" src={JoinImage} alt="Join community image." borderRadius={"1rem"} sx={{ maxWidth: "80%", hight: "auto" }} />

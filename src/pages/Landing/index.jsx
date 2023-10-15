@@ -1,15 +1,21 @@
 import React from "react";
-import Navbar from "../../components/layout/navbar/Navbar";
 import JoinBanner from "./JoinBanner";
-import MainBanner from "./MainBanner"
+import MainBanner from "./MainBanner";
 import Footer from "../../components/layout/footer/Footer";
+import Hero from "./Hero";
+import EmailSender from "./EmailSender";
+import Details from "./Details";
+import Features from "./Features";
 
 const Landing = () => {
   return (
     <>
-      <JoinBanner/>
-      <MainBanner/>
-      <Footer/>
+      <Hero />
+      <MainBanner />
+      <Features/>
+      <Details/>
+      <EmailSender/>
+      <Footer />
     </>
   );
 };
