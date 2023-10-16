@@ -17,8 +17,8 @@ import {
 } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { checkIfEmailExist } from '../../api/axios/Account/checkIfEmailExist.js';
-import { checkIfUsernameExist } from '../../api/axios/Account/checkIfUsernameExist.js';
+import { checkIfEmailExist } from '../../../api/axios/Account/checkIfEmailExist.js';
+import { checkIfUsernameExist } from '../../../api/axios/Account/checkIfUsernameExist.js';
 
 const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn }) => {
   const [showPassword, setShowPassword] = React.useState(false);

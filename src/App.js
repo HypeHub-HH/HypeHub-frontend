@@ -8,7 +8,7 @@ import Navbar from './components/layout/navbar/Navbar';
 function App() {
   return (
     <>
-    <Navbar/>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/tbd" element={<Home />} />

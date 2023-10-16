@@ -1,5 +1,5 @@
-import * as React from "react";
-import { Typography, Tooltip, IconButton, Avatar, Menu, MenuItem } from "@mui/material";
+import * as React from 'react';
+import { Typography, Tooltip, IconButton, Avatar, Menu, MenuItem } from '@mui/material';
 
 const AvatarMenu = ({ settings }) => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -23,17 +23,17 @@ const AvatarMenu = ({ settings }) => {
         </IconButton>
       </Tooltip>
       <Menu
-        sx={{ mt: "95px" }}
+        sx={{ mt: '95px' }}
         id="menu-appbar"
         anchorEl={anchorElUser}
         anchorOrigin={{
-          vertical: "top",
-          horizontal: "right",
+          vertical: 'top',
+          horizontal: 'right',
         }}
         keepMounted
         transformOrigin={{
-          vertical: "top",
-          horizontal: "right",
+          vertical: 'top',
+          horizontal: 'right',
         }}
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}

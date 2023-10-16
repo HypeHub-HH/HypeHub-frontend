@@ -1,9 +1,8 @@
-import { Navigate, Outlet } from 'react-router-dom'
-const PrivateRoutes = () => {
-  let auth = {'token':false}
-return (
-    auth.token ? <Outlet/> : <Navigate to='/'/>
-  )
-}
+import { Navigate, Outlet } from 'react-router-dom';
 
-export default PrivateRoutes
+const PrivateRoutes = () => {
+  let auth = { token: false };
+  return auth.token ? <Outlet /> : <Navigate to="/" />;
+};
+
+export default PrivateRoutes;
