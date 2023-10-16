@@ -14,7 +14,7 @@ const AvatarMenu = ({ settings }) => {
   return (
     <>
       <Tooltip title="Open settings">
-        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+        <IconButton onClick={handleOpenUserMenu}>
           <Avatar
             alt="Avatar image."
             src="https://img.wprost.pl/img/joe-biden/f8/ec/45cbff5cf911c1f11165ae3b135e.jpeg"

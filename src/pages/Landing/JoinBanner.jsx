@@ -17,37 +17,30 @@ const JoinBanner = () => {
   }));
 
   return (
-    <Box sx={{ backgroundColor: '#CBD5E1' }}>
-      <Container sx={{ backgroundColor: 'greySecondary.main' }} fixed>
-        <Grid container spacing={2} display={'flex'} justifycontent={'center'} padding={'1dvw'}>
-          <Grid md={6} display={'flex'} justifyContent={'center'}>
-            <Box
-              component="img"
-              src={JoinImage}
-              alt="Join community image."
-              borderRadius={'1rem'}
-              sx={{ maxWidth: '80%', hight: 'auto' }}
-            />
-          </Grid>
-          <Grid md={6} display={'flex'} flexDirection={'column'} justifycontent={'center'} alignSelf={'center'}>
-            <JoinText variant="h5" component="div" align="justify">
-              Dive into a world where fashion is more than just clothing, it's an expression of individuality,
-              creativity, and passion. Here, we've created a haven for fashion aficionados to share their favorite
-              fashion items, clothes, and outfits with a community that truly understands and appreciates the art of
-              dressing.
-            </JoinText>
-            <Box display={'flex'} justifycontent={'center'} marginTop={'5%'}>
-              <CustomButton
-                backgroundColor="#0EA5E9"
-                color="secondary"
-                buttonText="Join the Community"
-                breakpointWidth="100dvw"
-                breakpointHeight="5dvh"
-              />
-            </Box>
-          </Grid>
+    <Box sx={{backgroundColor: "greySecondary.main"}}>
+    <Container maxWidth={"xl"}>
+      <Grid container spacing={2} display={"flex"} justifycontent={"center"} padding={"1dvw"}>
+        <Grid md={6} display={"flex"} justifyContent={"center"}>
+          <Box component="img" src={JoinImage} alt="Join community image." borderRadius={"1rem"} sx={{ maxWidth: "80%", hight: "auto" }} />
         </Grid>
-      </Container>
+        <Grid md={6} display={"flex"} flexDirection={"column"} justifyContent={"center"} alignSelf={"center"}>
+          <JoinText variant="h5" component="div" align="justify">
+            Dive into a world where fashion is more than just clothing, it's an expression of individuality, creativity, and passion. Here, we've
+            created a haven for fashion aficionados to share their favorite fashion items, clothes, and outfits with a community that truly
+            understands and appreciates the art of dressing.
+          </JoinText>
+          <Box display={"flex"} justifyContent={"center"} marginTop={"5%"}>
+            <CustomButton
+              backgroundColor="#0EA5E9"
+              color="secondary"
+              buttonText="Join the Community"
+              breakpointWidth="100dvw"
+              breakpointHeight="5dvh"
+            />
+          </Box>
+        </Grid>
+      </Grid>
+    </Container>
     </Box>
   );
 };
