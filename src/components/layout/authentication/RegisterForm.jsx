@@ -17,10 +17,13 @@ import {
 } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { checkIfEmailExist } from '../../../api/axios/Account/checkIfEmailExist.js';
-import { checkIfUsernameExist } from '../../../api/axios/Account/checkIfUsernameExist.js';
+import { AuthenticationApi } from '../../../api/AuthenticationApi.js';
+import { AccountApi } from '../../../api/AccountApi.js';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn }) => {
+  const navigate = useNavigate();
+  const [errors, setErrors] = React.useState(null);
   const [showPassword, setShowPassword] = React.useState(false);
   const [email, setEmail] = React.useState('');
   const [username, setUsername] = React.useState('');
@@ -34,6 +37,7 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn }) => {
   const [triggerAxiosUsername, setTriggerAxiosUsername] = React.useState(false);
 
   React.useEffect(() => {
+    setErrors(null);
     validateEmail();
   }, [email]);
 
@@ -41,7 +45,7 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn }) => {
     const axiosCheckIfEmailExist = async () => {
       try {
         setCheckEmail(true);
-        const response = await checkIfEmailExist(email);
+        const response = await AccountApi.checkIfEmailExistAsync(email);
         let emailExist = response.data;
         if (emailExist === true) {
           setIsEmailValid({ result: false, message: 'This email already exists.' });
@@ -58,6 +62,7 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn }) => {
   }, [triggerAxiosEmail]);
 
   React.useEffect(() => {
+    setErrors(null);
     validateUsername();
   }, [username]);
 
@@ -65,7 +70,7 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn }) => {
     const axiosCheckIfUsernameExist = async () => {
       try {
         setCheckUsername(true);
-        const response = await checkIfUsernameExist(username);
+        const response = await AccountApi.checkIfUsernameExistAsync(username);
         let usernameExist = response.data;
         if (usernameExist === true) {
           setIsUsernameValid({ result: false, messages: ['This username already exists.'] });
@@ -82,6 +87,7 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn }) => {
   }, [triggerAxiosUsername]);
 
   React.useEffect(() => {
+    setErrors(null);
     validatePassword();
   }, [password]);
 
@@ -108,9 +114,22 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn }) => {
     validateUsername();
     validatePassword();
     if (isEmailValid.result === true && isUsernameValid.result === true && isPasswordValid.result === true) {
-      console.log(password);
-      console.log(username);
-      console.log(email);
+      const axiosRegister = async () => {
+        try {
+          const response = await AuthenticationApi.signUpAsync({
+            email: email,
+            username: username,
+            password: password,
+          });
+          console.log(response);
+          setOpenSignUp(false);
+          navigate('/');
+        } catch (error) {
+          setErrors(error.response.data.message);
+          console.error(error);
+        }
+      };
+      axiosRegister();
     }
   };
 
@@ -226,6 +245,12 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn }) => {
         <Typography component="h1" variant="h4" align="center">
           Sign Up
         </Typography>
+        {errors !== null &&
+          errors.map((error) => (
+            <Typography variant="h6" align="center" color={'#db6969'}>
+              {error}
+            </Typography>
+          ))}
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
           <FormControl
             fullWidth

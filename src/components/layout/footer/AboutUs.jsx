@@ -1,4 +1,3 @@
-import * as React from 'react';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { Box, Link, Typography } from '@mui/material';
@@ -13,10 +12,10 @@ const AboutUs = () => {
         <Typography variant="body1" color="text.secondary">
           Mikołaj Zgórski
         </Typography>
-        <Link href="https://www.linkedin.com/in/miko%C5%82aj-zg%C3%B3rski-190687207/" color="inherit">
+        <Link href="https://www.linkedin.com/in/miko%C5%82aj-zg%C3%B3rski-190687207/" color="inherit" target="_blank">
           <LinkedInIcon />
         </Link>
-        <Link href="https://github.com/Meek0hWhy" color="inherit" sx={{ pl: 1, pr: 1 }}>
+        <Link href="https://github.com/Meek0hWhy" color="inherit" target="_blank" sx={{ pl: 1, pr: 1 }}>
           <GitHubIcon />
         </Link>
       </Box>
@@ -24,10 +23,10 @@ const AboutUs = () => {
         <Typography variant="body1" color="text.secondary">
           Mariusz Woźniak
         </Typography>
-        <Link href="https://www.linkedin.com/in/mariuszwozniak145/" color="inherit">
+        <Link href="https://www.linkedin.com/in/mariuszwozniak145/" color="inherit" target="_blank">
           <LinkedInIcon />
         </Link>
-        <Link href="https://github.com/MariuszWozniak145" color="inherit" sx={{ pl: 1, pr: 1 }}>
+        <Link href="https://github.com/MariuszWozniak145" color="inherit" target="_blank" sx={{ pl: 1, pr: 1 }}>
           <GitHubIcon />
         </Link>
       </Box>

@@ -1,24 +1,23 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Routes } from 'react-router-dom';
 import Landing from './pages/Landing';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
-import PrivateRoutes from './utils/PrivateRoutes';
 import Navbar from './components/layout/navbar/Navbar';
+import { AuthProvider } from './context/AuthContext';
+import UserRoutes from './utils/UserRoutes';
 
 function App() {
   return (
-    <>
+    <AuthProvider>
       <Navbar />
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/tbd" element={<Home />} />
-        <Route element={<PrivateRoutes />}>
-          <Route path="/tbd2" />
-          <Route path="/tbd3" />
+        <Route element={<UserRoutes />}>
+          <Route path="/home" element={<Home />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </>
+    </AuthProvider>
   );
 }
 

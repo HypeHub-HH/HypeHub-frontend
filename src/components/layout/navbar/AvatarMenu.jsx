@@ -39,8 +39,8 @@ const AvatarMenu = ({ settings }) => {
         onClose={handleCloseUserMenu}
       >
         {settings.map((setting) => (
-          <MenuItem key={setting} onClick={handleCloseUserMenu}>
-            <Typography textAlign="center">{setting}</Typography>
+          <MenuItem key={setting.Name} onClick={setting.Fun}>
+            <Typography textAlign="center">{setting.Name}</Typography>
           </MenuItem>
         ))}
       </Menu>

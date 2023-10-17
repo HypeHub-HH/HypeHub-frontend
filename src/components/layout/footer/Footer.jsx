@@ -1,9 +1,7 @@
-import * as React from "react";
 import Grid from "@mui/material/Grid";
 import { Container, Box, Typography } from "@mui/material";
 import AboutUs from "./AboutUs";
 import Hello from "./Hello";
-import EmailSender from "../../../pages/Landing/EmailSender";
 
 export default function Footer() {
   return (

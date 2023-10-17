@@ -6,13 +6,34 @@ import Searchbar from './Searchbar';
 import AvatarMenu from './AvatarMenu';
 import LoginForm from '../authentication/LoginForm';
 import RegisterForm from '../authentication/RegisterForm';
-
+import { useAuth } from '../../../context/AuthContext.js';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
-  const [auth, setAuth] = React.useState(false);
-  const settings = ['Outfits', 'Items', 'Account', 'Logout'];
+  const { currentUser, logout } = useAuth();
+  const navigate = useNavigate();
   const [openSignIn, setOpenSignIn] = React.useState(false);
   const [openSignUp, setOpenSingUp] = React.useState(false);
+
+  const handleOutfitsButton = () => {
+    navigate('/outfits');
+  };
+  const handleItemsButton = () => {
+    navigate('/items');
+  };
+  const handleAccountButton = () => {
+    navigate('/account');
+  };
+  const handleLogoutButton = () => {
+    logout();
+    navigate('/');
+  };
+  const settings = [
+    { Name: 'Outfits', Fun: handleOutfitsButton },
+    { Name: 'Items', Fun: handleItemsButton },
+    { Name: 'Account', Fun: handleAccountButton },
+    { Name: 'Logout', Fun: handleLogoutButton },
+  ];
 
   const handleSignInButton = () => {
     setOpenSignIn(true);
@@ -26,7 +47,7 @@ const Navbar = () => {
     <AppBar position="sticky" color="primary">
       <Toolbar>
         <Logo />
-        {!auth ? (
+        {!currentUser ? (
           <Stack spacing={3} direction="row">
             <CustomButton
               backgroundColor="#CBD5E1"

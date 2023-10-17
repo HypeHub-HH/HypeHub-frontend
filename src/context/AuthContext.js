@@ -1,11 +1,23 @@
 import * as React from 'react';
 
-const AuthContext = React.createContext({});
+const AuthContext = React.createContext();
+
+export const useAuth = () => {
+  return React.useContext(AuthContext);
+};
 
 export const AuthProvider = ({ children }) => {
-  const [auth, setAuth] = React.useState({});
+  const [currentUser, setCurrentUser] = React.useState();
 
-  return <AuthContext.Provider value={{ auth, setAuth }}>{children}</AuthContext.Provider>;
+  const login = (user) => {
+    setCurrentUser(user);
+  };
+
+  const logout = () => {
+    setCurrentUser(null);
+  };
+
+  return <AuthContext.Provider value={{ currentUser, login, logout }}>{children}</AuthContext.Provider>;
 };
 
 export default AuthContext;

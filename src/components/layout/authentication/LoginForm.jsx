@@ -16,9 +16,14 @@ import {
 } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { signIn } from '../../../api/axios/Authentication/signIn.js';
+import { AuthenticationApi } from '../../../api/AuthenticationApi.js';
+import { useAuth } from '../../../context/AuthContext.js';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = ({ openSignIn, setOpenSignIn, setOpenSignUp }) => {
+  const navigate = useNavigate();
+  const auth = useAuth();
+  const [error, setError] = React.useState(null);
   const [showPassword, setShowPassword] = React.useState(false);
   const [emailOrUsername, setEmailOrUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -26,10 +31,12 @@ const LoginForm = ({ openSignIn, setOpenSignIn, setOpenSignUp }) => {
   const [isPasswordValid, setIsPasswordValid] = React.useState({ result: null, message: null });
 
   React.useEffect(() => {
+    setError(null);
     validateEmailOrUsername();
   }, [emailOrUsername]);
 
   React.useEffect(() => {
+    setError(null);
     validatePassword();
   }, [password]);
 
@@ -53,12 +60,16 @@ const LoginForm = ({ openSignIn, setOpenSignIn, setOpenSignUp }) => {
     if (isEmailOrUsernameValid.result === true && isPasswordValid.result === true) {
       const axiosLogin = async () => {
         try {
-          const response = await signIn({
+          const response = await AuthenticationApi.signInAsync({
             emailOrUsername: emailOrUsername,
             password: password,
           });
           console.log(response);
+          auth.login(response.data);
+          setOpenSignIn(false);
+          navigate('/home');
         } catch (error) {
+          setError(error.response.data.message);
           console.error(error);
         }
       };
@@ -113,6 +124,11 @@ const LoginForm = ({ openSignIn, setOpenSignIn, setOpenSignUp }) => {
         <Typography component="h1" variant="h4" align="center">
           Sign In
         </Typography>
+        {error !== null && (
+          <Typography variant="h6" align="center" color={'#db6969'}>
+            {error}
+          </Typography>
+        )}
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
           <FormControl
             fullWidth
