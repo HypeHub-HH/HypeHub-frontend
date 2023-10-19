@@ -27,6 +27,17 @@ Nagrac gifa z wygladem i funkcjonalnosciami strony
 <p align="center">https://github.com/MariuszWozniak145</p>
 <p align="center">https://github.com/Meek0hWhy</p>
 
+<h2 align="center">Documentation</h2>
+<p align="center">
+  <a align="center" href="https://postman.com" target="_blank" rel="noreferrer">API</a>
+</p>
+<p align="center">
+  <a align="center" href="https://postman.com" target="_blank" rel="noreferrer">Class diagram</a>
+</p>
+<p align="center">
+  <a align="center" href="https://postman.com" target="_blank" rel="noreferrer">Database diagram</a>
+</p>
+
 <!--
 CI ikonka
 -->
