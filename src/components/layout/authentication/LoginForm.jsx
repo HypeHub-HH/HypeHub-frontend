@@ -64,12 +64,20 @@ const LoginForm = ({ openSignIn, setOpenSignIn, setOpenSignUp }) => {
             emailOrUsername: emailOrUsername,
             password: password,
           });
-          console.log(response);
-          auth.login(response.data);
+          console.log(response.data);
+          auth.login({
+            accountId: response.data.accountId,
+            userName: response.data.userName,
+            email: response.data.email,
+            avatarURL: response.data.avatarURL,
+            roles: response.data.roles,
+          });
+          localStorage.setItem('ACCESS_TOKEN', response.data.token);
+          localStorage.setItem('REFRESH_TOKEN', response.data.refreshToken);
           setOpenSignIn(false);
           navigate('/home');
         } catch (error) {
-          setError(error.response.data.message);
+          setError(error.response.data.Msg);
           console.error(error);
         }
       };

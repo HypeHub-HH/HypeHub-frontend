@@ -7,7 +7,7 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = React.useState();
+  const [currentUser, setCurrentUser] = React.useState(null);
 
   const login = (user) => {
     setCurrentUser(user);

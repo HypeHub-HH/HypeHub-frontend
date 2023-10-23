@@ -125,7 +125,7 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn }) => {
           setOpenSignUp(false);
           navigate('/');
         } catch (error) {
-          setErrors(error.response.data.message);
+          setErrors(error.response.data.Errors);
           console.error(error);
         }
       };

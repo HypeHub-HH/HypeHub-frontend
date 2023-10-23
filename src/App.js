@@ -4,7 +4,7 @@ import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import Navbar from './components/layout/navbar/Navbar';
 import { AuthProvider } from './context/AuthContext';
-import UserRoutes from './utils/UserRoutes';
+import UserRoutes from './utils/UserRoutes.js';
 
 function App() {
   return (
