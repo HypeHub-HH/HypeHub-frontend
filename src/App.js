@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Switch, Route, Routes } from 'react-router-dom';
 import Landing from './pages/Landing';
 import NotFound from './pages/NotFound';
-import NavbarUnAuthorized from './components/layout/navbar/NavbarUnAuthorized';
 import { AuthProvider } from './context/AuthContext';
 import AuthorizedRoutes from './utils/AuthorizedRoutes.js';
 import UnAuthorizedRoutes from './utils/UnAuthorizedRoutes.js';
 import Containter from './components/layout/Container.jsx';
+import Items from './pages/Items';
 
 function App() {
   return (
@@ -28,7 +28,7 @@ function App() {
         >
           <Route path="/explore" element={<div>latest outfits</div>} />
           <Route path="/{username}/settings" element={<div>ustawienia naszego konta</div>} />
-          <Route path="/{username}/myItems" element={<div>wchodzimy na nasze itemy do edycji</div>} />
+          <Route path="/{username}/myItems" element={<Items/>} />
           <Route path="/{username}/myItems/{iditemu}" element={<div>wchodzimy na nasz item do edycji</div>} />
           <Route path="/{username}/items" element={<div>wchodzimy na itemy innego uzytkownika</div>} />
           <Route path="/{username}/items/{iditemu}" element={<div>wchodzimy na item innego uzytkownika</div>} />
@@ -38,7 +38,6 @@ function App() {
           <Route path="/{username}/outfits/{idoutfitu}" element={<div>wchodzimy na outfit innego uzytkownika</div>} />
         </Route>
         <Route path="*" element={<NotFound />} />
-        <Route path="/items" element={<Items />} />
       </Routes>
     </AuthProvider>
   );
