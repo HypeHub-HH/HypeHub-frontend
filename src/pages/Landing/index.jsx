@@ -12,10 +12,6 @@ const Landing = () => {
   const [openSignUp, setOpenSingUp] = React.useState(false);
   const [successfullySignUp, setSuccessfullySignUp] = React.useState(false);
 
-  React.useEffect(()=>{
-console.log(process.env.REACT_APP_BACKEND_HOST)
-  },[])
-
   return (
     <>
       <NavbarUnAuthorized
