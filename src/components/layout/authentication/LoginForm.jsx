@@ -65,15 +65,7 @@ const LoginForm = ({ openSignIn, setOpenSignIn, setOpenSignUp }) => {
             password: password,
           });
           console.log(response.data);
-          auth.login({
-            accountId: response.data.accountId,
-            userName: response.data.userName,
-            email: response.data.email,
-            avatarURL: response.data.avatarURL,
-            roles: response.data.roles,
-          });
-          localStorage.setItem('ACCESS_TOKEN', response.data.token);
-          localStorage.setItem('REFRESH_TOKEN', response.data.refreshToken);
+          auth.login(response.data);
           setOpenSignIn(false);
           navigate('/home');
         } catch (error) {

@@ -2,19 +2,37 @@ import { BrowserRouter as Router, Switch, Route, Routes } from 'react-router-dom
 import Landing from './pages/Landing';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
-import Navbar from './components/layout/navbar/Navbar';
+import NavbarUnAuthorized from './components/layout/navbar/NavbarUnAuthorized';
 import { AuthProvider } from './context/AuthContext';
-import UserRoutes from './utils/UserRoutes.js';
+import AuthorizedRoutes from './utils/AuthorizedRoutes.js';
+import UnAuthorizedRoutes from './utils/UnAuthorizedRoutes.js';
+import Containter from './components/layout/Container.jsx';
 
 function App() {
   return (
     <AuthProvider>
-      <Navbar />
       <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route element={<UserRoutes />}>
+        <Route
+          path="/"
+          element={
+            <UnAuthorizedRoutes>
+              <NavbarUnAuthorized />
+              <Landing />
+            </UnAuthorizedRoutes>
+          }
+        ></Route>
+
+        <Route
+          element={
+            <AuthorizedRoutes>
+              <Containter />
+            </AuthorizedRoutes>
+          }
+        >
           <Route path="/home" element={<Home />} />
+          <Route path="/test" element={<div>test</div>} />
         </Route>
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AuthProvider>
