@@ -1,4 +1,9 @@
 import * as React from 'react';
+import { AuthenticationApi } from '../../../api/AuthenticationApi.js';
+import { useAuth } from '../../../context/AuthContext.js';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { useNavigate } from 'react-router-dom';
 import {
   styled,
   Button,
@@ -14,11 +19,6 @@ import {
   Divider,
   FormHelperText,
 } from '@mui/material';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { AuthenticationApi } from '../../../api/AuthenticationApi.js';
-import { useAuth } from '../../../context/AuthContext.js';
-import { useNavigate } from 'react-router-dom';
 
 const LoginForm = ({ openSignIn, setOpenSignIn, setOpenSignUp }) => {
   const navigate = useNavigate();
@@ -64,12 +64,11 @@ const LoginForm = ({ openSignIn, setOpenSignIn, setOpenSignUp }) => {
             emailOrUsername: emailOrUsername,
             password: password,
           });
-          console.log(response);
           auth.login(response.data);
           setOpenSignIn(false);
-          navigate('/home');
+          navigate('/explore');
         } catch (error) {
-          setError(error.response.data.message);
+          setError(error.response.data.Msg);
           console.error(error);
         }
       };

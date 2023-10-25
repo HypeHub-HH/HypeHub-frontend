@@ -12,17 +12,14 @@ const CustomButton = ({ backgroundColor, color, buttonText, breakpointWidth, bre
     borderRadius: '20px',
     fontWeight: 'bold',
     textTransform: 'none',
-    display: 'block',
+    // display: 'block',
     '&:hover': {
       backgroundColor: color,
       color: backgroundColor,
       borderColor: backgroundColor,
     },
     [theme.breakpoints.down('md')]: {
-      fontSize: '0.6rem',
-      padding: '0',
-      width: breakpointWidth,
-      height: breakpointHeight,
+      fontSize: '0.7rem',
     },
   }));
 

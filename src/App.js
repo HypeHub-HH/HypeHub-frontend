@@ -1,20 +1,41 @@
 import { BrowserRouter as Router, Switch, Route, Routes } from 'react-router-dom';
 import Landing from './pages/Landing';
-import Home from './pages/Home';
 import NotFound from './pages/NotFound';
-import Navbar from './components/layout/navbar/Navbar';
+import NavbarUnAuthorized from './components/layout/navbar/NavbarUnAuthorized';
 import { AuthProvider } from './context/AuthContext';
-import UserRoutes from './utils/UserRoutes';
-import Items from './pages/Items';
+import AuthorizedRoutes from './utils/AuthorizedRoutes.js';
+import UnAuthorizedRoutes from './utils/UnAuthorizedRoutes.js';
+import Containter from './components/layout/Container.jsx';
 
 function App() {
   return (
     <AuthProvider>
-      <Navbar />
       <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route element={<UserRoutes />}>
-          <Route path="/home" element={<Home />} />
+        <Route
+          path="/"
+          element={
+            <UnAuthorizedRoutes>
+              <Landing />
+            </UnAuthorizedRoutes>
+          }
+        ></Route>
+        <Route
+          element={
+            <AuthorizedRoutes>
+              <Containter />
+            </AuthorizedRoutes>
+          }
+        >
+          <Route path="/explore" element={<div>latest outfits</div>} />
+          <Route path="/{username}/settings" element={<div>ustawienia naszego konta</div>} />
+          <Route path="/{username}/myItems" element={<div>wchodzimy na nasze itemy do edycji</div>} />
+          <Route path="/{username}/myItems/{iditemu}" element={<div>wchodzimy na nasz item do edycji</div>} />
+          <Route path="/{username}/items" element={<div>wchodzimy na itemy innego uzytkownika</div>} />
+          <Route path="/{username}/items/{iditemu}" element={<div>wchodzimy na item innego uzytkownika</div>} />
+          <Route path="/{username}/myOutfits" element={<div>wchodzimy na nasze outfity do edycji</div>} />
+          <Route path="/{username}/myOutfits/{idoutfitu}" element={<div>wchodzimy na nasz utfit do edycji</div>} />
+          <Route path="/{username}/outfits" element={<div>wchodzimy na outfity innego uzytkownika</div>} />
+          <Route path="/{username}/outfits/{idoutfitu}" element={<div>wchodzimy na outfit innego uzytkownika</div>} />
         </Route>
         <Route path="*" element={<NotFound />} />
         <Route path="/items" element={<Items />} />

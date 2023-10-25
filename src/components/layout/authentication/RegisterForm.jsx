@@ -1,4 +1,8 @@
 import * as React from 'react';
+import { AuthenticationApi } from '../../../api/AuthenticationApi.js';
+import { AccountApi } from '../../../api/AccountApi.js';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import {
   styled,
   Button,
@@ -15,14 +19,8 @@ import {
   CircularProgress,
   FormHelperText,
 } from '@mui/material';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { AuthenticationApi } from '../../../api/AuthenticationApi.js';
-import { AccountApi } from '../../../api/AccountApi.js';
-import { useNavigate } from 'react-router-dom';
 
-const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn }) => {
-  const navigate = useNavigate();
+const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn, setSuccessfullySignUp }) => {
   const [errors, setErrors] = React.useState(null);
   const [showPassword, setShowPassword] = React.useState(false);
   const [email, setEmail] = React.useState('');
@@ -121,11 +119,10 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn }) => {
             username: username,
             password: password,
           });
-          console.log(response);
+          setSuccessfullySignUp(true);
           setOpenSignUp(false);
-          navigate('/');
         } catch (error) {
-          setErrors(error.response.data.message);
+          setErrors(error.response.data.Errors);
           console.error(error);
         }
       };

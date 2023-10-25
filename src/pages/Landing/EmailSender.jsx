@@ -44,10 +44,25 @@ const EmailSender = () => {
               <Typography variant="h5">Got questions? We've got answers.</Typography>
             </Grid>
             <Grid xs={7} item>
-              <TextField placeholder="Enter first name" label="Name" variant="outlined" name="from_name" fullWidth required />
+              <TextField
+                placeholder="Enter first name"
+                label="Name"
+                variant="outlined"
+                name="from_name"
+                fullWidth
+                required
+              />
             </Grid>
             <Grid item xs={7}>
-              <TextField type="email" placeholder="Enter email" label="Email" variant="outlined" name="reply_to" fullWidth required />
+              <TextField
+                type="email"
+                placeholder="Enter email"
+                label="Email"
+                variant="outlined"
+                name="reply_to"
+                fullWidth
+                required
+              />
             </Grid>
             <Grid item xs={7}>
               <TextField

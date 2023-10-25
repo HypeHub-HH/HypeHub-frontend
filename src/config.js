@@ -1,7 +1,6 @@
 const config = {
-    //Footer
-    alertDuration: 6000,
+  //Footer
+  alertDuration: 6000,
+};
 
-  };
-  
 export default config;

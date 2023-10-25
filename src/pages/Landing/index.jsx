@@ -1,20 +1,31 @@
-import React from "react";
-import JoinBanner from "./JoinBanner";
-import MainBanner from "./MainBanner";
-import Footer from "../../components/layout/footer/Footer";
-import Hero from "./Hero";
-import EmailSender from "./EmailSender";
-import Details from "./Details";
-import Features from "./Features";
+import * as React from 'react';
+import Footer from '../../components/layout/footer/Footer';
+import Hero from './Hero';
+import EmailSender from './EmailSender';
+import Details from './Details';
+import Features from './Features';
+import NavbarUnAuthorized from '../../components/layout/navbar/NavbarUnAuthorized.jsx';
+import SuccessfullySignUpForm from '../../components/layout/authentication/SuccessfullySignUpForm.jsx';
 
 const Landing = () => {
+  const [openSignIn, setOpenSignIn] = React.useState(false);
+  const [openSignUp, setOpenSingUp] = React.useState(false);
+  const [successfullySignUp, setSuccessfullySignUp] = React.useState(false);
+
   return (
     <>
-      <Hero />
-      <MainBanner />
-      <Features/>
-      <Details/>
-      <EmailSender/>
+      <NavbarUnAuthorized
+        openSignIn={openSignIn}
+        setOpenSignIn={setOpenSignIn}
+        openSignUp={openSignUp}
+        setOpenSingUp={setOpenSingUp}
+        setSuccessfullySignUp={setSuccessfullySignUp}
+      />
+      <SuccessfullySignUpForm successfullySignUp={successfullySignUp} setSuccessfullySignUp={setSuccessfullySignUp} />
+      <Hero setOpenSingUp={setOpenSingUp} />
+      <Features />
+      <Details />
+      <EmailSender />
       <Footer />
     </>
   );
