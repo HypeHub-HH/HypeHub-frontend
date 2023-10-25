@@ -5,6 +5,7 @@ import NotFound from './pages/NotFound';
 import Navbar from './components/layout/navbar/Navbar';
 import { AuthProvider } from './context/AuthContext';
 import UserRoutes from './utils/UserRoutes';
+import Items from './pages/Items';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/home" element={<Home />} />
         </Route>
         <Route path="*" element={<NotFound />} />
+        <Route path="/items" element={<Items />} />
       </Routes>
     </AuthProvider>
   );
