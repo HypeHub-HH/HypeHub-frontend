@@ -11,23 +11,7 @@ const AvatarMenu = ({ settings }) => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  const test = () => {
-    console.log('acces token');
-    console.log(localStorage.getItem('ACCESS_TOKEN'));
-    console.log('refresh token');
-    console.log(localStorage.getItem('REFRESH_TOKEN'));
-    const axiosCreateOutfit = async () => {
-      try {
-        const response = await OutfitApi.createOutfitAsync({
-          name: 'TeeeeeeestowyCrOut',
-        });
-        console.log(response);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    axiosCreateOutfit();
-  };
+
   return (
     <>
       <Tooltip title="Open settings">
@@ -60,9 +44,6 @@ const AvatarMenu = ({ settings }) => {
             <Typography textAlign="center">{setting.Name}</Typography>
           </MenuItem>
         ))}
-        <MenuItem key={'test'} onClick={test}>
-          <Typography textAlign="center">"test"</Typography>
-        </MenuItem>
       </Menu>
     </>
   );
