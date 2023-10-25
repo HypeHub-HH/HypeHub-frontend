@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Typography, Tooltip, IconButton, Avatar, Menu, MenuItem } from '@mui/material';
-import { OutfitApi } from '../../../api//OutfitApi.js';
+import defaultIcon from '../../../assets/defaultAccountIcon.png';
 
-const AvatarMenu = ({ settings }) => {
+const AvatarMenu = ({ settings, avatarURL }) => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenUserMenu = (event) => {
@@ -16,11 +16,7 @@ const AvatarMenu = ({ settings }) => {
     <>
       <Tooltip title="Open settings">
         <IconButton onClick={handleOpenUserMenu}>
-          <Avatar
-            alt="Avatar image."
-            src="https://img.wprost.pl/img/joe-biden/f8/ec/45cbff5cf911c1f11165ae3b135e.jpeg"
-            sx={{ width: 95, height: 95 }}
-          />
+          <Avatar alt="Avatar image." src={avatarURL ? avatarURL : defaultIcon} sx={{ width: 95, height: 95 }} />
         </IconButton>
       </Tooltip>
       <Menu

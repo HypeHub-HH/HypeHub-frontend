@@ -11,13 +11,13 @@ const NavbarAuthorized = () => {
   const navigate = useNavigate();
 
   const handleOutfitsButton = () => {
-    navigate('/outfits');
+    navigate('/{username}/myOutfits');
   };
   const handleItemsButton = () => {
-    navigate('/items');
+    navigate('/{username}/myItems');
   };
-  const handleAccountButton = () => {
-    navigate('/home');
+  const handleSettingsButton = () => {
+    navigate('/{username}/settings');
   };
   const handleLogoutButton = () => {
     logout();
@@ -26,7 +26,7 @@ const NavbarAuthorized = () => {
   const settings = [
     { Name: 'Outfits', Fun: handleOutfitsButton },
     { Name: 'Items', Fun: handleItemsButton },
-    { Name: 'Account', Fun: handleAccountButton },
+    { Name: 'Settings', Fun: handleSettingsButton },
     { Name: 'Logout', Fun: handleLogoutButton },
   ];
 
@@ -42,7 +42,7 @@ const NavbarAuthorized = () => {
           sx={{ flexGrow: 0.1 }}
         >
           <Searchbar />
-          <AvatarMenu settings={settings} />
+          <AvatarMenu settings={settings} avatarURL={currentUser?.avatarURL} />
         </Box>
       </Toolbar>
     </AppBar>
