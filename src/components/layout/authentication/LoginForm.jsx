@@ -22,7 +22,7 @@ import {
 
 const LoginForm = ({ openSignIn, setOpenSignIn, setOpenSignUp }) => {
   const navigate = useNavigate();
-  const auth = useAuth();
+  const { login } = useAuth();
   const [error, setError] = React.useState(null);
   const [showPassword, setShowPassword] = React.useState(false);
   const [emailOrUsername, setEmailOrUsername] = React.useState('');
@@ -40,19 +40,6 @@ const LoginForm = ({ openSignIn, setOpenSignIn, setOpenSignUp }) => {
     validatePassword();
   }, [password]);
 
-  const handleEmailOrUsernameChange = (e) => setEmailOrUsername(e.target.value);
-
-  const handlePasswordChange = (e) => setPassword(e.target.value);
-
-  const handleDialogClose = () => setOpenSignIn(false);
-
-  const handleRegisterLink = () => {
-    setOpenSignIn(false);
-    setOpenSignUp(true);
-  };
-
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-
   const handleSubmit = (event) => {
     event.preventDefault();
     validateEmailOrUsername();
@@ -64,7 +51,7 @@ const LoginForm = ({ openSignIn, setOpenSignIn, setOpenSignUp }) => {
             emailOrUsername: emailOrUsername,
             password: password,
           });
-          auth.login(response.data);
+          login(response.data);
           setOpenSignIn(false);
           navigate('/explore');
         } catch (error) {
@@ -80,18 +67,16 @@ const LoginForm = ({ openSignIn, setOpenSignIn, setOpenSignUp }) => {
     const lengthRegex = /^(?!\s*$).+/;
     let result = lengthRegex.test(emailOrUsername);
     if (isEmailOrUsernameValid.result === null) setIsEmailOrUsernameValid({ result: false, message: null });
-    else if (result === true) {
-      setIsEmailOrUsernameValid({ result: true, message: null });
-    } else setIsEmailOrUsernameValid({ result: false, message: 'Invalid format.' });
+    else if (result === true) setIsEmailOrUsernameValid({ result: true, message: null });
+    else setIsEmailOrUsernameValid({ result: false, message: 'Invalid format.' });
   };
 
   const validatePassword = () => {
     const lengthRegex = /^(\s|.){1,}$/;
     let result = lengthRegex.test(password);
     if (isPasswordValid.result === null) setIsPasswordValid({ result: false, message: null });
-    else if (result === true) {
-      setIsPasswordValid({ result: true, message: null });
-    } else setIsPasswordValid({ result: false, message: 'Invalid format.' });
+    else if (result === true) setIsPasswordValid({ result: true, message: null });
+    else setIsPasswordValid({ result: false, message: 'Invalid format.' });
   };
 
   const SubmitButton = styled(Button)(({ theme }) => ({
@@ -118,7 +103,7 @@ const LoginForm = ({ openSignIn, setOpenSignIn, setOpenSignUp }) => {
   }));
 
   return (
-    <Dialog open={openSignIn} onClose={handleDialogClose}>
+    <Dialog open={openSignIn} onClose={() => setOpenSignIn(false)}>
       <DialogContent>
         <Typography component="h1" variant="h4" align="center">
           Sign In
@@ -134,7 +119,7 @@ const LoginForm = ({ openSignIn, setOpenSignIn, setOpenSignUp }) => {
             error={!isEmailOrUsernameValid.result && isEmailOrUsernameValid.message !== null}
             margin="normal"
             variant="outlined"
-            onChange={handleEmailOrUsernameChange}
+            onChange={(e) => setEmailOrUsername(e.target.value)}
           >
             <InputLabel htmlFor="emailOrUsername">Email or username</InputLabel>
             <OutlinedInput
@@ -153,7 +138,7 @@ const LoginForm = ({ openSignIn, setOpenSignIn, setOpenSignUp }) => {
             error={!isPasswordValid.result && isPasswordValid.message !== null}
             margin="normal"
             variant="outlined"
-            onChange={handlePasswordChange}
+            onChange={(e) => setPassword(e.target.value)}
           >
             <InputLabel htmlFor="password">Password</InputLabel>
             <OutlinedInput
@@ -164,7 +149,11 @@ const LoginForm = ({ openSignIn, setOpenSignIn, setOpenSignUp }) => {
               autoComplete="current-password"
               endAdornment={
                 <InputAdornment position="end">
-                  <IconButton aria-label="toggle password visibility" onClick={handleClickShowPassword} edge="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={() => setShowPassword((show) => !show)}
+                    edge="end"
+                  >
                     {showPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
                 </InputAdornment>
@@ -186,7 +175,13 @@ const LoginForm = ({ openSignIn, setOpenSignIn, setOpenSignUp }) => {
               margin: '16px 0 0 0',
             }}
           >
-            <LinkText onClick={handleRegisterLink} variant="body1">
+            <LinkText
+              onClick={() => {
+                setOpenSignIn(false);
+                setOpenSignUp(true);
+              }}
+              variant="body1"
+            >
               Don't have an account? Sign Up
             </LinkText>
           </Box>

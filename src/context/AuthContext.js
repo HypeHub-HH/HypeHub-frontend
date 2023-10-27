@@ -1,5 +1,6 @@
 import * as React from 'react';
 import authorizedApi from '../services/AuthorizedAxios.js';
+import { useNavigate } from 'react-router-dom';
 
 const AuthContext = React.createContext();
 
@@ -9,6 +10,7 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = React.useState(null);
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     const token = localStorage.getItem('ACCESS_TOKEN');
@@ -25,6 +27,7 @@ export const AuthProvider = ({ children }) => {
         });
       } catch (error) {
         logout();
+        navigate('/');
         console.error(error);
       }
     };

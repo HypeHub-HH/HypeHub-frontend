@@ -5,14 +5,12 @@ const CustomButton = ({ backgroundColor, color, buttonText, breakpointWidth, bre
   const CustomButton = styled(Button)(({ theme }) => ({
     backgroundColor: backgroundColor,
     color: color,
-    fontWeight: '700',
     fontSize: '1rem',
     cursor: 'pointer',
     padding: '0.5rem 1.25rem',
     borderRadius: '20px',
     fontWeight: 'bold',
     textTransform: 'none',
-    // display: 'block',
     '&:hover': {
       backgroundColor: color,
       color: backgroundColor,

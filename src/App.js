@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Switch, Route, Routes } from 'react-router-dom';
 import Landing from './pages/Landing';
 import NotFound from './pages/NotFound';
-import NavbarUnAuthorized from './components/layout/navbar/NavbarUnAuthorized';
 import { AuthProvider } from './context/AuthContext';
 import AuthorizedRoutes from './utils/AuthorizedRoutes.js';
 import UnAuthorizedRoutes from './utils/UnAuthorizedRoutes.js';

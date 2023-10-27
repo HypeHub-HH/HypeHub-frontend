@@ -5,17 +5,10 @@ import defaultIcon from '../../../assets/defaultAccountIcon.png';
 const AvatarMenu = ({ settings, avatarURL }) => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
   return (
     <>
       <Tooltip title="Open settings">
-        <IconButton onClick={handleOpenUserMenu}>
+        <IconButton onClick={(e) => setAnchorElUser(e.currentTarget)}>
           <Avatar alt="Avatar image." src={avatarURL ? avatarURL : defaultIcon} sx={{ width: 95, height: 95 }} />
         </IconButton>
       </Tooltip>
@@ -33,7 +26,7 @@ const AvatarMenu = ({ settings, avatarURL }) => {
           horizontal: 'right',
         }}
         open={Boolean(anchorElUser)}
-        onClose={handleCloseUserMenu}
+        onClose={() => setAnchorElUser(null)}
       >
         {settings.map((setting) => (
           <MenuItem key={setting.Name} onClick={setting.Fun}>
