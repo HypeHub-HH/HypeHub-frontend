@@ -89,23 +89,6 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn, setSuccessfull
     validatePassword();
   }, [password]);
 
-  const handleEmailChange = (e) => setEmail(e.target.value);
-
-  const handleUsernameChange = (e) => setUsername(e.target.value);
-
-  const handlePasswordChange = (e) => setPassword(e.target.value);
-
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-  const handleDialogClose = () => {
-    setOpenSignUp(false);
-  };
-
-  const handleLoginLink = () => {
-    setOpenSignUp(false);
-    setOpenSignIn(true);
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
     validateEmail();
@@ -237,7 +220,7 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn, setSuccessfull
   }));
 
   return (
-    <Dialog open={openSignUp} onClose={handleDialogClose}>
+    <Dialog open={openSignUp} onClose={() => setOpenSignUp(false)}>
       <DialogContent>
         <Typography component="h1" variant="h4" align="center">
           Sign Up
@@ -254,7 +237,7 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn, setSuccessfull
             error={!isEmailValid.result && isEmailValid.message !== null}
             margin="normal"
             variant="outlined"
-            onChange={handleEmailChange}
+            onChange={(e) => setEmail(e.target.value)}
           >
             <InputLabel htmlFor="email">Email</InputLabel>
             <OutlinedInput
@@ -278,7 +261,7 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn, setSuccessfull
             error={!isUsernameValid.result && isUsernameValid.messages.length !== 0}
             margin="normal"
             variant="outlined"
-            onChange={handleUsernameChange}
+            onChange={(e) => setUsername(e.target.value)}
           >
             <InputLabel htmlFor="username">Username</InputLabel>
             <OutlinedInput
@@ -304,7 +287,7 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn, setSuccessfull
             error={!isPasswordValid.result && isPasswordValid.messages.length !== 0}
             margin="normal"
             variant="outlined"
-            onChange={handlePasswordChange}
+            onChange={(e) => setPassword(e.target.value)}
           >
             <InputLabel htmlFor="password">Password</InputLabel>
             <OutlinedInput
@@ -316,7 +299,11 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn, setSuccessfull
               variant="filled"
               endAdornment={
                 <InputAdornment position="end">
-                  <IconButton aria-label="toggle password visibility" onClick={handleClickShowPassword} edge="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={() => setShowPassword((show) => !show)}
+                    edge="end"
+                  >
                     {showPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
                 </InputAdornment>
@@ -340,7 +327,13 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn, setSuccessfull
               margin: '16px 0 0 0',
             }}
           >
-            <LinkText onClick={handleLoginLink} variant="body1">
+            <LinkText
+              onClick={() => {
+                setOpenSignUp(false);
+                setOpenSignIn(true);
+              }}
+              variant="body1"
+            >
               Already have an account? Sign In
             </LinkText>
           </Box>

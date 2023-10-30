@@ -26,9 +26,7 @@ export default function Footer() {
         </Grid>
         <Box mt={5}>
           <Typography variant="body2" color="text.secondary" align="center">
-            {'Copyright © HypeHub '}
-            {new Date().getFullYear()}
-            {'.'}
+            Copyright © HypeHub {new Date().getFullYear()}.
           </Typography>
         </Box>
       </Container>

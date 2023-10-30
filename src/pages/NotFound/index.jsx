@@ -1,14 +1,10 @@
 import React from 'react';
-import { Box, styled, Typography, Divider } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import CustomButton from '../../components/ui/CustomButton';
 import { useNavigate } from 'react-router-dom';
 
 const NotFound = () => {
   const navigate = useNavigate();
-
-  const handleBackHomeButton = () => {
-    navigate('/');
-  };
 
   return (
     <Box
@@ -46,7 +42,7 @@ const NotFound = () => {
         buttonText="Back to home page"
         breakpointWidth="30dvw"
         breakpointHeight="5dvh"
-        onClick={handleBackHomeButton}
+        onClick={() => navigate('/')}
       />
     </Box>
   );

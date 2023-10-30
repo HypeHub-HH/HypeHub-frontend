@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box, Container, Typography, styled } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
-import AddIcon from '@mui/icons-material/Add';
 import Add from '../../assets/plus.png';
 import Idea from '../../assets/idea.png';
 import Heart from '../../assets/heart.png';

@@ -1,9 +1,6 @@
 import axios from 'axios';
 
-const baseURL = process.env.REACT_APP_BACKEND_HOST;
-
 const authorizedApi = axios.create({
-  baseURL: baseURL,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -30,12 +27,15 @@ authorizedApi.interceptors.response.use(
     const originalConfig = err.config;
     if (err.response.status === 401) {
       try {
-        const response = await authorizedApi.post('/Authentication/RefreshToken', {
+        const tokens = {
           accessToken: localStorage.getItem('ACCESS_TOKEN'),
           refreshToken: localStorage.getItem('REFRESH_TOKEN'),
-        });
-        const accessToken = response.data;
+        };
+        const response = await authorizedApi.post('/Authentication/RefreshToken', tokens);
+        const accessToken = response.data.accessToken;
+        const refreshToken = response.data.refreshToken;
         localStorage.setItem('ACCESS_TOKEN', accessToken);
+        localStorage.setItem('REFRESH_TOKEN', refreshToken);
         return authorizedApi(originalConfig);
       } catch (_error) {
         localStorage.removeItem('ACCESS_TOKEN');

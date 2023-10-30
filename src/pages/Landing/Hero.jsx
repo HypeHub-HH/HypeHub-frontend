@@ -4,11 +4,7 @@ import React from 'react';
 import JoinImage from '../../assets/image-join.jpg';
 import CustomButton from '../../components/ui/CustomButton';
 
-const Hero = ({setOpenSingUp }) => {
-
-  const handleJoinCommunityButton = () => {
-    setOpenSingUp(true);
-  };
+const Hero = ({ setOpenSingUp }) => {
 
   const CustomBox = styled(Box)(({ theme }) => ({
     display: 'flex',
@@ -49,16 +45,15 @@ const Hero = ({setOpenSingUp }) => {
               sx={{
                 color: '#0F172A',
                 fontWeight: '500',
-                mt: 10,
-                mb: 4,
+                mt: 5,
               }}
             >
               Welcome to HypeHub
             </Typography>
-            <Title variant="h1" textAlign="center">
+            <Title variant="h2" textAlign="center">
               Share Your Style with the World
             </Title>
-            <Typography variant="body2" sx={{ fontSize: '18px', color: '#5A6473', my: 4 }} textAlign="center">
+            <Typography variant="body2" sx={{ fontSize: '18px', color: '#5A6473', mb: 5 }} textAlign="center">
               Discover the latest trends, get inspired, and connect with fashion enthusiasts around the globe on
               HypeHub. Show off your favorite outfits, share styling tips, and connect with like-minded individuals who
               share your passion for fashion!
@@ -67,7 +62,7 @@ const Hero = ({setOpenSingUp }) => {
               backgroundColor="#0EA5E9"
               color="secondary"
               buttonText="Join the Community"
-              onClick={handleJoinCommunityButton}
+              onClick={() => setOpenSingUp(true)}
             />
           </Box>
           <Box

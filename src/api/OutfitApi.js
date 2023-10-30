@@ -4,13 +4,26 @@ import authorizedApi from '../services/AuthorizedAxios.js';
 const baseURL = process.env.REACT_APP_BACKEND_HOST;
 
 export class OutfitApi {
-  static getOutfitAsync = async (id) => await axios.get(`${baseURL}/Outfits/${id}`);
+  static getOutfitWithAccountAndLikesAndImagesAndItemsAsync = async (outfitId) =>
+    await axios.get(`${baseURL}/Outfits/${outfitId}/AllInformation`);
 
-  static getOutfitWithAccountAndLikesAndImagesAndItemsAsync = async (id) =>
-    await axios.get(`${baseURL}/Outfits/${id}/AllInformation`);
-
-  static getLatestOutfitsAsync = async (page, count) =>
-    await axios.get(`${baseURL}/Outfits/Latest?page=${page}&count=${count}`);
+  static getLatestOutfitsAsync = async (page, pageSize) =>
+    await axios.get(`${baseURL}/Outfits/Latest?page=${page}&pageSize=${pageSize}`);
 
   static createOutfitAsync = async (body) => await authorizedApi.post(`/Outfits`, body);
+
+  static updateOutfitAsync = async (body) => await authorizedApi.put(`/Outfits`, body);
+
+  static deleteOutfitAsync = async (outfitId) => await authorizedApi.delete(`/Outfits/${outfitId}`);
+
+  static likeOrUnlikeOutfitAsync = async (outfitId) => await authorizedApi.put(`/Outfits/Like/${outfitId}`);
+
+  static addItemToOutfitAsync = async (outfitId, body) => await authorizedApi.post(`/Outfits/${outfitId}/Items`, body);
+
+  static removeItemFromOutfitAsync = async (outfitId, body) =>
+    await authorizedApi.delete(`/Outfits/${outfitId}/Items`, body);
+
+  static createImageAsync = async (body) => await authorizedApi.post(`/Outfits/Images`, body);
+
+  static deleteImageAsync = async (imageId) => await authorizedApi.delete(`/Outfits/Images/${imageId}`);
 }
