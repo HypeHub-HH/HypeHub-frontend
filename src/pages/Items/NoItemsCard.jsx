@@ -11,7 +11,7 @@ const NoItemsCard = ({setOpenAddItem}) => {
     <Typography variant="h4" alignSelf={'center'} mb={'4%'}>
       Click the button and add some!
     </Typography>
-    <CustomButton backgroundColor="#00FF00" color="black" buttonText="ADD ITEM" breakpointWidth="3dvw" breakpointHeight="3dvh" onClick={()=>setOpenAddItem(true)}/>
+    <CustomButton backgroundColor="#00FF00" color="black" buttonText="ADD ITEM" breakpointWidth="3dvw" breakpointHeight="3dvh"/>
   </Box>
   )
 }

@@ -9,25 +9,17 @@ const NavbarUnAuthorized = ({ openSignIn, setOpenSignIn, openSignUp, setOpenSing
   //   const [openSignIn, setOpenSignIn] = React.useState(false);
   //   const [openSignUp, setOpenSingUp] = React.useState(false);
 
-  const handleSignInButton = () => {
-    setOpenSignIn(true);
-  };
-
-  const handleSignUpButton = () => {
-    setOpenSingUp(true);
-  };
-
   return (
     <AppBar position="sticky" color="primary">
       <Toolbar>
         <Logo />
         <Stack spacing={3} direction="row">
-          <CustomButton backgroundColor="#CBD5E1" color="black" buttonText="SIGN UP" onClick={handleSignUpButton} />
-          <CustomButton backgroundColor="#0EA5E9" color="black" buttonText="SIGN IN" onClick={handleSignInButton} />
-          {openSignIn === true && (
+          <CustomButton backgroundColor="#CBD5E1" color="black" buttonText="SIGN UP" onClick={()=>setOpenSingUp(true)} />
+          <CustomButton backgroundColor="#0EA5E9" color="black" buttonText="SIGN IN" onClick={()=>setOpenSignIn(true)} />
+          {openSignIn && (
             <LoginForm openSignIn={openSignIn} setOpenSignIn={setOpenSignIn} setOpenSignUp={setOpenSingUp} />
           )}
-          {openSignUp === true && (
+          {openSignUp && (
             <RegisterForm
               openSignUp={openSignUp}
               setOpenSignUp={setOpenSingUp}

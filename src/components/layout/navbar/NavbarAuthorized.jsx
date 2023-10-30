@@ -10,37 +10,33 @@ const NavbarAuthorized = () => {
   const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
 
-  const handleOutfitsButton = () => {
-    navigate('/{username}/myOutfits');
-  };
-  const handleItemsButton = () => {
-    navigate('/{username}/myItems');
-  };
-  const handleSettingsButton = () => {
-    navigate('/{username}/settings');
-  };
-  const handleLogoutButton = () => {
-    logout();
-    navigate('/');
-  };
   const settings = [
-    { Name: 'Outfits', Fun: handleOutfitsButton },
-    { Name: 'Items', Fun: handleItemsButton },
-    { Name: 'Settings', Fun: handleSettingsButton },
-    { Name: 'Logout', Fun: handleLogoutButton },
+    {
+      Name: 'Outfits',
+      Fun: () => navigate('/{username}/myOutfits'),
+    },
+    {
+      Name: 'Items',
+      Fun: () => navigate('/myItems'),
+    },
+    {
+      Name: 'Settings',
+      Fun: () => navigate('/{username}/settings'),
+    },
+    {
+      Name: 'Logout',
+      Fun: () => {
+        logout();
+        navigate('/');
+      },
+    },
   ];
 
   return (
     <AppBar position="sticky" color="primary">
       <Toolbar>
         <Logo />
-        <Box
-          display="flex"
-          flexDirection="row"
-          justifyContent="space-around"
-          alignItems="center"
-          sx={{ flexGrow: 0.1 }}
-        >
+        <Box display="flex" flexDirection="row" justifyContent="space-around" alignItems="center" sx={{ flexGrow: 0.1 }}>
           <Searchbar />
           <AvatarMenu settings={settings} avatarURL={currentUser?.avatarURL} />
         </Box>

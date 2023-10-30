@@ -6,6 +6,7 @@ import AuthorizedRoutes from './utils/AuthorizedRoutes.js';
 import UnAuthorizedRoutes from './utils/UnAuthorizedRoutes.js';
 import Containter from './components/layout/Container.jsx';
 import Items from './pages/Items';
+import AddItem from './pages/AddItem';
 
 function App() {
   return (
@@ -27,8 +28,9 @@ function App() {
           }
         >
           <Route path="/explore" element={<div>latest outfits</div>} />
-          <Route path="/{username}/settings" element={<div>ustawienia naszego konta</div>} />
-          <Route path="/{username}/myItems" element={<Items/>} />
+          <Route path="/{username}/settings" element={<div>ustawienia konta</div>} />
+          <Route path="/myItems" element={<Items/>} />
+          <Route path="/myItems/addNewItem" element={<AddItem />} />
           <Route path="/{username}/myItems/{iditemu}" element={<div>wchodzimy na nasz item do edycji</div>} />
           <Route path="/{username}/items" element={<div>wchodzimy na itemy innego uzytkownika</div>} />
           <Route path="/{username}/items/{iditemu}" element={<div>wchodzimy na item innego uzytkownika</div>} />
