@@ -1,5 +1,4 @@
 import React from 'react';
-import MuiAlert from '@mui/material/Alert';
 import config from '../../config';
 import { Alert, Snackbar } from '@mui/material';
 const Alerts = ({ openSuccessAlert, openFailedAlert, setOpenSuccessAlert, setOpenFailedAlert }) => {

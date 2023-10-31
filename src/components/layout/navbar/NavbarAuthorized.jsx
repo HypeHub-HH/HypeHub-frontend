@@ -35,16 +35,12 @@ const NavbarAuthorized = () => {
   return (
     <AppBar position="sticky" color="primary">
       <Toolbar>
-        <Logo />
-        <Box
-          display="flex"
-          flexDirection="row"
-          justifyContent="space-around"
-          alignItems="center"
-          sx={{ flexGrow: 0.1 }}
-        >
-          <Searchbar />
-          <AvatarMenu settings={settings} avatarURL={currentUser?.avatarURL} />
+        <Box display="flex" flexDirection="row" justifyContent="space-between" alignItems="center" width="100%">
+          <Logo />
+          <Box display="flex" flexDirection="row" justifyContent="space-around" alignItems="center" sx={{ flexGrow: 0.1 }}>
+            <Searchbar />
+            <AvatarMenu settings={settings} avatarURL={currentUser?.avatarURL} />
+          </Box>
         </Box>
       </Toolbar>
     </AppBar>

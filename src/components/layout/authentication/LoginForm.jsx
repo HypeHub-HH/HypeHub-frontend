@@ -44,7 +44,7 @@ const LoginForm = ({ openSignIn, setOpenSignIn, setOpenSignUp }) => {
     event.preventDefault();
     validateEmailOrUsername();
     validatePassword();
-    if (isEmailOrUsernameValid.result === true && isPasswordValid.result === true) {
+    if (isEmailOrUsernameValid.result && isPasswordValid.result) {
       const axiosLogin = async () => {
         try {
           const response = await AuthenticationApi.signInAsync({
@@ -67,7 +67,7 @@ const LoginForm = ({ openSignIn, setOpenSignIn, setOpenSignUp }) => {
     const lengthRegex = /^(?!\s*$).+/;
     let result = lengthRegex.test(emailOrUsername);
     if (isEmailOrUsernameValid.result === null) setIsEmailOrUsernameValid({ result: false, message: null });
-    else if (result === true) setIsEmailOrUsernameValid({ result: true, message: null });
+    else if (result) setIsEmailOrUsernameValid({ result: true, message: null });
     else setIsEmailOrUsernameValid({ result: false, message: 'Invalid format.' });
   };
 
@@ -75,7 +75,7 @@ const LoginForm = ({ openSignIn, setOpenSignIn, setOpenSignUp }) => {
     const lengthRegex = /^(\s|.){1,}$/;
     let result = lengthRegex.test(password);
     if (isPasswordValid.result === null) setIsPasswordValid({ result: false, message: null });
-    else if (result === true) setIsPasswordValid({ result: true, message: null });
+    else if (result) setIsPasswordValid({ result: true, message: null });
     else setIsPasswordValid({ result: false, message: 'Invalid format.' });
   };
 
@@ -122,13 +122,7 @@ const LoginForm = ({ openSignIn, setOpenSignIn, setOpenSignUp }) => {
             onChange={(e) => setEmailOrUsername(e.target.value)}
           >
             <InputLabel htmlFor="emailOrUsername">Email or username</InputLabel>
-            <OutlinedInput
-              id="emailOrUsername"
-              name="emailOrUsername"
-              type="text"
-              label="Email or username"
-              autoComplete="email"
-            />
+            <OutlinedInput id="emailOrUsername" name="emailOrUsername" type="text" label="Email or username" autoComplete="email" />
             {!isEmailOrUsernameValid.result && isEmailOrUsernameValid.message !== null && (
               <FormHelperText>{isEmailOrUsernameValid.message}</FormHelperText>
             )}
@@ -149,19 +143,13 @@ const LoginForm = ({ openSignIn, setOpenSignIn, setOpenSignUp }) => {
               autoComplete="current-password"
               endAdornment={
                 <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={() => setShowPassword((show) => !show)}
-                    edge="end"
-                  >
+                  <IconButton aria-label="toggle password visibility" onClick={() => setShowPassword((show) => !show)} edge="end">
                     {showPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
                 </InputAdornment>
               }
             />
-            {!isPasswordValid.result && isPasswordValid.message !== null && (
-              <FormHelperText>{isPasswordValid.message}</FormHelperText>
-            )}
+            {!isPasswordValid.result && isPasswordValid.message !== null && <FormHelperText>{isPasswordValid.message}</FormHelperText>}
           </FormControl>
           <SubmitButton fullWidth margin="normal" type="submit">
             SIGN IN

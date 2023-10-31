@@ -94,7 +94,7 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn, setSuccessfull
     validateEmail();
     validateUsername();
     validatePassword();
-    if (isEmailValid.result === true && isUsernameValid.result === true && isPasswordValid.result === true) {
+    if (isEmailValid.result && isUsernameValid.result && isPasswordValid.result) {
       const axiosRegister = async () => {
         try {
           const response = await AuthenticationApi.signUpAsync({
@@ -117,7 +117,7 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn, setSuccessfull
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     let result = emailRegex.test(email);
     if (isEmailValid.result === null) setIsEmailValid({ result: false, message: null });
-    else if (result === true) {
+    else if (result) {
       setIsEmailValid({ result: true, message: null });
       setTriggerAxiosEmail(!triggerAxiosEmail);
     } else setIsEmailValid({ result: false, message: 'Invalid Email format.' });
@@ -132,15 +132,15 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn, setSuccessfull
     let lengthResult = lengthRegex.test(username);
     if (validationResult === null) setIsUsernameValid({ result: false, messages: [] });
     else {
-      if (alphanumericResult === false) {
+      if (!alphanumericResult) {
         validationResult = false;
         messages.push('Username can only contain alphanumeric characters.');
       }
-      if (lengthResult === false) {
+      if (!lengthResult) {
         validationResult = false;
         messages.push('Username must not have less than 4 and more than 15 characters.');
       }
-      if (lengthResult == true && alphanumericResult === true) {
+      if (lengthResult && alphanumericResult) {
         validationResult = true;
         setTriggerAxiosUsername(!triggerAxiosUsername);
       }
@@ -163,33 +163,27 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn, setSuccessfull
     let lengthResult = lengthRegex.test(password);
     if (validationResult === null) setIsPasswordValid({ result: false, messages: [] });
     else {
-      if (upercaseResult === false) {
+      if (!upercaseResult) {
         validationResult = false;
         messages.push('Password must contain at least one uppercase letter.');
       }
-      if (lowercaseResult === false) {
+      if (!lowercaseResult) {
         validationResult = false;
         messages.push('Password must contain at least one lowercase letter.');
       }
-      if (digitResult === false) {
+      if (!digitResult) {
         validationResult = false;
         messages.push('Password must contain at least one digit.');
       }
-      if (nonAlphanumericResult === false) {
+      if (!nonAlphanumericResult) {
         validationResult = false;
         messages.push('Password must contain at least one non-alphanumeric character.');
       }
-      if (lengthResult === false) {
+      if (!lengthResult) {
         validationResult = false;
         messages.push('Password must not have less than 4 and more than 255 characters.');
       }
-      if (
-        upercaseResult === true &&
-        lowercaseResult === true &&
-        digitResult === true &&
-        nonAlphanumericResult === true &&
-        lengthResult === true
-      ) {
+      if (upercaseResult && lowercaseResult && digitResult && nonAlphanumericResult && lengthResult) {
         validationResult = true;
       }
       setIsPasswordValid({ result: validationResult, messages: messages });
@@ -247,14 +241,10 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn, setSuccessfull
               label="Email"
               autoComplete="email"
               endAdornment={
-                <InputAdornment position="end">
-                  {<CircularProgress sx={{ display: checkEmail ? 'block' : 'none' }} color="grey" />}
-                </InputAdornment>
+                <InputAdornment position="end">{<CircularProgress sx={{ display: checkEmail ? 'block' : 'none' }} color="grey" />}</InputAdornment>
               }
             />
-            {!isEmailValid.result && isEmailValid.message !== null && (
-              <FormHelperText>{isEmailValid.message}</FormHelperText>
-            )}
+            {!isEmailValid.result && isEmailValid.message !== null && <FormHelperText>{isEmailValid.message}</FormHelperText>}
           </FormControl>
           <FormControl
             fullWidth
@@ -271,9 +261,7 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn, setSuccessfull
               label="Username"
               autoComplete="nickname"
               endAdornment={
-                <InputAdornment position="end">
-                  {<CircularProgress sx={{ display: checkUsername ? 'block' : 'none' }} color="grey" />}
-                </InputAdornment>
+                <InputAdornment position="end">{<CircularProgress sx={{ display: checkUsername ? 'block' : 'none' }} color="grey" />}</InputAdornment>
               }
             />
             {!isUsernameValid.result &&
@@ -299,11 +287,7 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn, setSuccessfull
               variant="filled"
               endAdornment={
                 <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={() => setShowPassword((show) => !show)}
-                    edge="end"
-                  >
+                  <IconButton aria-label="toggle password visibility" onClick={() => setShowPassword((show) => !show)} edge="end">
                     {showPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
                 </InputAdornment>

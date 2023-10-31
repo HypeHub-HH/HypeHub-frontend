@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
-import ImageCarousel from './ImageCarousel';
+import ImageCarousel from '../../components/layout/ImageCarousel.jsx';
 import NoItemsCard from './NoItemsCard';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -14,7 +14,7 @@ const ItemsCategoryTabPanel = (props) => {
   const [openSuccessAlert, setOpenSuccessAlert] = React.useState(false);
   const [openFailedAlert, setOpenFailedAlert] = React.useState(false);
 
-  const checkIfLiked = (accounts) => accounts.includes("TBD");
+  const checkIfLiked = (accounts) => accounts.includes('TBD');
 
   return items.length !== 0 ? (
     <div role="tabpanel" hidden={value !== index} id={`simple-tabpanel-${index}`} {...other}>
@@ -29,7 +29,7 @@ const ItemsCategoryTabPanel = (props) => {
             {items.map((item, index) => {
               return (
                 <Grid xs={6} md={3} key={`itemGrid${index}`}>
-                  <ImageCarousel imagesForItem={item.Images} imagesIndex={index}></ImageCarousel>
+                  <ImageCarousel images={item.Images} imagesIndex={index}></ImageCarousel>
                   <Box display={'flex'} justifyContent={'space-between'} alignItems={'center'}>
                     <Typography>Likes: {item.Likes.length}</Typography>
                     {checkIfLiked(item.Likes) ? (
