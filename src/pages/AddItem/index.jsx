@@ -1,17 +1,13 @@
 import * as React from 'react';
-import { Button, TextField, MenuItem, Select, InputLabel, FormControl, Container, Typography, Box } from '@mui/material';
-import Grid from '@mui/material/Unstable_Grid2';
-import ImageCropper from './ImageCropper';
+import { Button, Container, Typography,Box} from '@mui/material';
 import ItemForm from './ItemForm';
-import SelectedImages from './SelectedImages';
+import SelectedImages from './ImagesSection';
+import { useNavigate } from 'react-router-dom';
 
 const AddItem = () => {
   const formRef = React.useRef();
+  const navigate = useNavigate();
   const [selectedImages, setSelectedImages] = React.useState([]);
- 
-  React.useEffect(()=>{
-    console.log(selectedImages)
-  },[selectedImages])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,16 +32,23 @@ const AddItem = () => {
   };
 
   return (
+    <Box backgroundColor={"#E6ECF3"} padding={"2%"}>
     <Container>
-      <Typography variant='h3'>Add Item</Typography>
+      <Typography variant="h4">Add Item</Typography>
       <form ref={formRef} onSubmit={handleSubmit}>
-        <ItemForm/>
+        <ItemForm />
       </form>
-      <SelectedImages selectedImages={selectedImages} setSelectedImages={setSelectedImages}/>
-      <Button type="submit" onClick={handleSubmit}>
-        Add
+      <SelectedImages selectedImages={selectedImages} setSelectedImages={setSelectedImages} />
+      <Box mt={"2%"} display={'flex'} justifyContent={"flex-end"}>
+      <Button variant='contained' color="primary" onClick={()=>navigate(`/myItems`)}>
+        Cancel
       </Button>
+      <Button type="submit" variant='contained' color="secondary" onClick={handleSubmit}>
+        Save and add
+      </Button>
+      </Box>
     </Container>
+    </Box>
   );
 };
 

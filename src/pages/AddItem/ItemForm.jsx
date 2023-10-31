@@ -9,7 +9,7 @@ const ItemForm = () => {
     { name: 'Footwear', value: '3' },
     { name: 'Accesories', value: '4' },
   ];
-  
+
   return (
     <>
       <TextField
@@ -44,7 +44,17 @@ const ItemForm = () => {
       <TextField name="model" margin="normal" id="modelId" label="Model" type="text" fullWidth variant="outlined" />
       <TextField name="colorway" margin="normal" id="colorwayId" label="Colorway" type="text" fullWidth variant="outlined" />
       <TextField name="price" margin="normal" id="priceId" label="Price" type="number" fullWidth variant="outlined" />
-      <TextField name="date" margin="normal" id="string" type="date" fullWidth variant="outlined" />
+      <TextField
+        name="date"
+        margin="normal"
+        id="string"
+        type="date"
+        label="Date of purchase"
+        defaultValue={new Date().toISOString().split('T')[0]}
+        inputProps={{ min: '1970-01-24', max:new Date().toISOString().split('T')[0]}}
+        fullWidth
+        variant="outlined"
+      />
     </>
   );
 };

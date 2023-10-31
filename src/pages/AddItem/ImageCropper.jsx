@@ -1,13 +1,13 @@
-import { Box, Button, Slider } from '@mui/material';
+import { Box, Button, Slider, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import Cropper from 'react-easy-crop';
 import getCroppedImg from './canvaUtils';
 
-const ImageCropper = ({setSelectedImages, selectedImages}) => {
+const ImageCropper = ({ setSelectedImages, selectedImages }) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [imageSrc, setImageSrc] = useState(null);
-  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
 
   const onFileChange = async (e) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -16,27 +16,24 @@ const ImageCropper = ({setSelectedImages, selectedImages}) => {
       setImageSrc(imageDataUrl);
     }
   };
-
-
   const showCroppedImage = async () => {
     try {
-      const croppedImageUrl = await getCroppedImg(imageSrc, croppedAreaPixels);     
-      setSelectedImages([...selectedImages, croppedImageUrl])
-      setImageSrc(null)
+      const croppedImageUrl = await getCroppedImg(imageSrc, croppedAreaPixels);
+      setSelectedImages([...selectedImages, croppedImageUrl]);
+      setImageSrc(null);
     } catch (e) {
-      console.error(e)
+      console.error(e);
     }
-  }
+  };
   const onCropComplete = (croppedArea, croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels);
   };
 
-
   return (
     <>
       {imageSrc ? (
-        <Box padding={10}>
-          <Box position={"relative"}  height={400} sx={{ width: '100%' }}>
+        <Box padding={10} border={2}>
+          <Box position={'relative'} height={400} sx={{ width: '100%' }}>
             <Cropper
               image={imageSrc}
               crop={crop}
@@ -48,17 +45,21 @@ const ImageCropper = ({setSelectedImages, selectedImages}) => {
             />
           </Box>
           <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
+            <Typography>Zoom</Typography>
             <Slider value={zoom} min={1} max={3} step={0.1} aria-labelledby="Zoom" onChange={(e, zoom) => setZoom(zoom)} />
-            <Button variant="contained" color="primary" onClick={() => showCroppedImage()}>
-              Cropp and add
-            </Button>
+            <Box display={"flex"} justifyContent={'space-between'}>
             <Button variant="contained" color="primary" onClick={() => setImageSrc(null)}>
               Cancel
             </Button>
+            <Button variant="contained" color="secondary" onClick={() => showCroppedImage()}>
+              Cropp and add
+            </Button>
+            </Box>
           </Box>
         </Box>
       ) : (
-        <input type="file" onChange={onFileChange} accept="image/*" />     
+        <TextField name="upload-photo" type='file' margin="normal" fullWidth onChange={onFileChange}></TextField>
+        // <input type="file" onChange={onFileChange} accept="image/*" />
       )}
     </>
   );

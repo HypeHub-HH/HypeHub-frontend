@@ -13,7 +13,6 @@ const Items = () => {
     try {
       const response = await ItemApi.getItems(currentUser.accountId);
       setFetchedItems(response.data);
-      console.log(fetchedItems);
     } catch (error) {
       console.error(error);
     }
@@ -34,11 +33,11 @@ const Items = () => {
             <Tab label="Footwear" sx={{ fontSize: '1.5rem' }}></Tab>
             <Tab label="Accesories" sx={{ fontSize: '1.5rem' }}></Tab>
           </Tabs>
-          {selectedTab === 0 && <TabPanel items={fetchedItems.filter((data) => data.cloathingType == 0)} />}
-          {selectedTab === 1 && <TabPanel items={fetchedItems.filter((data) => data.cloathingType == 1)} />}
-          {selectedTab === 2 && <TabPanel items={fetchedItems.filter((data) => data.cloathingType == 2)} />}
+          {selectedTab === 0 && <TabPanel items={fetchedItems.filter((data) => data.cloathingType === 0)} />}
+          {selectedTab === 1 && <TabPanel items={fetchedItems.filter((data) => data.cloathingType === 1)} />}
+          {selectedTab === 2 && <TabPanel items={fetchedItems.filter((data) => data.cloathingType === 2)} />}
           {selectedTab === 3 && (
-            <TabPanel items={fetchedItems.filter((data) => data.cloathingType == 3)} />
+            <TabPanel items={fetchedItems.filter((data) => data.cloathingType === 3)} />
           )}
         </Box>
       </Container>

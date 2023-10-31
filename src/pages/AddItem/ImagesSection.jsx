@@ -12,16 +12,17 @@ const SelectedImages = ({ selectedImages, setSelectedImages }) => {
     updatedImageUrls.splice(index, 1);
     setSelectedImages(updatedImageUrls);
   };
+
   return (
-    <Box>
-      <Typography variant="h4">Images {`(${numberOfSelectedImages}/${maxNumberOfImages})`}</Typography>
-      {numberOfSelectedImages < 7 && <ImageCropper setSelectedImages={setSelectedImages} selectedImages={selectedImages}/>}
-      <Grid container spacing={1}>
+    <Box mt={'2%'}>
+      <Typography variant="h5">Images {`(${numberOfSelectedImages}/${maxNumberOfImages})`}</Typography>
+      {numberOfSelectedImages < 7 && <ImageCropper setSelectedImages={setSelectedImages} selectedImages={selectedImages} />}
+      <Grid container spacing={2}>
         {selectedImages.map((image, index) => {
           return (
             <Grid md={3} key={index} display={'flex'} justifyContent={'center'} flexDirection={'column'} alignItems={'center'}>
-                <Box component="img" src={image} sx={{ width: '50%', hight: 'auto' }}></Box>
-              <Button onClick={() => handleRemoveImage(index)}>Delete image</Button>
+              <Box border={1} component="img" src={image} sx={{ width: '50%', hight: 'auto' }}></Box>
+              <Button variant="outlined" onClick={()=>handleRemoveImage(index)} sx={{backgroundColor: ""}}>Delete image</Button>
             </Grid>
           );
         })}

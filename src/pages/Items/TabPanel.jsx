@@ -14,7 +14,7 @@ const ItemsCategoryTabPanel = (props) => {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
 
-  const checkIfLiked = (accounts) => accounts.some((account) => account.accountId == currentUser.accountId);
+  const checkIfLiked = (accounts) => accounts.some((account) => account.accountId === currentUser.accountId);
   
   return items.length !== 0 ? (
     <div role="tabpanel" hidden={value !== index} id={`simple-tabpanel-${index}`} {...other}>
