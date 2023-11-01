@@ -8,7 +8,7 @@ import RegisterForm from '../authentication/RegisterForm';
 const NavbarUnAuthorized = ({ openSignIn, setOpenSignIn, openSignUp, setOpenSingUp, setSuccessfullySignUp }) => {
   return (
     <AppBar position="sticky" color="primary">
-      <Toolbar>
+      <Toolbar sx={{  maxHeight: '100px' }}>
         <Box display="flex" flexDirection="row" justifyContent="space-between" alignItems="center" width="100%">
           <Logo />
           <Stack spacing={3} direction="row" height="">

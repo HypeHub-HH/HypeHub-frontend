@@ -5,7 +5,6 @@ import JoinImage from '../../assets/image-join.jpg';
 import CustomButton from '../../components/ui/CustomButton';
 
 const Hero = ({ setOpenSingUp }) => {
-
   const CustomBox = styled(Box)(({ theme }) => ({
     display: 'flex',
     justifyContent: 'center',
@@ -16,7 +15,15 @@ const Hero = ({ setOpenSingUp }) => {
       textAlign: 'center',
     },
   }));
-
+  const CustomImage = styled(Box)(({ theme }) => ({
+    borderRadius: '1rem',
+    width: '25vw',
+    hight: '1vh',
+    [theme.breakpoints.down('md')]: {
+      width: '80%',
+	  borderRadius: '1rem',
+    },
+  }));
   const Title = styled(Typography)(({ theme }) => ({
     fontSize: '64px',
     color: '#0F172A',
@@ -54,24 +61,12 @@ const Hero = ({ setOpenSingUp }) => {
               Share Your Style with the World
             </Title>
             <Typography variant="body2" sx={{ fontSize: '18px', color: '#5A6473', mb: 5 }} textAlign="center">
-              Discover the latest trends, get inspired, and connect with fashion enthusiasts around the globe on
-              HypeHub. Show off your favorite outfits, share styling tips, and connect with like-minded individuals who
-              share your passion for fashion!
+              Discover the latest trends, get inspired, and connect with fashion enthusiasts around the globe on HypeHub. Show off your favorite
+              outfits, share styling tips, and connect with like-minded individuals who share your passion for fashion!
             </Typography>
-            <CustomButton
-              backgroundColor="#0EA5E9"
-              color="secondary"
-              buttonText="Join the Community"
-              onClick={() => setOpenSingUp(true)}
-            />
+            <CustomButton backgroundColor="#0EA5E9" color="secondary" buttonText="Join the Community" onClick={() => setOpenSingUp(true)} />
           </Box>
-          <Box
-            component="img"
-            src={JoinImage}
-            alt="Join community image."
-            borderRadius={'1rem'}
-            sx={{ maxWidth: '70%', hight: 'auto' }}
-          />
+          <CustomImage component="img" src={JoinImage} alt="Join community image." />
         </CustomBox>
       </Container>
     </Box>

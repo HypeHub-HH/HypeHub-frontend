@@ -69,9 +69,7 @@ const Details = () => {
           <ImgContainer>
             <img src={wardrobeImage} alt="house" style={{ maxWidth: '100%' }} />
           </ImgContainer>
-
           <Box>
-            <Divider />
             <Typography
               sx={{
                 fontSize: '35px',
@@ -82,7 +80,6 @@ const Details = () => {
             >
               Discover New Styles
             </Typography>
-
             <Typography
               sx={{
                 fontSize: '16px',

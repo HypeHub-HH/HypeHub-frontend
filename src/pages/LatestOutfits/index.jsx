@@ -1,15 +1,11 @@
 import * as React from 'react';
 import { OutfitApi } from '../../api/OutfitApi.js';
-import { useAuth } from '../../context/AuthContext.js';
-import { useNavigate } from 'react-router-dom';
 import CustomButton from '../../components/ui/CustomButton.jsx';
-import { Box, Container, Typography, Avatar, Stack, styled } from '@mui/material';
+import { Container } from '@mui/material';
 import LikesPopUp from './LikesPopUp.jsx';
 import Post from './Post.jsx';
 
 const LatestOutfits = () => {
-  const { currentUser } = useAuth();
-  const navigate = useNavigate();
   const [openLikesPopUp, setOpenLikesPopUp] = React.useState(false);
   const [likes, setLikes] = React.useState(null);
   const [currPage, setCurrPage] = React.useState(1);
@@ -31,19 +27,6 @@ const LatestOutfits = () => {
     if (!wasLastList) axiosLatestOutfits();
   }, [currPage]);
 
-  const likeOrUnlikeOutfitAsync = (outfitId) => {
-    const axiosLikeOrUnlikeOutfitAsync = async () => {
-      try {
-        const response = await OutfitApi.likeOrUnlikeOutfitAsync(outfitId);
-        latestOutfits.find((outfit) => outfit.id === outfitId).likes = response.data;
-        setLatestOutfits([...latestOutfits]);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    axiosLikeOrUnlikeOutfitAsync();
-  };
-
   return (
     <Container
       sx={{
@@ -56,7 +39,7 @@ const LatestOutfits = () => {
       }}
     >
       {likes && <LikesPopUp openLikesPopUp={openLikesPopUp} setOpenLikesPopUp={setOpenLikesPopUp} likes={likes} setLikes={setLikes} />}
-      {latestOutfits.map((outfit, index) => (
+      {latestOutfits.map((outfit) => (
         <Post key={outfit.id} outfitInit={outfit} setOpenLikesPopUp={setOpenLikesPopUp} setLikes={setLikes} />
       ))}
       {!wasLastList && <CustomButton backgroundColor="#CBD5E1" color="black" buttonText="Load more" onClick={() => setCurrPage(currPage + 1)} />}
