@@ -17,7 +17,7 @@ const NavbarAuthorized = () => {
     },
     {
       Name: 'Items',
-      Fun: () => navigate('/{username}/myItems'),
+      Fun: () => navigate('/myItems'),
     },
     {
       Name: 'Settings',

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography, Button,Link } from '@mui/material';
-import ImageCarousel from './ImageCarousel';
+import ImageCarousel from '../../components/layout/ImageCarousel'
 import NoItemsCard from './NoItemsCard';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -9,15 +9,15 @@ import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { ItemApi } from '../../api/ItemApi';
 
-const ItemsCategoryTabPanel = (props) => {
+const TabPanel = (props) => {
   const { value, index, items, ...other } = props;
   const { currentUser } = useAuth();
+
   const navigate = useNavigate();
 
   const likeOrUnlikeItem = async (itemId) => {
     try {
       const response = await ItemApi.likeOrUnlikeItem(itemId);
-      // setFetchedItems(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -38,7 +38,7 @@ const ItemsCategoryTabPanel = (props) => {
             {items.map((item, index) => {
               return (
                 <Grid xs={12} md={4} key={`itemGrid${index}`}>
-                  <ImageCarousel imagesForItem={item.images} imagesIndex={index} />
+                  <ImageCarousel images={item.images}/>
                   <Box display={'flex'} justifyContent={'space-between'} alignItems={'center'}>
                     <Typography>Likes: {item.likes.length}</Typography>
                     {checkIfLiked(item.likes) ? (
@@ -66,4 +66,4 @@ const ItemsCategoryTabPanel = (props) => {
   );
 };
 
-export default ItemsCategoryTabPanel;
+export default TabPanel;
