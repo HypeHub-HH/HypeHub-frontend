@@ -1,10 +1,12 @@
 import axios from 'axios';
+import authorizedApi from '../services/AuthorizedAxios';
 
 const baseURL = process.env.REACT_APP_BACKEND_HOST;
 
 export class ItemApi {
-  static checkIfEmailExistAsync = async (email) => await axios.get(`${baseURL}/Account/Email?email=${email}`);
+  static getItem = async (itemId) => await axios.get(`${baseURL}/Items/${itemId}`);
 
-  static getItems = async (accountId) =>{
-    return await axios.get(`${baseURL}/Account/${accountId}/Items`)};
+  static getItems = async (accountId) => await axios.get(`${baseURL}/Account/${accountId}/Items`);
+
+  static likeOrUnlikeItem = async (itemId) => await authorizedApi.put(`/Items/${itemId}/like`);
 }
