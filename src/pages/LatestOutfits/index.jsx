@@ -2,7 +2,7 @@ import * as React from 'react';
 import { OutfitApi } from '../../api/OutfitApi.js';
 import CustomButton from '../../components/ui/CustomButton.jsx';
 import { Container } from '@mui/material';
-import LikesPopUp from './LikesPopUp.jsx';
+import LikesPopUp from '../../components/ui/LikesPopUp'
 import Post from './Post.jsx';
 
 const LatestOutfits = () => {
