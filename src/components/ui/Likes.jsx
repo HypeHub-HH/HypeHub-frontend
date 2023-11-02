@@ -1,4 +1,4 @@
-import { Typography, styled,Stack } from '@mui/material';
+import { Typography, styled, Stack } from '@mui/material';
 import { useAuth } from '../../context/AuthContext.js';
 import React from 'react';
 import LikesPopUp from '../../components/ui/LikesPopUp.jsx';
@@ -9,7 +9,6 @@ const Likes = ({ likes, likeOrUnlikeFunc, id, setLikes }) => {
   const { currentUser } = useAuth();
   const [openLikesPopUp, setOpenLikesPopUp] = React.useState(false);
   const checkIfLiked = (likes) => likes.some((like) => like.accountId === currentUser.accountId);
-  console.log(likes);
 
   const CustomFavoriteIcon = styled(FavoriteIcon)(({ theme }) => ({
     cursor: 'pointer',
@@ -23,7 +22,6 @@ const Likes = ({ likes, likeOrUnlikeFunc, id, setLikes }) => {
       opacity: '0.5',
     },
   }));
-
   const CustomTypography = styled(Typography)(({ theme }) => ({
     cursor: 'pointer',
     '&:hover': {
@@ -31,15 +29,7 @@ const Likes = ({ likes, likeOrUnlikeFunc, id, setLikes }) => {
     },
   }));
   return (
-    <Stack
-          spacing={1}
-          direction="row"
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
+    <Stack spacing={1} direction="row" display="flex" justifyContent="center" alignItems="center">
       {likes && currentUser && checkIfLiked(likes) ? (
         <CustomFavoriteIcon onClick={() => likeOrUnlikeFunc(id)} />
       ) : (
