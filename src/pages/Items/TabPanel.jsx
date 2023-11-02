@@ -1,6 +1,6 @@
 import React from 'react';
-import { Box, Typography, Button,Link } from '@mui/material';
-import ImageCarousel from '../../components/layout/ImageCarousel'
+import { Box, Typography, Button, Link } from '@mui/material';
+import ImageCarousel from '../../components/layout/ImageCarousel';
 import NoItemsCard from './NoItemsCard';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -38,21 +38,21 @@ const TabPanel = (props) => {
             {items.map((item, index) => {
               return (
                 <Grid xs={12} md={4} key={`itemGrid${index}`}>
-                  <ImageCarousel images={item.images}/>
+                  <ImageCarousel images={item.images} navigateURL={`../myItems/${item.id}`} />
                   <Box display={'flex'} justifyContent={'space-between'} alignItems={'center'}>
                     <Typography>Likes: {item.likes.length}</Typography>
                     {checkIfLiked(item.likes) ? (
-                      <Button onClick={()=>likeOrUnlikeItem(item.id)}>
+                      <Button onClick={() => likeOrUnlikeItem(item.id)}>
                         <FavoriteIcon />
                       </Button>
                     ) : (
-                      <Button onClick={()=>likeOrUnlikeItem(item.id)}>
+                      <Button onClick={() => likeOrUnlikeItem(item.id)}>
                         <FavoriteBorderIcon />
                       </Button>
                     )}
                   </Box>
                   <Link href={`/myItems/${item.id}`}>
-                  <Typography variant="h6">{item.name}</Typography>
+                    <Typography variant="h6">{item.name}</Typography>
                   </Link>
                 </Grid>
               );
@@ -62,7 +62,7 @@ const TabPanel = (props) => {
       )}
     </div>
   ) : (
-      <NoItemsCard/>
+    <NoItemsCard />
   );
 };
 

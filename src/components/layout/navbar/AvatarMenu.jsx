@@ -6,11 +6,11 @@ const AvatarMenu = ({ settings, avatarURL }) => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const CustomAvatar = styled(Avatar)(({ theme }) => ({
-    width: 95,
-    height: 95,
+    width: 75,
+    height: 75,
     [theme.breakpoints.down('md')]: {
-      width: 70,
-      height: 70,
+      width: 60,
+      height: 60,
     },
   }));
 
