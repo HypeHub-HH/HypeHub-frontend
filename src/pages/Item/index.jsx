@@ -9,7 +9,7 @@ const Item = () => {
 
   const fetchItem = async () => {
     try {
-      const response = await ItemApi.getItem(itemId);
+      const response = await ItemApi.getItemAsync(itemId);
       setFetchedItem(response.data);
     } catch (error) {
       console.error(error);
@@ -20,9 +20,7 @@ const Item = () => {
     fetchItem();
   }, []);
 
-  return (<Box>
-    
-  </Box>);
+  return <Box></Box>;
 };
 
 export default Item;

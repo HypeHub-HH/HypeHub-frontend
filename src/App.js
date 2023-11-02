@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Landing from './pages/Landing';
 import NotFound from './pages/NotFound';
 import { AuthProvider } from './context/AuthContext';
@@ -9,6 +9,7 @@ import Items from './pages/Items';
 import Item from './pages/Item';
 import AddItem from './pages/AddItem';
 import LatestOutfits from './pages/LatestOutfits';
+import OtherAccount from './pages/OtherAccount';
 
 function App() {
   return (
@@ -30,17 +31,17 @@ function App() {
           }
         >
           <Route path="/explore" element={<LatestOutfits />} />
-          <Route path="/{username}/settings" element={<div>ustawienia konta</div>} />
-          <Route path="/myItems" element={<Items />} />
-          <Route path="/myItems/:itemId" element={<Item />} />
-          <Route path="/myItems/addNewItem" element={<AddItem />} />
-          <Route path="/{username}/myItems/{iditemu}" element={<div>wchodzimy na nasz item do edycji</div>} />
-          <Route path="/{username}/items" element={<div>wchodzimy na itemy innego uzytkownika</div>} />
-          <Route path="/{username}/items/{iditemu}" element={<div>wchodzimy na item innego uzytkownika</div>} />
-          <Route path="/{username}/myOutfits" element={<div>wchodzimy na nasze outfity do edycji</div>} />
-          <Route path="/{username}/myOutfits/{idoutfitu}" element={<div>wchodzimy na nasz utfit do edycji</div>} />
-          <Route path="/:accountId/outfits" element={<div>wchodzimy na outfity innego uzytkownika</div>} />
-          <Route path="/outfits/:outfitId" element={<div>wchodzimy na outfit innego uzytkownika</div>} />
+          <Route path="/account/:accountId/settings" element={<div>ustawienia konta</div>} />
+          <Route path="/account/:accountId/items" element={<Items />} />
+          <Route path="/account/:accountId/items/:itemId" element={<Item />} />
+          <Route path="/account/:accountId/items/addNewItem" element={<AddItem />} />
+          {/* <Route path="/{username}/myItems/{iditemu}" element={<div>wchodzimy na nasz item do edycji</div>} /> */}
+          {/* <Route path="/{username}/items" element={<div>wchodzimy na itemy innego uzytkownika</div>} /> */}
+          {/* <Route path="/{username}/items/{iditemu}" element={<div>wchodzimy na item innego uzytkownika</div>} /> */}
+          <Route path="/account/:accountId/outfits" element={<div>wchodzimy na nasze outfity do edycji</div>} />
+          <Route path="/account/:accountId/outfits/:outfitId" element={<div>wchodzimy na nasz utfit do edycji</div>} />
+          <Route path="/account/:accountId" element={<OtherAccount />} />
+          {/* <Route path="/outfits/:outfitId" element={<div>wchodzimy na outfit innego uzytkownika</div>} /> */}
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

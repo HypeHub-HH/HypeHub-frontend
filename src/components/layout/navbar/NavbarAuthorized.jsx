@@ -12,16 +12,20 @@ const NavbarAuthorized = () => {
 
   const settings = [
     {
+      Name: 'Wardrobe',
+      Fun: () => navigate(`../account/${currentUser.accountId}`, { replace: true }),
+    },
+    {
       Name: 'Outfits',
-      Fun: () => navigate('/{username}/myOutfits'),
+      Fun: () => navigate(`/account/${currentUser.accountId}/outfits`),
     },
     {
       Name: 'Items',
-      Fun: () => navigate('/myItems'),
+      Fun: () => navigate(`/account/${currentUser.accountId}/items`),
     },
     {
       Name: 'Settings',
-      Fun: () => navigate('/{username}/settings'),
+      Fun: () => navigate(`/account/${currentUser.accountId}/settings`),
     },
     {
       Name: 'Logout',

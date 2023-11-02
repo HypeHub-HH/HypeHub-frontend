@@ -91,7 +91,7 @@ const PostInfo = ({ outfitInit, setOpenLikesPopUp, setLikes }) => {
           alignItems: 'center',
         }}
       >
-        <CustomTypography variant="h6" onClick={() => navigate(`../${outfit.account.id}/outfits`)}>
+        <CustomTypography variant="h6" onClick={() => navigate(`../account/${outfit.account.id}`)}>
           {outfit.account.username}
         </CustomTypography>
         <Avatar

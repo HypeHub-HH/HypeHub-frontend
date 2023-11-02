@@ -4,9 +4,7 @@ import authorizedApi from '../services/AuthorizedAxios';
 const baseURL = process.env.REACT_APP_BACKEND_HOST;
 
 export class ItemApi {
-  static getItem = async (itemId) => await axios.get(`${baseURL}/Items/${itemId}`);
+  static getItemAsync = async (itemId) => await axios.get(`${baseURL}/Items/${itemId}`);
 
-  static getItems = async (accountId) => await axios.get(`${baseURL}/Account/${accountId}/Items`);
-
-  static likeOrUnlikeItem = async (itemId) => await authorizedApi.put(`/Items/${itemId}/like`);
+  static likeOrUnlikeItemAsync = async (itemId) => await authorizedApi.put(`/Items/${itemId}/like`);
 }
