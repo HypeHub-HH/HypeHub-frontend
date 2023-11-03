@@ -25,10 +25,7 @@ const Info = ({ item, setFetchedItem }) => {
 
   return (
     <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
-      <Box display={'flex'}>
       <Typography variant="h4">{item.name}</Typography>
-      <Likes likes={item.likes} likeOrUnlikeFunc={likeOrUnlikeItem} id={item.id} setLikes={setLikes}/>
-      </Box>
       <List
         sx={{
           width: '100%',
@@ -81,6 +78,9 @@ const Info = ({ item, setFetchedItem }) => {
           <ListItemText primary={item.purchaseDate} secondary="Date of purchase" />
         </ListItem>
         <Divider variant="inset" component="li" />
+        <ListItem>
+        <Likes likes={item.likes} likeOrUnlikeFunc={likeOrUnlikeItem} id={item.id} setLikes={setLikes}/>
+        </ListItem>
       </List>
     </Box>
   );
