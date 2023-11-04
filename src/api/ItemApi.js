@@ -9,4 +9,6 @@ export class ItemApi {
   static getItems = async (accountId) => await axios.get(`${baseURL}/Account/${accountId}/Items`);
 
   static likeOrUnlikeItem = async (itemId) => await authorizedApi.put(`/Items/${itemId}/like`);
+
+  static createItem = async (body) => await authorizedApi.post(`/Items`, body);
 }

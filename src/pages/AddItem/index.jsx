@@ -2,8 +2,9 @@ import * as React from 'react';
 import { Button, Container, Typography,Box} from '@mui/material';
 import ItemForm from './ItemForm';
 import SelectedImages from './ImagesSection';
-import { useNavigate } from 'react-router-dom';
+import { json, useNavigate } from 'react-router-dom';
 import { postImage } from '../../api/ImageBBApi';
+import { ItemApi } from '../../api/ItemApi';
 
 const AddItem = () => {
   const formRef = React.useRef();
@@ -17,19 +18,31 @@ const AddItem = () => {
     const name = formData.get('name');
     const category = formData.get('category');
     if (name !== '' && category !== '') {
-      console.log(selectedImages)  
-      let newItem = {
+      // let uploadedImages = await postImage(selectedImages);
+      // let newItem = {
+      //   Name: name,
+      //   Category: category,
+      //   Brand: formData.get('brand'),
+      //   Model: formData.get('model'),
+      //   Colorway: formData.get('colorway'),
+      //   Price: parseFloat(formData.get('price')),
+      //   DateOfPurchase: new Date(formData.get('date')),
+      //   Images: await postImage(selectedImages)
+      // };
+      // console.log(newItem)
+      var parsedItem = JSON.stringify({
         Name: name,
         Category: category,
         Brand: formData.get('brand'),
         Model: formData.get('model'),
         Colorway: formData.get('colorway'),
-        Price: formData.get('price'),
-        DateOfPurchase: formData.get('date'),
-      };
-      let uploadedImages = await postImage(selectedImages);
-      console.log(newItem);
-      console.log(uploadedImages)
+        Price: parseFloat(formData.get('price')),
+        DateOfPurchase: new Date(formData.get('date')),
+        Images: await postImage(selectedImages)
+      })
+      console.log("oto twój obiekt")
+      console.log(parsedItem)
+      await ItemApi.createItem(parsedItem)
     }
   };
 
