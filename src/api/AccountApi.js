@@ -8,6 +8,8 @@ export class AccountApi {
 
   static checkIfUsernameExistAsync = async (username) => await axios.get(`${baseURL}/Account/Username?username=${username}`);
 
+  static getSearchedAccountsAsync = async (searchedUsername) => await axios.get(`${baseURL}/Account/Search?searchedUsername=${searchedUsername}`);
+
   static getAccountWithOutfitsAsync = async (accountId) => await axios.get(`${baseURL}/Account/${accountId}/Outfits`);
 
   static getItemsFromAccountAsync = async (accountId) => await axios.get(`${baseURL}/Account/${accountId}/Items`);

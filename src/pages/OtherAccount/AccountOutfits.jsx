@@ -1,7 +1,5 @@
 import * as React from 'react';
-import { AccountApi } from '../../api/AccountApi.js';
-import { ItemApi } from '../../api/ItemApi.js';
-import { Box, Container, Divider, Typography } from '@mui/material';
+import { Box, Divider, Typography } from '@mui/material';
 import OutfitTabPanel from '../../components/layout/OutfitTabPanel.jsx';
 
 const AccountOutfits = ({ outfits, setOpenLikesPopUp, setLikes }) => {

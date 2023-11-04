@@ -19,11 +19,13 @@ const OutfitTabPanel = ({ outfits, setOpenLikesPopUp, setLikes }) => {
               setLikes={setLikes}
               likeFun={OutfitApi.likeOrUnlikeOutfitAsync}
             />
-            <ImageCarousel
-              images={outfit.images}
-              navigateURL={`../account/${currentUser.accountId}/outfits/${outfit.id}`}
-              likeFun={OutfitApi.likeOrUnlikeOutfitAsync}
-            />
+            {currentUser && (
+              <ImageCarousel
+                images={outfit.images}
+                navigateURL={`../account/${currentUser.accountId}/outfits/${outfit.id}`}
+                likeFun={OutfitApi.likeOrUnlikeOutfitAsync}
+              />
+            )}
           </Grid>
         );
       })}

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Toolbar, AppBar } from '@mui/material';
+import { Box, Toolbar, AppBar, Stack } from '@mui/material';
 import Logo from './Logo';
 import Searchbar from './Searchbar';
 import AvatarMenu from './AvatarMenu';
@@ -13,7 +13,7 @@ const NavbarAuthorized = () => {
   const settings = [
     {
       Name: 'Wardrobe',
-      Fun: () => navigate(`../account/${currentUser.accountId}`, { replace: true }),
+      Fun: () => navigate(`../account/${currentUser.accountId}`),
     },
     {
       Name: 'Outfits',
@@ -41,10 +41,19 @@ const NavbarAuthorized = () => {
       <Toolbar sx={{ maxHeight: '100px' }}>
         <Box display="flex" flexDirection="row" justifyContent="space-between" alignItems="center" width="100%">
           <Logo />
-          <Box display="flex" flexDirection="row" justifyContent="space-around" alignItems="center" sx={{ flexGrow: 0.1 }}>
+          <Stack
+            spacing={1}
+            direction="row"
+            sx={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              alignItems: 'center',
+              flexGrow: 0.15,
+            }}
+          >
             <Searchbar />
             <AvatarMenu settings={settings} avatarURL={currentUser?.avatarURL} />
-          </Box>
+          </Stack>
         </Box>
       </Toolbar>
     </AppBar>

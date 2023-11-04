@@ -14,10 +14,10 @@ const OtherAccount = () => {
   const [accountInfo, setAccountInfo] = React.useState(null);
   const [openLikesPopUp, setOpenLikesPopUp] = React.useState(false);
   const [likes, setLikes] = React.useState(null);
+
   const axiosItems = async () => {
     try {
       const response = await AccountApi.getItemsFromAccountAsync(accountId);
-      console.log(response.data);
       setItems(response.data);
     } catch (error) {
       console.error(error);
@@ -27,7 +27,6 @@ const OtherAccount = () => {
   const axiosOutfits = async () => {
     try {
       const response = await AccountApi.getAccountWithOutfitsAsync(accountId);
-      console.log(response.data);
       setOutfits(response.data.outfits);
       setAccountInfo({
         id: response.data.id,
@@ -42,7 +41,7 @@ const OtherAccount = () => {
   React.useEffect(() => {
     axiosItems();
     axiosOutfits();
-  }, []);
+  }, [accountId]);
 
   return (
     <Box sx={{ width: '100%' }}>

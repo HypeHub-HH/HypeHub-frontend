@@ -22,11 +22,13 @@ const TabPanel = ({ items, setOpenLikesPopUp, setLikes }) => {
                   setLikes={setLikes}
                   likeFun={ItemApi.likeOrUnlikeItemAsync}
                 />
-                <ImageCarousel
-                  images={item.images}
-                  navigateURL={`../account/${currentUser.accountId}/items/${item.id}`}
-                  likeFun={ItemApi.likeOrUnlikeItemAsync}
-                />
+                {currentUser && (
+                  <ImageCarousel
+                    images={item.images}
+                    navigateURL={`../account/${currentUser.accountId}/items/${item.id}`}
+                    likeFun={ItemApi.likeOrUnlikeItemAsync}
+                  />
+                )}
               </Grid>
             );
           })}

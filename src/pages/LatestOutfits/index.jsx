@@ -43,9 +43,10 @@ const LatestOutfits = () => {
         {likes && (
           <LikesPopUp openLikesPopUp={openLikesPopUp} setOpenLikesPopUp={setOpenLikesPopUp} likes={likes} setLikes={setLikes} />
         )}
-        {latestOutfits.map((outfit) => (
-          <Post key={outfit.id} outfit={outfit} setOpenLikesPopUp={setOpenLikesPopUp} setLikes={setLikes} />
-        ))}
+        {latestOutfits !== [] &&
+          latestOutfits.map((outfit) => (
+            <Post key={outfit.id} outfit={outfit} setOpenLikesPopUp={setOpenLikesPopUp} setLikes={setLikes} />
+          ))}
         {!wasLastList && (
           <CustomButton
             backgroundColor="#CBD5E1"

@@ -1,59 +1,104 @@
 import * as React from 'react';
-import { styled, alpha } from '@mui/material/styles';
-import { InputBase } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import { AccountApi } from '../../../api/AccountApi';
+import { styled, alpha } from '@mui/material/styles';
+import { Autocomplete, TextField, Typography, InputAdornment } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { useTheme } from '@mui/material/styles';
 
 const Searchbar = () => {
-  const Search = styled('div')(({ theme }) => ({
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
+  const navigate = useNavigate();
+  const theme = useTheme();
+  const [usernamesList, setUsernamesList] = React.useState([]);
+  const [resetKey, setResetKey] = React.useState(0);
+
+  const axiosUsername = async (searchedUsername) => {
+    try {
+      const response = await AccountApi.getSearchedAccountsAsync(searchedUsername);
+      setUsernamesList(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const CustomTypography = styled(Typography)(({ theme }) => ({
+    cursor: 'pointer',
+    padding: '3% 0 3% 6%',
     '&:hover': {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginLeft: 0,
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(1),
-      width: 'auto',
-    },
-    [theme.breakpoints.down('md')]: {
-      marginLeft: theme.spacing(1),
-      width: '60%',
+      opacity: '0.5',
     },
   }));
 
-  const SearchIconWrapper = styled('div')(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }));
-
-  const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: 'inherit',
-    '& .MuiInputBase-input': {
-      padding: theme.spacing(1, 1, 1, 0),
-      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-      transition: theme.transitions.create('width'),
-      width: '100%',
-      [theme.breakpoints.up('sm')]: {
-        width: '12ch',
-        '&:focus': {
-          width: '20ch',
-        },
-      },
-    },
-  }));
   return (
-    <Search>
-      <SearchIconWrapper>
-        <SearchIcon />
-      </SearchIconWrapper>
-      <StyledInputBase placeholder="Search User…" inputProps={{ 'aria-label': 'search' }} />
-    </Search>
+    <Autocomplete
+      key={resetKey}
+      freeSolo={true}
+      onChange={(event, newValue) => {
+        console.log('przejscie do account teraz');
+      }}
+      onInputChange={(event, newInputValue) => {
+        if (newInputValue !== '') axiosUsername(newInputValue);
+        else setUsernamesList([]);
+      }}
+      options={usernamesList.map((account) => JSON.stringify(account))}
+      sx={{
+        position: 'relative',
+        borderRadius: (theme) => theme.shape.borderRadius,
+        backgroundColor: (theme) => alpha(theme.palette.common.white, 0.15),
+        '&:hover': {
+          backgroundColor: (theme) => alpha(theme.palette.common.white, 0.25),
+        },
+        marginLeft: 0,
+        [theme.breakpoints.up('sm')]: {
+          marginLeft: (theme) => theme.spacing(1),
+          width: '55%',
+        },
+        [theme.breakpoints.down('sm')]: {
+          marginLeft: (theme) => theme.spacing(10),
+          width: '150px',
+        },
+      }}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          placeholder="Search User…"
+          InputProps={{
+            ...params.InputProps,
+            startAdornment: (
+              <InputAdornment>
+                <SearchIcon />
+              </InputAdornment>
+            ),
+          }}
+          sx={{
+            '& .MuiInputBase-input': {
+              color: '#c4c4c4',
+              transition: theme.transitions.create('width'),
+              [theme.breakpoints.up('sm')]: {
+                '&:focus': {
+                  width: '70%',
+                },
+              },
+            },
+          }}
+        />
+      )}
+      renderOption={(option) => {
+        let account = JSON.parse(option.key);
+        return (
+          <CustomTypography
+            key={account.id}
+            onClick={() => {
+              navigate(`../account/${account.id}`);
+              setUsernamesList([]);
+              setResetKey((prevKey) => prevKey + 1);
+            }}
+          >
+            {account.username}
+          </CustomTypography>
+        );
+      }}
+    />
   );
 };
 
