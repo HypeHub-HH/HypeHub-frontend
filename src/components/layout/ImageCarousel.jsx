@@ -37,7 +37,7 @@ const ImageCarousel = ({ images }) => {
         >
           {images.map((image, index) => (
             <div key={image.id} width="80%">
-              {index === activeStep ? <Box component="img" width="100%" display="block" src={image.url} alt="image" /> : null}
+              {index === activeStep ? <Box component="img" width="100%" display="block" src={image.url} alt="image" loading='lazy'/> : null}
             </div>
           ))}
           <MobileStepper

@@ -75,7 +75,7 @@ const Info = ({ item, setFetchedItem }) => {
               <CalendarMonthIcon />
             </Avatar>
           </ListItemAvatar>
-          <ListItemText primary={item.purchaseDate} secondary="Date of purchase" />
+          <ListItemText primary={item.purchaseDate.split('T')[0]} secondary="Date of purchase" />
         </ListItem>
         <Divider variant="inset" component="li" />
         <ListItem>

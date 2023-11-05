@@ -33,14 +33,8 @@ export async function postImage(images) {
     });
   });
 
-  try {
     const uploadedImages = await Promise.all(uploadPromises);
-    console.log(uploadedImages);
     return uploadedImages;
-  } catch (error) {
-    console.error('Error uploading images:', error);
-    return [];
-  }
 }
 
 

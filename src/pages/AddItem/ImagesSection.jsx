@@ -22,7 +22,7 @@ const SelectedImages = ({ selectedImages, setSelectedImages }) => {
           return (
             <Grid md={3} key={index} display={'flex'} justifyContent={'center'} flexDirection={'column'} alignItems={'center'}>
               <Box border={1} component="img" src={image} sx={{ width: '50%', hight: 'auto' }}></Box>
-              <Button variant="outlined" onClick={()=>handleRemoveImage(index)} sx={{backgroundColor: ""}}>Delete image</Button>
+              <Button variant="outlined" onClick={()=>handleRemoveImage(index)}>Delete image</Button>
             </Grid>
           );
         })}
