@@ -13,9 +13,6 @@ export async function postImage(images) {
         const response = await axios({
           method: 'post',
           url: 'https://api.imgbb.com/1/upload',
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
           data: formData,
           params: {
             key: apiKey,

@@ -30,7 +30,7 @@ const Item = () => {
 
   const handleDelete = async () => {
     try {
-      const response = await ItemApi.deleteItem(fetchedItem.id);
+      const response = await ItemApi.deleteItemAsync(fetchedItem.id);
       navigate(`/account/${currentUser.accountId}/items`);
     } catch (error) {
       console.error(error);

@@ -8,7 +8,7 @@ export class ItemApi {
 
   static likeOrUnlikeItemAsync = async (itemId) => await authorizedApi.put(`/Items/${itemId}/like`);
 
-  static createItem = async (body) => await authorizedApi.post(`/Items`, body);
+  static createItemAsync = async (body) => await authorizedApi.post(`/Items`, body);
 
-  static deleteItem = async (itemId) => await authorizedApi.delete(`/Items/${itemId}`);
+  static deleteItemAsync = async (itemId) => await authorizedApi.delete(`/Items/${itemId}`);
 }
