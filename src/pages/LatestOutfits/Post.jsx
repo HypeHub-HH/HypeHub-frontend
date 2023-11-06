@@ -27,15 +27,13 @@ const Post = ({ outfit, setOpenLikesPopUp, setLikes }) => {
   return (
     <CustomBox
       key={outfit.id}
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingBottom: '2%',
-        paddingTop: '2%',
-        MaxWidth: '40%',
-      }}
+      display={'flex'}
+      justifyContent={'center'}
+      flexDirection={'column'}
+      alignItems={'center'}
+      paddingBottom={'2%'}
+      paddingTop={'2%'}
+      maxWidth={'40%'}
     >
       <PostInfo outfitInit={outfit} setOpenLikesPopUp={setOpenLikesPopUp} setLikes={setLikes} />
       {currentUser && (
