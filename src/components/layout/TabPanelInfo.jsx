@@ -1,44 +1,20 @@
 import * as React from 'react';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import { Container, Typography, Stack, styled } from '@mui/material';
-import { useAuth } from '../../context/AuthContext.js';
+import Likes from '../ui/Likes';
+import { Container, Typography } from '@mui/material';
 
-const ItemTabPanelInfo = ({ objectInit, setOpenLikesPopUp, setLikes, likeFun }) => {
-  const { currentUser } = useAuth();
+const TabPanelInfo = ({ objectInit, likeFun }) => {
   const [object, setObject] = React.useState(objectInit);
-
-  const checkIfLiked = (itemLikes) => itemLikes.some((like) => like.accountId === currentUser.accountId);
+  const [likes, setLikes] = React.useState(null);
 
   const axiosLikeOrUnlikeObjectAsync = async (objectId) => {
     try {
       const response = await likeFun(objectId);
-      console.log(response);
       object.likes = response.data;
       setObject({ ...object });
     } catch (error) {
       console.error(error);
     }
   };
-
-  const CustomFavoriteIcon = styled(FavoriteIcon)(({ theme }) => ({
-    cursor: 'pointer',
-    '&:hover': {
-      opacity: '0.5',
-    },
-  }));
-  const CustomFavoriteBorderIcon = styled(FavoriteBorderIcon)(({ theme }) => ({
-    cursor: 'pointer',
-    '&:hover': {
-      opacity: '0.5',
-    },
-  }));
-  const CustomTypography = styled(Typography)(({ theme }) => ({
-    cursor: 'pointer',
-    '&:hover': {
-      opacity: '0.5',
-    },
-  }));
 
   return (
     <Container
@@ -50,35 +26,10 @@ const ItemTabPanelInfo = ({ objectInit, setOpenLikesPopUp, setLikes, likeFun }) 
         paddingTop: '3%',
       }}
     >
-      <Stack
-        spacing={1}
-        direction="row"
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        {object.likes && currentUser && checkIfLiked(object.likes) ? (
-          <CustomFavoriteIcon onClick={() => axiosLikeOrUnlikeObjectAsync(object.id)} />
-        ) : (
-          <CustomFavoriteBorderIcon onClick={() => axiosLikeOrUnlikeObjectAsync(object.id)} />
-        )}
-        {object.likes && (
-          <CustomTypography
-            variant="h6"
-            onClick={() => {
-              setLikes(object.likes);
-              setOpenLikesPopUp(true);
-            }}
-          >
-            {object.likes.length}
-          </CustomTypography>
-        )}
-      </Stack>
+      <Likes likes={object.likes} likeOrUnlikeFunc={axiosLikeOrUnlikeObjectAsync} id={object.id} setLikes={setLikes} />
       <Typography variant="h6">{object.name}</Typography>
     </Container>
   );
 };
 
-export default ItemTabPanelInfo;
+export default TabPanelInfo;

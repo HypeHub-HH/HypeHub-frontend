@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { Typography, Box } from '@mui/material';
-import { styled } from '@mui/material/styles';
 import LogoIcon from '../../../assets/logo-icon.png';
+import { useAuth } from '../../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../../context/AuthContext.js';
+import { Typography, Box, styled } from '@mui/material';
 
 const Logo = () => {
   const navigate = useNavigate();

@@ -1,6 +1,6 @@
+import * as React from 'react';
 import { styled, Typography } from '@mui/material';
 import { Box, Container } from '@mui/system';
-import React from 'react';
 import wardrobeImage from '../../assets/wardrobe.jpg';
 
 const Details = () => {
@@ -49,16 +49,6 @@ const Details = () => {
     [theme.breakpoints.down('sm')]: {
       flexDirection: 'column',
       gap: theme.spacing(5),
-    },
-  }));
-
-  const Divider = styled('div')(({ theme }) => ({
-    width: '13%',
-    height: '5px',
-    backgroundColor: '#000339',
-    [theme.breakpoints.down('md')]: {
-      marginLeft: 'auto',
-      marginRight: 'auto',
     },
   }));
 

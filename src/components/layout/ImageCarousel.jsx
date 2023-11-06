@@ -1,11 +1,9 @@
 import * as React from 'react';
-import { useTheme } from '@mui/material/styles';
-import MobileStepper from '@mui/material/MobileStepper';
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import { Box, Container, styled, Button } from '@mui/material';
 import noImage from '../../assets/no-item-image.png';
 import { useNavigate } from 'react-router-dom';
+import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
+import { Box, Container, styled, Button, useTheme, MobileStepper } from '@mui/material';
 
 const ImageCarousel = ({ images, navigateURL }) => {
   const theme = useTheme();

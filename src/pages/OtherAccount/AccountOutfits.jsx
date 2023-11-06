@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Box, Divider, Typography } from '@mui/material';
 import OutfitTabPanel from '../../components/layout/OutfitTabPanel.jsx';
 
-const AccountOutfits = ({ outfits, setOpenLikesPopUp, setLikes }) => {
+const AccountOutfits = ({ outfits }) => {
   return (
     <Box
       sx={{
@@ -18,7 +18,7 @@ const AccountOutfits = ({ outfits, setOpenLikesPopUp, setLikes }) => {
           Outfits
         </Typography>
       </Divider>
-      <OutfitTabPanel outfits={outfits} setOpenLikesPopUp={setOpenLikesPopUp} setLikes={setLikes} />
+      <OutfitTabPanel outfits={outfits} />
     </Box>
   );
 };

@@ -1,11 +1,11 @@
-import React from 'react';
+import * as React from 'react';
+import TabPanelInfo from './TabPanelInfo';
 import ImageCarousel from './ImageCarousel';
+import { OutfitApi } from '../../api/OutfitApi';
 import Grid from '@mui/material/Unstable_Grid2';
 import { useAuth } from '../../context/AuthContext';
-import TabPanelInfo from './TabPanelInfo';
-import { OutfitApi } from '../../api/OutfitApi';
 
-const OutfitTabPanel = ({ outfits, setOpenLikesPopUp, setLikes }) => {
+const OutfitTabPanel = ({ outfits }) => {
   const { currentUser } = useAuth();
 
   return (
@@ -13,12 +13,7 @@ const OutfitTabPanel = ({ outfits, setOpenLikesPopUp, setLikes }) => {
       {outfits.map((outfit) => {
         return (
           <Grid xs={12} md={4} key={outfit.id} sx={{ paddingBottom: '8%' }}>
-            <TabPanelInfo
-              objectInit={outfit}
-              setOpenLikesPopUp={setOpenLikesPopUp}
-              setLikes={setLikes}
-              likeFun={OutfitApi.likeOrUnlikeOutfitAsync}
-            />
+            <TabPanelInfo objectInit={outfit} likeFun={OutfitApi.likeOrUnlikeOutfitAsync} />
             {currentUser && (
               <ImageCarousel
                 images={outfit.images}

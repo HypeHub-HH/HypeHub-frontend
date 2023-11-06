@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Typography, Tooltip, IconButton, Avatar, Menu, MenuItem, styled } from '@mui/material';
 import defaultIcon from '../../../assets/defaultAccountIcon.png';
+import { Typography, Tooltip, IconButton, Avatar, Menu, MenuItem, styled } from '@mui/material';
 
 const AvatarMenu = ({ settings, avatarURL }) => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);

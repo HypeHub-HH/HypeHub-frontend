@@ -1,6 +1,6 @@
+import * as React from 'react';
 import { Box, styled, Typography } from '@mui/material';
 import { Container } from '@mui/system';
-import React from 'react';
 import JoinImage from '../../assets/image-join.jpg';
 import CustomButton from '../../components/ui/CustomButton';
 

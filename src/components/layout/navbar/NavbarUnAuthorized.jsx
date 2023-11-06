@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { Stack, Toolbar, AppBar, Box } from '@mui/material';
 import CustomButton from '../../ui/CustomButton';
 import Logo from './Logo';
 import LoginForm from '../authentication/LoginForm';
 import RegisterForm from '../authentication/RegisterForm';
+import { Stack, Toolbar, AppBar, Box } from '@mui/material';
 
 const NavbarUnAuthorized = ({ openSignIn, setOpenSignIn, openSignUp, setOpenSingUp, setSuccessfullySignUp }) => {
   return (

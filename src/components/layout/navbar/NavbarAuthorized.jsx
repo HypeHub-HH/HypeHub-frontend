@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { Box, Toolbar, AppBar, Stack } from '@mui/material';
 import Logo from './Logo';
 import Searchbar from './Searchbar';
 import AvatarMenu from './AvatarMenu';
-import { useAuth } from '../../../context/AuthContext.js';
+import { useAuth } from '../../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { Box, Toolbar, AppBar, Stack } from '@mui/material';
 
 const NavbarAuthorized = () => {
   const { currentUser, logout } = useAuth();

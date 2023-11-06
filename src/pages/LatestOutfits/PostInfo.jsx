@@ -1,18 +1,14 @@
 import * as React from 'react';
 import defaultIcon from '../../assets/defaultAccountIcon.png';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Container, Typography, Avatar, Stack, styled } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext.js';
-import { OutfitApi } from '../../api/OutfitApi.js';
+import { OutfitApi } from '../../api/OutfitApi';
+import Likes from '../../components/ui/Likes';
 
-const PostInfo = ({ outfitInit, setOpenLikesPopUp, setLikes }) => {
-  const { currentUser } = useAuth();
+const PostInfo = ({ outfitInit }) => {
   const navigate = useNavigate();
   const [outfit, setOutfit] = React.useState(outfitInit);
-
-  const checkIfLiked = (outfitLikes) => outfitLikes.some((like) => like.accountId === currentUser.accountId);
+  const [likes, setLikes] = React.useState(null);
 
   const axiosLikeOrUnlikeOutfitAsync = async (outfitId) => {
     try {
@@ -23,19 +19,6 @@ const PostInfo = ({ outfitInit, setOpenLikesPopUp, setLikes }) => {
       console.error(error);
     }
   };
-
-  const CustomFavoriteIcon = styled(FavoriteIcon)(({ theme }) => ({
-    cursor: 'pointer',
-    '&:hover': {
-      opacity: '0.5',
-    },
-  }));
-  const CustomFavoriteBorderIcon = styled(FavoriteBorderIcon)(({ theme }) => ({
-    cursor: 'pointer',
-    '&:hover': {
-      opacity: '0.5',
-    },
-  }));
   const CustomTypography = styled(Typography)(({ theme }) => ({
     cursor: 'pointer',
     '&:hover': {
@@ -53,32 +36,7 @@ const PostInfo = ({ outfitInit, setOpenLikesPopUp, setLikes }) => {
         paddingTop: '3%',
       }}
     >
-      <Stack
-        spacing={1}
-        direction="row"
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        {outfit.likes && currentUser && checkIfLiked(outfit.likes) ? (
-          <CustomFavoriteIcon onClick={() => axiosLikeOrUnlikeOutfitAsync(outfit.id)} />
-        ) : (
-          <CustomFavoriteBorderIcon onClick={() => axiosLikeOrUnlikeOutfitAsync(outfit.id)} />
-        )}
-        {outfit.likes && (
-          <CustomTypography
-            variant="h6"
-            onClick={() => {
-              setLikes(outfit.likes);
-              setOpenLikesPopUp(true);
-            }}
-          >
-            {outfit.likes.length}
-          </CustomTypography>
-        )}
-      </Stack>
+	  <Likes likes={outfit.likes} setLikes={setLikes} likeOrUnlikeFunc={axiosLikeOrUnlikeOutfitAsync} id={outfit.id}/>
       <Stack
         spacing={1}
         direction="row"

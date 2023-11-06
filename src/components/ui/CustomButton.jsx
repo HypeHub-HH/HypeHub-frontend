@@ -1,5 +1,5 @@
+import * as React from 'react';
 import { Button, styled } from '@mui/material';
-import React from 'react';
 
 const CustomButton = ({ backgroundColor, color, buttonText, breakpointWidth, breakpointHeight, onClick }) => {
   const CustomButton = styled(Button)(({ theme }) => ({

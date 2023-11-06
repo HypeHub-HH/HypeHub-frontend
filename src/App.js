@@ -35,13 +35,9 @@ function App() {
           <Route path="/account/:accountId/items" element={<Items />} />
           <Route path="/account/:accountId/items/:itemId" element={<Item />} />
           <Route path="/account/:accountId/items/addNewItem" element={<AddItem />} />
-          {/* <Route path="/{username}/myItems/{iditemu}" element={<div>wchodzimy na nasz item do edycji</div>} /> */}
-          {/* <Route path="/{username}/items" element={<div>wchodzimy na itemy innego uzytkownika</div>} /> */}
-          {/* <Route path="/{username}/items/{iditemu}" element={<div>wchodzimy na item innego uzytkownika</div>} /> */}
           <Route path="/account/:accountId/outfits" element={<div>wchodzimy na nasze outfity do edycji</div>} />
           <Route path="/account/:accountId/outfits/:outfitId" element={<div>wchodzimy na nasz utfit do edycji</div>} />
           <Route path="/account/:accountId" element={<OtherAccount />} />
-          {/* <Route path="/outfits/:outfitId" element={<div>wchodzimy na outfit innego uzytkownika</div>} /> */}
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

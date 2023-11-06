@@ -1,10 +1,8 @@
 import * as React from 'react';
-import SearchIcon from '@mui/icons-material/Search';
 import { AccountApi } from '../../../api/AccountApi';
-import { styled, alpha } from '@mui/material/styles';
-import { Autocomplete, TextField, Typography, InputAdornment } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { useTheme } from '@mui/material/styles';
+import SearchIcon from '@mui/icons-material/Search';
+import { Autocomplete, TextField, Typography, InputAdornment, useTheme, styled, alpha } from '@mui/material';
 
 const Searchbar = () => {
   const navigate = useNavigate();
@@ -33,9 +31,6 @@ const Searchbar = () => {
     <Autocomplete
       key={resetKey}
       freeSolo={true}
-      onChange={(event, newValue) => {
-        console.log('przejscie do account teraz');
-      }}
       onInputChange={(event, newInputValue) => {
         if (newInputValue !== '') axiosUsername(newInputValue);
         else setUsernamesList([]);
@@ -65,7 +60,7 @@ const Searchbar = () => {
           InputProps={{
             ...params.InputProps,
             startAdornment: (
-              <InputAdornment>
+              <InputAdornment position='start'>
                 <SearchIcon />
               </InputAdornment>
             ),

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Button, Typography, Box } from '@mui/material';
 import ImageCropper from './ImageCropper';
 import Grid from '@mui/material/Unstable_Grid2';

@@ -1,13 +1,14 @@
+import * as React from 'react';
 import { Typography, styled, Stack } from '@mui/material';
 import { useAuth } from '../../context/AuthContext.js';
-import React from 'react';
 import LikesPopUp from '../../components/ui/LikesPopUp.jsx';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
-const Likes = ({ likes, likeOrUnlikeFunc, id, setLikes }) => {
+const Likes = ({ likes, setLikes, likeOrUnlikeFunc, id }) => {
   const { currentUser } = useAuth();
   const [openLikesPopUp, setOpenLikesPopUp] = React.useState(false);
+  
   const checkIfLiked = (likes) => likes.some((like) => like.accountId === currentUser.accountId);
 
   const CustomFavoriteIcon = styled(FavoriteIcon)(({ theme }) => ({

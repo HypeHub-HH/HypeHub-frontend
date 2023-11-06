@@ -1,12 +1,11 @@
-import React from 'react';
-import { Typography } from '@mui/material';
-import ImageCarousel from './ImageCarousel';
-import Grid from '@mui/material/Unstable_Grid2';
+import * as React from 'react';
+import { ItemApi } from '../../api/ItemApi';
 import { useAuth } from '../../context/AuthContext';
+import ImageCarousel from './ImageCarousel';
 import TabPanelInfo from './TabPanelInfo';
-import { ItemApi } from '../../api/ItemApi.js';
+import { Typography, Grid } from '@mui/material';
 
-const TabPanel = ({ items, setOpenLikesPopUp, setLikes }) => {
+const TabPanel = ({ items }) => {
   const { currentUser } = useAuth();
 
   return (
@@ -15,13 +14,8 @@ const TabPanel = ({ items, setOpenLikesPopUp, setLikes }) => {
         <Grid container spacing={6} mt={'1%'} sx={{ maxWidth: '100%' }}>
           {items.map((item) => {
             return (
-              <Grid xs={12} md={4} key={item.id} sx={{ paddingBottom: '8%' }}>
-                <TabPanelInfo
-                  objectInit={item}
-                  setOpenLikesPopUp={setOpenLikesPopUp}
-                  setLikes={setLikes}
-                  likeFun={ItemApi.likeOrUnlikeItemAsync}
-                />
+              <Grid item xs={12} md={4} key={item.id} sx={{ paddingBottom: '8%' }}>
+                <TabPanelInfo objectInit={item} likeFun={ItemApi.likeOrUnlikeItemAsync} />
                 {currentUser && (
                   <ImageCarousel
                     images={item.images}

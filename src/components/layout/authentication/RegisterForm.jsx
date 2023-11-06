@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { AuthenticationApi } from '../../../api/AuthenticationApi.js';
-import { AccountApi } from '../../../api/AccountApi.js';
+import { AuthenticationApi } from '../../../api/AuthenticationApi';
+import { AccountApi } from '../../../api/AccountApi';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import {
@@ -91,7 +91,7 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn, setSuccessfull
   };
   const axiosRegister = async () => {
     try {
-      const response = await AuthenticationApi.signUpAsync({
+      await AuthenticationApi.signUpAsync({
         email: email,
         username: username,
         password: password,

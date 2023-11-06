@@ -4,8 +4,8 @@ import Hero from './Hero';
 import EmailSender from './EmailSender';
 import Details from './Details';
 import Features from './Features';
-import NavbarUnAuthorized from '../../components/layout/navbar/NavbarUnAuthorized.jsx';
-import SuccessfullySignUpForm from '../../components/layout/authentication/SuccessfullySignUpForm.jsx';
+import NavbarUnAuthorized from '../../components/layout/navbar/NavbarUnAuthorized';
+import SuccessfullySignUpForm from '../../components/layout/authentication/SuccessfullySignUpForm';
 
 const Landing = () => {
   const [openSignIn, setOpenSignIn] = React.useState(false);

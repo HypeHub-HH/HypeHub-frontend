@@ -5,15 +5,12 @@ import { useParams } from 'react-router-dom';
 import AccountInfo from './AccountInfo.jsx';
 import AccountItems from './AccountItems.jsx';
 import AccountOutfits from './AccountOutfits.jsx';
-import LikesPopUp from '../../components/layout/LikesPopUp.jsx';
 
 const OtherAccount = () => {
   const { accountId } = useParams();
   const [items, setItems] = React.useState(null);
   const [outfits, setOutfits] = React.useState(null);
   const [accountInfo, setAccountInfo] = React.useState(null);
-  const [openLikesPopUp, setOpenLikesPopUp] = React.useState(false);
-  const [likes, setLikes] = React.useState(null);
 
   const axiosItems = async () => {
     try {
@@ -53,12 +50,9 @@ const OtherAccount = () => {
           flexDirection: 'column',
         }}
       >
-        {likes && (
-          <LikesPopUp openLikesPopUp={openLikesPopUp} setOpenLikesPopUp={setOpenLikesPopUp} likes={likes} setLikes={setLikes} />
-        )}
         {accountInfo && <AccountInfo accountInfo={accountInfo} />}
-        {items && <AccountItems items={items} setOpenLikesPopUp={setOpenLikesPopUp} setLikes={setLikes} />}
-        {outfits && <AccountOutfits outfits={outfits} setOpenLikesPopUp={setOpenLikesPopUp} setLikes={setLikes} />}
+        {items && <AccountItems items={items} />}
+        {outfits && <AccountOutfits outfits={outfits} />}
       </Container>
     </Box>
   );

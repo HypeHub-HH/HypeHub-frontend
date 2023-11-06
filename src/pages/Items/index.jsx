@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import * as React from 'react';
 import { Box, Container, Tab, Tabs, Button, styled } from '@mui/material';
 import ItemsTabPanel from '../../components/layout/ItemsTabPanel';
-import { AccountApi } from '../../api/AccountApi.js';
+import { AccountApi } from '../../api/AccountApi';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import LikesPopUp from '../../components/layout/LikesPopUp.jsx';
+import LikesPopUp from '../../components/ui/LikesPopUp';
 
 const Items = () => {
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ const Items = () => {
     }
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     fetchItems();
   }, []);
 
@@ -62,7 +62,7 @@ const Items = () => {
           <CustomTab label="Footwear"></CustomTab>
           <CustomTab label="Accesories"></CustomTab>
         </Tabs>
-        {currentUser.accountId === accountId && (
+        {currentUser && currentUser.accountId === accountId && (
           <Button
             sx={{ backgroundColor: '#00FF00', alignSelf: 'flex-end' }}
             onClick={() => navigate(`../account/${currentUser.accountId}/items/addNewItem`)}
@@ -70,35 +70,11 @@ const Items = () => {
             Add Item
           </Button>
         )}
-        {items && selectedTab === 0 && <ItemsTabPanel items={items} setOpenLikesPopUp={setOpenLikesPopUp} setLikes={setLikes} />}
-        {items && selectedTab === 1 && (
-          <ItemsTabPanel
-            items={items.filter((data) => data.cloathingType === 0)}
-            setOpenLikesPopUp={setOpenLikesPopUp}
-            setLikes={setLikes}
-          />
-        )}
-        {items && selectedTab === 2 && (
-          <ItemsTabPanel
-            items={items.filter((data) => data.cloathingType === 1)}
-            setOpenLikesPopUp={setOpenLikesPopUp}
-            setLikes={setLikes}
-          />
-        )}
-        {items && selectedTab === 3 && (
-          <ItemsTabPanel
-            items={items.filter((data) => data.cloathingType === 2)}
-            setOpenLikesPopUp={setOpenLikesPopUp}
-            setLikes={setLikes}
-          />
-        )}
-        {items && selectedTab === 4 && (
-          <ItemsTabPanel
-            items={items.filter((data) => data.cloathingType === 3)}
-            setOpenLikesPopUp={setOpenLikesPopUp}
-            setLikes={setLikes}
-          />
-        )}
+        {items && selectedTab === 0 && <ItemsTabPanel items={items} />}
+        {items && selectedTab === 1 && <ItemsTabPanel items={items.filter((data) => data.cloathingType === 0)} />}
+        {items && selectedTab === 2 && <ItemsTabPanel items={items.filter((data) => data.cloathingType === 1)} />}
+        {items && selectedTab === 3 && <ItemsTabPanel items={items.filter((data) => data.cloathingType === 2)} />}
+        {items && selectedTab === 4 && <ItemsTabPanel items={items.filter((data) => data.cloathingType === 3)} />}
       </Container>
     </Box>
   );

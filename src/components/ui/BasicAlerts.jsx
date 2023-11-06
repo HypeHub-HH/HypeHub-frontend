@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
+import config from '../../config';
 import { Snackbar, Stack } from '@mui/material';
 import MuiAlert from '@mui/material/Alert';
-import config from '../../config';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="standard" {...props} />;

@@ -1,6 +1,5 @@
 import * as React from 'react';
-import CustomButton from '../../ui/CustomButton.jsx';
-
+import CustomButton from '../../ui/CustomButton';
 import { Dialog, DialogContent, Typography } from '@mui/material';
 
 const SuccessfullySignUpForm = ({ successfullySignUp, setSuccessfullySignUp }) => {

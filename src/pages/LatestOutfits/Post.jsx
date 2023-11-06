@@ -1,10 +1,10 @@
 import * as React from 'react';
-import ImageCarousel from '../../components/layout/ImageCarousel.jsx';
-import { Box, Typography, styled, Stack } from '@mui/material';
-import PostInfo from './PostInfo.jsx';
-import { useAuth } from '../../context/AuthContext.js';
+import ImageCarousel from '../../components/layout/ImageCarousel';
+import { Box, Typography, styled } from '@mui/material';
+import PostInfo from './PostInfo';
+import { useAuth } from '../../context/AuthContext';
 
-const Post = ({ outfit, setOpenLikesPopUp, setLikes }) => {
+const Post = ({ outfit }) => {
   const { currentUser } = useAuth();
 
   const CustomBox = styled(Box)(({ theme }) => ({
@@ -35,7 +35,7 @@ const Post = ({ outfit, setOpenLikesPopUp, setLikes }) => {
       paddingTop={'2%'}
       maxWidth={'40%'}
     >
-      <PostInfo outfitInit={outfit} setOpenLikesPopUp={setOpenLikesPopUp} setLikes={setLikes} />
+      <PostInfo outfitInit={outfit} />
       {currentUser && (
         <ImageCarousel images={outfit.images} navigateURL={`../account/${currentUser.accountId}/outfits/${outfit.id}`} />
       )}

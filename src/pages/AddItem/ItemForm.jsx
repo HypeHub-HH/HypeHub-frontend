@@ -1,5 +1,5 @@
-import React from 'react';
-import { TextField, MenuItem, Select, InputLabel, FormControl,InputAdornment ,OutlinedInput} from '@mui/material';
+import * as React from 'react';
+import { TextField, MenuItem, Select, InputLabel, FormControl } from '@mui/material';
 
 const ItemForm = () => {
   const [categoryValue, setCategoryValue] = React.useState('');
@@ -51,7 +51,7 @@ const ItemForm = () => {
         type="date"
         label="Date of purchase"
         defaultValue={new Date().toISOString().split('T')[0]}
-        inputProps={{ min: '1970-01-24', max:new Date().toISOString().split('T')[0]}}
+        inputProps={{ min: '1970-01-24', max: new Date().toISOString().split('T')[0] }}
         fullWidth
         variant="outlined"
       />

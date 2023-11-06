@@ -1,7 +1,7 @@
 import Grid from '@mui/material/Grid';
-import { Container, Box, Typography } from '@mui/material';
 import AboutUs from './AboutUs';
 import Hello from './Hello';
+import { Container, Box, Typography } from '@mui/material';
 
 export default function Footer() {
   return (

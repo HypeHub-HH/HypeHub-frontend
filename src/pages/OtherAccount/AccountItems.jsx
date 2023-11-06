@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Box, Divider, Typography, Tab, Tabs, styled } from '@mui/material';
 import ItemsTabPanel from '../../components/layout/ItemsTabPanel.jsx';
 
-const AccountItems = ({ items, setOpenLikesPopUp, setLikes }) => {
+const AccountItems = ({ items }) => {
   const [selectedTab, setSelectedTab] = React.useState(0);
 
   const CustomTab = styled(Tab)(({ theme }) => ({
@@ -49,35 +49,11 @@ const AccountItems = ({ items, setOpenLikesPopUp, setLikes }) => {
           <CustomTab label="Footwear" sx={{ fontSize: '1.5rem' }}></CustomTab>
           <CustomTab label="Accesories" sx={{ fontSize: '1.5rem' }}></CustomTab>
         </Tabs>
-        {selectedTab === 0 && <ItemsTabPanel items={items} setOpenLikesPopUp={setOpenLikesPopUp} setLikes={setLikes} />}
-        {selectedTab === 1 && (
-          <ItemsTabPanel
-            items={items.filter((data) => data.cloathingType === 0)}
-            setOpenLikesPopUp={setOpenLikesPopUp}
-            setLikes={setLikes}
-          />
-        )}
-        {selectedTab === 2 && (
-          <ItemsTabPanel
-            items={items.filter((data) => data.cloathingType === 1)}
-            setOpenLikesPopUp={setOpenLikesPopUp}
-            setLikes={setLikes}
-          />
-        )}
-        {selectedTab === 3 && (
-          <ItemsTabPanel
-            items={items.filter((data) => data.cloathingType === 2)}
-            setOpenLikesPopUp={setOpenLikesPopUp}
-            setLikes={setLikes}
-          />
-        )}
-        {selectedTab === 4 && (
-          <ItemsTabPanel
-            items={items.filter((data) => data.cloathingType === 3)}
-            setOpenLikesPopUp={setOpenLikesPopUp}
-            setLikes={setLikes}
-          />
-        )}
+        {selectedTab === 0 && <ItemsTabPanel items={items} />}
+        {selectedTab === 1 && <ItemsTabPanel items={items.filter((data) => data.cloathingType === 0)} />}
+        {selectedTab === 2 && <ItemsTabPanel items={items.filter((data) => data.cloathingType === 1)} />}
+        {selectedTab === 3 && <ItemsTabPanel items={items.filter((data) => data.cloathingType === 2)} />}
+        {selectedTab === 4 && <ItemsTabPanel items={items.filter((data) => data.cloathingType === 3)} />}
       </Box>
     </Box>
   );

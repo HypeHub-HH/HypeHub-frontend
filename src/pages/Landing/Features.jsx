@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Box, Container, Typography, styled } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import Add from '../../assets/plus.png';

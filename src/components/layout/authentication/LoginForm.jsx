@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { AuthenticationApi } from '../../../api/AuthenticationApi.js';
-import { useAuth } from '../../../context/AuthContext.js';
+import { AuthenticationApi } from '../../../api/AuthenticationApi';
+import { useAuth } from '../../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { useNavigate } from 'react-router-dom';
 import {
   styled,
   Button,

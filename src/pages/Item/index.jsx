@@ -7,11 +7,13 @@ import Info from './Info';
 import { Container } from '@mui/system';
 import Grid from '@mui/material/Unstable_Grid2';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
 const Item = () => {
   const { itemId } = useParams();
   const [fetchedItem, setFetchedItem] = React.useState(null);
   const navigate = useNavigate();
+  const { currentUser } = useAuth();
 
   const fetchItem = async () => {
     try {
@@ -29,7 +31,7 @@ const Item = () => {
   const handleDelete = async () => {
     try {
       const response = await ItemApi.deleteItem(fetchedItem.id);
-      navigate(`/myItems`);
+      navigate(`/account/${currentUser.accountId}/items`);
     } catch (error) {
       console.error(error);
     }
