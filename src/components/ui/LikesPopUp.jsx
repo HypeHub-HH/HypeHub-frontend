@@ -40,10 +40,14 @@ const LikesPopUp = ({ openLikesPopUp, setOpenLikesPopUp, likes, setLikes }) => {
                   padding: '7%',
                 }}
               >
-                <CustomTypography variant="h6" onClick={() => navigate(`../${like.accountId}/outfits`)}>
+                <CustomTypography variant="h6" onClick={() => navigate(`../account/${like.accountId}`)}>
                   {like.account.username}
                 </CustomTypography>
-                <Avatar alt="Avatar image." src={like.account.avatarUrl ? like.account.avatarUrl : defaultIcon} sx={{ width: 30, height: 30 }} />
+                <Avatar
+                  alt="Avatar image."
+                  src={like.account.avatarUrl ? like.account.avatarUrl : defaultIcon}
+                  sx={{ width: 30, height: 30 }}
+                />
               </Stack>
             ))}
           </Box>

@@ -2,7 +2,7 @@ import { Box, Button, Typography, LinearProgress } from '@mui/material';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { ItemApi } from '../../api/ItemApi';
-import ImagesGallery from './ImagesGallery';
+import ImagesGallery from '../../components/ui/ImagesGallery';
 import Info from './Info';
 import { Container } from '@mui/system';
 import Grid from '@mui/material/Unstable_Grid2';
@@ -18,6 +18,7 @@ const Item = () => {
   const fetchItem = async () => {
     try {
       const response = await ItemApi.getItemAsync(itemId);
+      console.log(response.data);
       setFetchedItem(response.data);
     } catch (error) {
       console.error(error);

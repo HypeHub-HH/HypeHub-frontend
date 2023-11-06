@@ -11,6 +11,7 @@ import AddItem from './pages/AddItem';
 import LatestOutfits from './pages/LatestOutfits';
 import Wardrobe from './pages/Wardrobe';
 import Outfits from './pages/Outfits';
+import Outfit from './pages/Outfit';
 
 function App() {
   return (
@@ -37,7 +38,7 @@ function App() {
           <Route path="/account/:accountId/items/:itemId" element={<Item />} />
           <Route path="/account/:accountId/items/addNewItem" element={<AddItem />} />
           <Route path="/account/:accountId/outfits" element={<Outfits />} />
-          <Route path="/account/:accountId/outfits/:outfitId" element={<div>wchodzimy na nasz utfit do edycji</div>} />
+          <Route path="/account/:accountId/outfits/:outfitId" element={<Outfit />} />
           <Route path="/account/:accountId/outfits/addNewOutfit" element={<div>dodajemy outfit</div>} />
           <Route path="/account/:accountId" element={<Wardrobe />} />
         </Route>
