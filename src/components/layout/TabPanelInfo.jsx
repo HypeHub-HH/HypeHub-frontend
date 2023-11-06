@@ -10,18 +10,15 @@ const ItemTabPanelInfo = ({ objectInit, setOpenLikesPopUp, setLikes, likeFun }) 
 
   const checkIfLiked = (itemLikes) => itemLikes.some((like) => like.accountId === currentUser.accountId);
 
-  const likeOrUnlikeObjectAsync = (objectId) => {
-    const axiosLikeOrUnlikeObjectAsync = async () => {
-      try {
-        const response = await likeFun(objectId);
-        console.log(response);
-        object.likes = response.data;
-        setObject({ ...object });
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    axiosLikeOrUnlikeObjectAsync();
+  const axiosLikeOrUnlikeObjectAsync = async (objectId) => {
+    try {
+      const response = await likeFun(objectId);
+      console.log(response);
+      object.likes = response.data;
+      setObject({ ...object });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const CustomFavoriteIcon = styled(FavoriteIcon)(({ theme }) => ({
@@ -63,9 +60,9 @@ const ItemTabPanelInfo = ({ objectInit, setOpenLikesPopUp, setLikes, likeFun }) 
         }}
       >
         {object.likes && currentUser && checkIfLiked(object.likes) ? (
-          <CustomFavoriteIcon onClick={() => likeOrUnlikeObjectAsync(object.id)} />
+          <CustomFavoriteIcon onClick={() => axiosLikeOrUnlikeObjectAsync(object.id)} />
         ) : (
-          <CustomFavoriteBorderIcon onClick={() => likeOrUnlikeObjectAsync(object.id)} />
+          <CustomFavoriteBorderIcon onClick={() => axiosLikeOrUnlikeObjectAsync(object.id)} />
         )}
         {object.likes && (
           <CustomTypography

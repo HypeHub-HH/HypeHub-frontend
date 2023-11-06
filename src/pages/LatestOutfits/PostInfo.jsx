@@ -14,17 +14,14 @@ const PostInfo = ({ outfitInit, setOpenLikesPopUp, setLikes }) => {
 
   const checkIfLiked = (outfitLikes) => outfitLikes.some((like) => like.accountId === currentUser.accountId);
 
-  const likeOrUnlikeOutfitAsync = (outfitId) => {
-    const axiosLikeOrUnlikeOutfitAsync = async () => {
-      try {
-        const response = await OutfitApi.likeOrUnlikeOutfitAsync(outfitId);
-        outfit.likes = response.data;
-        setOutfit({ ...outfit });
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    axiosLikeOrUnlikeOutfitAsync();
+  const axiosLikeOrUnlikeOutfitAsync = async (outfitId) => {
+    try {
+      const response = await OutfitApi.likeOrUnlikeOutfitAsync(outfitId);
+      outfit.likes = response.data;
+      setOutfit({ ...outfit });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const CustomFavoriteIcon = styled(FavoriteIcon)(({ theme }) => ({
@@ -66,9 +63,9 @@ const PostInfo = ({ outfitInit, setOpenLikesPopUp, setLikes }) => {
         }}
       >
         {outfit.likes && currentUser && checkIfLiked(outfit.likes) ? (
-          <CustomFavoriteIcon onClick={() => likeOrUnlikeOutfitAsync(outfit.id)} />
+          <CustomFavoriteIcon onClick={() => axiosLikeOrUnlikeOutfitAsync(outfit.id)} />
         ) : (
-          <CustomFavoriteBorderIcon onClick={() => likeOrUnlikeOutfitAsync(outfit.id)} />
+          <CustomFavoriteBorderIcon onClick={() => axiosLikeOrUnlikeOutfitAsync(outfit.id)} />
         )}
         {outfit.likes && (
           <CustomTypography

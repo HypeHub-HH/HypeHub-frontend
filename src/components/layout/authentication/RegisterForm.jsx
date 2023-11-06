@@ -40,22 +40,6 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn, setSuccessfull
   }, [email]);
 
   React.useEffect(() => {
-    const axiosCheckIfEmailExist = async () => {
-      try {
-        setCheckEmail(true);
-        const response = await AccountApi.checkIfEmailExistAsync(email);
-        let emailExist = response.data;
-        if (emailExist === true) {
-          setIsEmailValid({ result: false, message: 'This email already exists.' });
-        } else {
-          setIsEmailValid({ result: true, message: null });
-        }
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setCheckEmail(false);
-      }
-    };
     if (isEmailValid.result === true) axiosCheckIfEmailExist();
   }, [triggerAxiosEmail]);
 
@@ -65,22 +49,6 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn, setSuccessfull
   }, [username]);
 
   React.useEffect(() => {
-    const axiosCheckIfUsernameExist = async () => {
-      try {
-        setCheckUsername(true);
-        const response = await AccountApi.checkIfUsernameExistAsync(username);
-        let usernameExist = response.data;
-        if (usernameExist === true) {
-          setIsUsernameValid({ result: false, messages: ['This username already exists.'] });
-        } else {
-          setIsUsernameValid({ result: true, messages: [] });
-        }
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setCheckUsername(false);
-      }
-    };
     if (isUsernameValid.result === true) axiosCheckIfUsernameExist();
   }, [triggerAxiosUsername]);
 
@@ -89,26 +57,59 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn, setSuccessfull
     validatePassword();
   }, [password]);
 
+  const axiosCheckIfEmailExist = async () => {
+    try {
+      setCheckEmail(true);
+      const response = await AccountApi.checkIfEmailExistAsync(email);
+      let emailExist = response.data;
+      if (emailExist === true) {
+        setIsEmailValid({ result: false, message: 'This email already exists.' });
+      } else {
+        setIsEmailValid({ result: true, message: null });
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setCheckEmail(false);
+    }
+  };
+  const axiosCheckIfUsernameExist = async () => {
+    try {
+      setCheckUsername(true);
+      const response = await AccountApi.checkIfUsernameExistAsync(username);
+      let usernameExist = response.data;
+      if (usernameExist === true) {
+        setIsUsernameValid({ result: false, messages: ['This username already exists.'] });
+      } else {
+        setIsUsernameValid({ result: true, messages: [] });
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setCheckUsername(false);
+    }
+  };
+  const axiosRegister = async () => {
+    try {
+      const response = await AuthenticationApi.signUpAsync({
+        email: email,
+        username: username,
+        password: password,
+      });
+      setSuccessfullySignUp(true);
+      setOpenSignUp(false);
+    } catch (error) {
+      setErrors(error.response.data.Errors);
+      console.error(error);
+    }
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     validateEmail();
     validateUsername();
     validatePassword();
     if (isEmailValid.result && isUsernameValid.result && isPasswordValid.result) {
-      const axiosRegister = async () => {
-        try {
-          const response = await AuthenticationApi.signUpAsync({
-            email: email,
-            username: username,
-            password: password,
-          });
-          setSuccessfullySignUp(true);
-          setOpenSignUp(false);
-        } catch (error) {
-          setErrors(error.response.data.Errors);
-          console.error(error);
-        }
-      };
       axiosRegister();
     }
   };
@@ -241,7 +242,9 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn, setSuccessfull
               label="Email"
               autoComplete="email"
               endAdornment={
-                <InputAdornment position="end">{<CircularProgress sx={{ display: checkEmail ? 'block' : 'none' }} color="grey" />}</InputAdornment>
+                <InputAdornment position="end">
+                  {<CircularProgress sx={{ display: checkEmail ? 'block' : 'none' }} color="grey" />}
+                </InputAdornment>
               }
             />
             {!isEmailValid.result && isEmailValid.message !== null && <FormHelperText>{isEmailValid.message}</FormHelperText>}
@@ -261,7 +264,9 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn, setSuccessfull
               label="Username"
               autoComplete="nickname"
               endAdornment={
-                <InputAdornment position="end">{<CircularProgress sx={{ display: checkUsername ? 'block' : 'none' }} color="grey" />}</InputAdornment>
+                <InputAdornment position="end">
+                  {<CircularProgress sx={{ display: checkUsername ? 'block' : 'none' }} color="grey" />}
+                </InputAdornment>
               }
             />
             {!isUsernameValid.result &&
