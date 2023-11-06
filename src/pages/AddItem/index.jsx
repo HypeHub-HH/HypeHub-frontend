@@ -6,9 +6,11 @@ import { useNavigate } from 'react-router-dom';
 import { postImage } from '../../api/ImageBBApi';
 import { ItemApi } from '../../api/ItemApi';
 import BasicAlerts from '../../components/ui/BasicAlerts';
+import { useAuth } from '../../context/AuthContext';
 
 const AddItem = () => {
   const formRef = React.useRef();
+  const { currentUser } = useAuth();
   const navigate = useNavigate();
   const [selectedImages, setSelectedImages] = React.useState([]);
   const [isUploading, setIsUploading] = React.useState(false);
@@ -34,10 +36,10 @@ const AddItem = () => {
           PurchaseDate: new Date(formData.get('date')),
           Images: await postImage(selectedImages),
         });
-        let serverResponse = await ItemApi.createItem(parsedItem);
+        let serverResponse = await ItemApi.createItemAsync(parsedItem);
         console.log(serverResponse);
         setOpenSuccessAlert(true);
-        navigate(`/myItems/${serverResponse.data.id}`);
+        navigate(`/account/${currentUser.accountId}/items/${serverResponse.data.id}`);
       }
     } catch (error) {
       setOpenSuccessAlert(true);

@@ -53,6 +53,7 @@ const ImageCarousel = ({ images, navigateURL }) => {
                   display="block"
                   src={image.url}
                   alt="image"
+                  loading="lazy"
                   onClick={() => navigate(navigateURL)}
                 />
               ) : null}

@@ -15,7 +15,7 @@ const Info = ({ item, setFetchedItem }) => {
 
   const likeOrUnlikeItem = async (itemId) => {
     try {
-      const response = await ItemApi.likeOrUnlikeItem(itemId);
+      const response = await ItemApi.likeOrUnlikeItemAsync(itemId);
       item.likes = response.data;
       setFetchedItem({ ...item });
     } catch (error) {
