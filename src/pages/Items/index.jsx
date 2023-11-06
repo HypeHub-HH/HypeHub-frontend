@@ -5,7 +5,6 @@ import { AccountApi } from '../../api/AccountApi';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import LikesPopUp from '../../components/ui/LikesPopUp';
 
 const Items = () => {
   const navigate = useNavigate();
@@ -13,12 +12,10 @@ const Items = () => {
   const { currentUser } = useAuth();
   const [selectedTab, setSelectedTab] = React.useState(0);
   const [items, setItems] = React.useState(null);
-  const [openLikesPopUp, setOpenLikesPopUp] = React.useState(false);
-  const [likes, setLikes] = React.useState(null);
 
   const fetchItems = async () => {
     try {
-      const response = await AccountApi.getItemsFromAccountAsync(currentUser.accountId);
+      const response = await AccountApi.getItemsFromAccountAsync(accountId);
       setItems(response.data);
     } catch (error) {
       console.error(error);
@@ -27,7 +24,7 @@ const Items = () => {
 
   React.useEffect(() => {
     fetchItems();
-  }, []);
+  }, [accountId]);
 
   const CustomTab = styled(Tab)(({ theme }) => ({
     fontSize: '1.5rem',
@@ -46,9 +43,6 @@ const Items = () => {
           flexDirection: 'column',
         }}
       >
-        {likes && (
-          <LikesPopUp openLikesPopUp={openLikesPopUp} setOpenLikesPopUp={setOpenLikesPopUp} likes={likes} setLikes={setLikes} />
-        )}
         <Tabs
           sx={{ padding: '1%', maxWidth: '90%' }}
           value={selectedTab}
