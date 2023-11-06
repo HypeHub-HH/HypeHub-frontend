@@ -33,7 +33,6 @@ const Post = ({ outfit }) => {
       alignItems={'center'}
       paddingBottom={'2%'}
       paddingTop={'2%'}
-      maxWidth={'40%'}
     >
       <PostInfo outfitInit={outfit} />
       {currentUser && (

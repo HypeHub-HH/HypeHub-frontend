@@ -9,7 +9,7 @@ import Items from './pages/Items';
 import Item from './pages/Item';
 import AddItem from './pages/AddItem';
 import LatestOutfits from './pages/LatestOutfits';
-import OtherAccount from './pages/OtherAccount';
+import Wardrobe from './pages/Wardrobe';
 
 function App() {
   return (
@@ -37,7 +37,7 @@ function App() {
           <Route path="/account/:accountId/items/addNewItem" element={<AddItem />} />
           <Route path="/account/:accountId/outfits" element={<div>wchodzimy na nasze outfity do edycji</div>} />
           <Route path="/account/:accountId/outfits/:outfitId" element={<div>wchodzimy na nasz utfit do edycji</div>} />
-          <Route path="/account/:accountId" element={<OtherAccount />} />
+          <Route path="/account/:accountId" element={<Wardrobe />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
