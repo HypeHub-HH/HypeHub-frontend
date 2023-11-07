@@ -14,7 +14,7 @@ const AccountOutfits = ({ outfits }) => {
       }}
     >
       <Divider sx={{ width: '100%' }}>
-        <Typography variant="h5" sx={{ alignSelf: 'flex-start', padding: '1%' }}>
+        <Typography variant="h5" padding="1%">
           Outfits
         </Typography>
       </Divider>

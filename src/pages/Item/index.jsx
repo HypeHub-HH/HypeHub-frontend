@@ -42,7 +42,7 @@ const Item = () => {
       <Container>
         {fetchedItem !== null ? (
           <>
-            <Grid container display={'flex'} justifyContent={'space-around'} mt={'3%'}>
+            <Grid container display={'flex'} justifyContent={'space-around'} mt={'4%'}>
               <Grid xs={12} md={6}>
                 <ImagesGallery images={fetchedItem.images} />
               </Grid>
