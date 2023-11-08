@@ -8,7 +8,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 const Likes = ({ likes, setLikes, likeOrUnlikeFunc, id }) => {
   const { currentUser } = useAuth();
   const [openLikesPopUp, setOpenLikesPopUp] = React.useState(false);
-  
+
   const checkIfLiked = (likes) => likes.some((like) => like.accountId === currentUser.accountId);
 
   const CustomFavoriteIcon = styled(FavoriteIcon)(({ theme }) => ({
