@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Box, Button, Slider, TextField, Typography } from '@mui/material';
 import Cropper from 'react-easy-crop';
 import getCroppedImg from './canvaUtils';
+import readFile from '../../utils/ReadFile';
 
 const ImageCropper = ({ setSelectedImages, selectedImages }) => {
   const [crop, setCrop] = React.useState({ x: 0, y: 0 });
@@ -59,18 +60,10 @@ const ImageCropper = ({ setSelectedImages, selectedImages }) => {
         </Box>
       ) : (
         <TextField name="upload-photo" type="file" margin="normal" fullWidth onChange={onFileChange}></TextField>
-        // <input type="file" onChange={onFileChange} accept="image/*" />
       )}
     </>
   );
 };
 
-function readFile(file) {
-  return new Promise((resolve) => {
-    const reader = new FileReader();
-    reader.addEventListener('load', () => resolve(reader.result), false);
-    reader.readAsDataURL(file);
-  });
-}
 
 export default ImageCropper;

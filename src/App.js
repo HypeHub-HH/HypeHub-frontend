@@ -12,6 +12,7 @@ import LatestOutfits from './pages/LatestOutfits';
 import Wardrobe from './pages/Wardrobe';
 import Outfits from './pages/Outfits';
 import Outfit from './pages/Outfit';
+import Settings from './pages/Settings';
 
 function App() {
   return (
@@ -33,7 +34,7 @@ function App() {
           }
         >
           <Route path="/explore" element={<LatestOutfits />} />
-          <Route path="/account/:accountId/settings" element={<div>ustawienia konta</div>} />
+          <Route path="/account/:accountId/settings" element={<Settings/>} />
           <Route path="/account/:accountId/items" element={<Items />} />
           <Route path="/account/:accountId/items/:itemId" element={<Item />} />
           <Route path="/account/:accountId/items/addNewItem" element={<AddItem />} />
