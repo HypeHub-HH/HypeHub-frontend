@@ -1,4 +1,4 @@
-import { Box, Button, Typography, LinearProgress } from '@mui/material';
+import { Box, Button, Typography, LinearProgress, Dialog, DialogContent } from '@mui/material';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { ItemApi } from '../../api/ItemApi';
@@ -12,6 +12,7 @@ import { useAuth } from '../../context/AuthContext';
 const Item = () => {
   const { itemId } = useParams();
   const [fetchedItem, setFetchedItem] = React.useState(null);
+  const [openSuccesDeleteDialog, setOpenSuccesDeleteDialog] = React.useState(false);
   const navigate = useNavigate();
   const { currentUser } = useAuth();
 
@@ -31,11 +32,17 @@ const Item = () => {
   const handleDelete = async () => {
     try {
       const response = await ItemApi.deleteItemAsync(fetchedItem.id);
-      navigate(`/account/${currentUser.accountId}/items`);
+      setOpenSuccesDeleteDialog(true);
     } catch (error) {
       console.error(error);
     }
   };
+
+  const handleDialogClose = () => {
+    setOpenSuccesDeleteDialog(false);
+    navigate(`/account/${currentUser.accountId}/items`);
+  };
+
   return (
     <Box>
       <Container>
@@ -61,6 +68,23 @@ const Item = () => {
             <LinearProgress color="secondary" variant="indeterminate" />
           </Box>
         )}
+        <Dialog open={openSuccesDeleteDialog} onClose={() => handleDialogClose()}>
+          <DialogContent
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              flexDirection: 'column',
+            }}
+          >
+            <Typography component="h1" variant="h4" align="center" color={'green'}>
+              Successfully deleted!
+            </Typography>
+            <Button variant="contained" color="success" onClick={() => handleDialogClose()}>
+              Go to items
+            </Button>
+          </DialogContent>
+        </Dialog>
       </Container>
     </Box>
   );
