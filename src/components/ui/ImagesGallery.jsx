@@ -16,25 +16,18 @@ const ImagesGallery = ({ images }) => {
     };
   });
 
-  const ImageContainer = styled(Box)(
-    ({ theme }) => ({
-      overflow: 'hidden',
-      display: 'block',
-    }),
-    theme.unstable_sx({
-      height: 500,
-      width: 375,
-    })
-  );
-
   return (
-    <Box>
+    <Box
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
       {images.length > 0 ? (
         <ImageGallery items={imagesURLs} showPlayButton={false} thumbnailPosition={'left'} showBullets={true} />
       ) : (
-        <ImageContainer>
-          <img src={noImage} alt="noImage" style={{ maxWidth: '100%', maxHeight: '100%' }} />
-        </ImageContainer>
+        <img src={noImage} alt="noImage" style={{ maxWidth: '100%', maxHeight: '100%' }} />
       )}
     </Box>
   );

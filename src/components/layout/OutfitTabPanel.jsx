@@ -15,11 +15,7 @@ const OutfitTabPanel = ({ outfits }) => {
           <Grid xs={12} md={4} key={outfit.id} sx={{ paddingBottom: '8%' }}>
             <TabPanelInfo objectInit={outfit} likeFun={OutfitApi.likeOrUnlikeOutfitAsync} />
             {currentUser && (
-              <ImageCarousel
-                images={outfit.images}
-                navigateURL={`../account/${currentUser.accountId}/outfits/${outfit.id}`}
-                likeFun={OutfitApi.likeOrUnlikeOutfitAsync}
-              />
+              <ImageCarousel images={outfit.images} navigateURL={`../account/${currentUser.accountId}/outfits/${outfit.id}`} />
             )}
           </Grid>
         );

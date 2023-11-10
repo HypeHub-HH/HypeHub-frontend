@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button, Container, Typography, Box, LinearProgress } from '@mui/material';
 import ItemForm from './ItemForm';
-import SelectedImages from './ImagesSection';
+import SelectedImages from '../../components/layout/cropper/ImagesSection';
 import { useNavigate } from 'react-router-dom';
 import { postImages } from '../../api/ImageBBApi';
 import { ItemApi } from '../../api/ItemApi';
@@ -37,7 +37,6 @@ const AddItem = () => {
           Images: await postImages(selectedImages),
         });
         let serverResponse = await ItemApi.createItemAsync(parsedItem);
-        console.log(serverResponse);
         setOpenSuccessAlert(true);
         navigate(`/account/${currentUser.accountId}/items/${serverResponse.data.id}`);
       }

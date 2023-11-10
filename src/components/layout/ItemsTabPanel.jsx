@@ -17,11 +17,7 @@ const TabPanel = ({ items }) => {
               <Grid item xs={12} md={4} key={item.id} sx={{ paddingBottom: '8%' }}>
                 <TabPanelInfo objectInit={item} likeFun={ItemApi.likeOrUnlikeItemAsync} />
                 {currentUser && (
-                  <ImageCarousel
-                    images={item.images}
-                    navigateURL={`../account/${currentUser.accountId}/items/${item.id}`}
-                    likeFun={ItemApi.likeOrUnlikeItemAsync}
-                  />
+                  <ImageCarousel images={item.images} navigateURL={`../account/${currentUser.accountId}/items/${item.id}`} />
                 )}
               </Grid>
             );
