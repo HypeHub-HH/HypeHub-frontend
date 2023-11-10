@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Box, Button, Slider, TextField, Typography } from '@mui/material';
 import Cropper from 'react-easy-crop';
 import getCroppedImg from './canvaUtils';
-import readFile from '../../utils/ReadFile';
+import readFile from '../../../utils/ReadFile';
 
 const ImageCropper = ({ setSelectedImages, selectedImages }) => {
   const [crop, setCrop] = React.useState({ x: 0, y: 0 });
@@ -64,6 +64,5 @@ const ImageCropper = ({ setSelectedImages, selectedImages }) => {
     </>
   );
 };
-
 
 export default ImageCropper;

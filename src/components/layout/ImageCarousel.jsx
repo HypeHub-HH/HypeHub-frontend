@@ -11,26 +11,6 @@ const ImageCarousel = ({ images, navigateURL }) => {
   const [activeStep, setActiveStep] = React.useState(0);
   const maxSteps = images.length;
 
-  const ImageContainer = styled(Box)(
-    ({ theme }) => ({
-      overflow: 'hidden',
-      display: 'block',
-      cursor: 'pointer',
-      '&:hover': {
-        opacity: '0.8',
-      },
-    }),
-    theme.unstable_sx({
-      height: 400,
-      width: 300,
-    })
-  );
-  const CustomImage = styled(Box)(({ theme }) => ({
-    cursor: 'pointer',
-    '&:hover': {
-      opacity: '0.8',
-    },
-  }));
   return (
     <>
       {maxSteps !== 0 ? (
@@ -47,14 +27,26 @@ const ImageCarousel = ({ images, navigateURL }) => {
           {images.map((image, index) => (
             <div key={image.id} width="80%">
               {index === activeStep ? (
-                <CustomImage
+                <Box
                   component="img"
                   width="100%"
                   display="block"
                   src={image.url}
                   alt="image"
                   loading="lazy"
-                  onClick={() => navigate(navigateURL)}
+                  onClick={() => {
+                    if (navigateURL) navigate(navigateURL);
+                  }}
+                  sx={
+                    navigateURL
+                      ? {
+                          cursor: 'pointer',
+                          '&:hover': {
+                            opacity: '0.8',
+                          },
+                        }
+                      : {}
+                  }
                 />
               ) : null}
             </div>
@@ -88,14 +80,37 @@ const ImageCarousel = ({ images, navigateURL }) => {
           />
         </Container>
       ) : (
-        <ImageContainer>
-          <img
+        <Container
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            paddingBottom: '2%',
+            overflow: 'hidden',
+          }}
+        >
+          <Box
+            component="img"
+            width="100%"
+            display="block"
             src={noImage}
             alt="noImage"
-            style={{ maxWidth: '100%', maxHeight: '100%' }}
-            onClick={() => navigate(navigateURL)}
+            onClick={() => {
+              if (navigateURL) navigate(navigateURL);
+            }}
+            sx={
+              navigateURL
+                ? {
+                    cursor: 'pointer',
+                    '&:hover': {
+                      opacity: '0.8',
+                    },
+                  }
+                : {}
+            }
           />
-        </ImageContainer>
+        </Container>
       )}
     </>
   );

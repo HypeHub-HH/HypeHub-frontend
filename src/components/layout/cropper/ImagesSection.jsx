@@ -14,7 +14,7 @@ const SelectedImages = ({ selectedImages, setSelectedImages }) => {
   };
 
   return (
-    <Box mt={'2%'}>
+    <Box mt={'2%'} width={'100%'}>
       <Typography variant="h5">Images {`(${numberOfSelectedImages}/${maxNumberOfImages})`}</Typography>
       {numberOfSelectedImages < 7 && <ImageCropper setSelectedImages={setSelectedImages} selectedImages={selectedImages} />}
       <Grid container spacing={2}>
@@ -22,7 +22,9 @@ const SelectedImages = ({ selectedImages, setSelectedImages }) => {
           return (
             <Grid md={3} key={index} display={'flex'} justifyContent={'center'} flexDirection={'column'} alignItems={'center'}>
               <Box border={1} component="img" src={image} sx={{ width: '50%', hight: 'auto' }}></Box>
-              <Button variant="outlined" onClick={()=>handleRemoveImage(index)}>Delete image</Button>
+              <Button variant="outlined" onClick={() => handleRemoveImage(index)}>
+                Delete image
+              </Button>
             </Grid>
           );
         })}
