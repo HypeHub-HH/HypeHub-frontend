@@ -36,7 +36,7 @@ const Post = ({ outfit }) => {
     >
       <PostInfo outfitInit={outfit} />
       {currentUser && (
-        <ImageCarousel images={outfit.images} navigateURL={`../account/${currentUser.accountId}/outfits/${outfit.id}`} />
+        <ImageCarousel images={outfit.images} navigateURL={`../account/${outfit.account.id}/outfits/${outfit.id}`} />
       )}
       <Typography variant="subtitle2">{getDate(outfit.creationDate)}</Typography>
     </CustomBox>

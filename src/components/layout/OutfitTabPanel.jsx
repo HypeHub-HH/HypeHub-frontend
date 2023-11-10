@@ -5,7 +5,7 @@ import { OutfitApi } from '../../api/OutfitApi';
 import Grid from '@mui/material/Unstable_Grid2';
 import { useAuth } from '../../context/AuthContext';
 
-const OutfitTabPanel = ({ outfits }) => {
+const OutfitTabPanel = ({ outfits, accountId }) => {
   const { currentUser } = useAuth();
 
   return (
@@ -15,7 +15,7 @@ const OutfitTabPanel = ({ outfits }) => {
           <Grid xs={12} md={4} key={outfit.id} sx={{ paddingBottom: '8%' }}>
             <TabPanelInfo objectInit={outfit} likeFun={OutfitApi.likeOrUnlikeOutfitAsync} />
             {currentUser && (
-              <ImageCarousel images={outfit.images} navigateURL={`../account/${currentUser.accountId}/outfits/${outfit.id}`} />
+              <ImageCarousel images={outfit.images} navigateURL={`../account/${accountId}/outfits/${outfit.id}`} />
             )}
           </Grid>
         );

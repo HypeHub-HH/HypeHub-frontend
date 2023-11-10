@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Box, Divider, Typography, Tab, Tabs, styled, Button } from '@mui/material';
 import ItemsTabPanel from '../../components/layout/ItemsTabPanel.jsx';
 
-const AccountItems = ({ items }) => {
+const AccountItems = ({ items, accountId }) => {
   const [selectedTab, setSelectedTab] = React.useState(0);
   const [showItems, setShowItems] = React.useState(true);
 
@@ -53,11 +53,19 @@ const AccountItems = ({ items }) => {
         <Button sx={{ backgroundColor: 'grey', alignSelf: 'flex-end' }} onClick={() => setShowItems(!showItems)}>
           {showItems ? 'Hide Items' : 'Show Items'}
         </Button>
-        {showItems && selectedTab === 0 && <ItemsTabPanel items={items} />}
-        {showItems && selectedTab === 1 && <ItemsTabPanel items={items.filter((data) => data.cloathingType === 0)} />}
-        {showItems && selectedTab === 2 && <ItemsTabPanel items={items.filter((data) => data.cloathingType === 1)} />}
-        {showItems && selectedTab === 3 && <ItemsTabPanel items={items.filter((data) => data.cloathingType === 2)} />}
-        {showItems && selectedTab === 4 && <ItemsTabPanel items={items.filter((data) => data.cloathingType === 3)} />}
+        {showItems && selectedTab === 0 && <ItemsTabPanel items={items} accountId={accountId} />}
+        {showItems && selectedTab === 1 && (
+          <ItemsTabPanel items={items.filter((data) => data.cloathingType === 0)} accountId={accountId} />
+        )}
+        {showItems && selectedTab === 2 && (
+          <ItemsTabPanel items={items.filter((data) => data.cloathingType === 1)} accountId={accountId} />
+        )}
+        {showItems && selectedTab === 3 && (
+          <ItemsTabPanel items={items.filter((data) => data.cloathingType === 2)} accountId={accountId} />
+        )}
+        {showItems && selectedTab === 4 && (
+          <ItemsTabPanel items={items.filter((data) => data.cloathingType === 3)} accountId={accountId} />
+        )}
       </Box>
     </Box>
   );

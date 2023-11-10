@@ -2,15 +2,31 @@ import * as React from 'react';
 import Likes from '../../components/ui/Likes';
 import defaultIcon from '../../assets/defaultAccountIcon.png';
 import { OutfitApi } from '../../api/OutfitApi';
+import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import Divider from '@mui/material/Divider';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import { Box, Typography, Avatar, styled, List, ListItem, ListItemText, ListItemAvatar } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Avatar,
+  styled,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemAvatar,
+  Button,
+  Dialog,
+  DialogContent,
+  Stack,
+} from '@mui/material';
 
-const Info = ({ outfitInit }) => {
+const Info = ({ outfitInit, accountId }) => {
   const [outfit, setOutfit] = React.useState(outfitInit);
   const navigate = useNavigate();
   const [likes, setLikes] = React.useState(null);
+  const [popUpDeleteOutfit, setPopUpDeleteOutfit] = React.useState(false);
+  const { currentUser } = useAuth();
 
   const axiosLikeOrUnlikeOutfitAsync = async (outfitId) => {
     try {
@@ -31,7 +47,14 @@ const Info = ({ outfitInit }) => {
     const seconds = String(date.getSeconds()).padStart(2, '0');
     return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
   };
-
+  const deleteOutfit = async () => {
+    try {
+      const response = await OutfitApi.deleteOutfitAsync(outfit.id);
+      navigate(-1);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   const CustomListItemText = styled(ListItemText)(({ theme }) => ({
     cursor: 'pointer',
     '&:hover': {
@@ -72,7 +95,33 @@ const Info = ({ outfitInit }) => {
         <ListItem>
           <Likes likes={outfit.likes} setLikes={setLikes} likeOrUnlikeFunc={axiosLikeOrUnlikeOutfitAsync} id={outfit.id} />
         </ListItem>
+        {currentUser && currentUser.accountId === accountId && (
+          <ListItem>
+            <Box display="flex" width="100%" justifyContent="space-around" alignItems="center">
+              <Button variant="contained" color="primary" onClick={() => setPopUpDeleteOutfit(true)}>
+                Delete
+              </Button>
+              <Button variant="contained" color="secondary" onClick={() => navigate('..')}>
+                Edit
+              </Button>
+            </Box>
+          </ListItem>
+        )}
       </List>
+
+      <Dialog open={popUpDeleteOutfit} onClose={() => setPopUpDeleteOutfit(false)}>
+        <DialogContent>
+          <Typography variant="h5">Are you sure you want to delete the outfit?</Typography>
+          <Stack spacing={7} mt={'7%'} direction="row" display="flex" justifyContent="center" alignItems="center">
+            <Button variant="contained" color="primary" onClick={() => setPopUpDeleteOutfit(false)}>
+              Cancel
+            </Button>
+            <Button variant="contained" color="secondary" onClick={() => deleteOutfit()}>
+              Yes
+            </Button>
+          </Stack>
+        </DialogContent>
+      </Dialog>
     </Box>
   );
 };

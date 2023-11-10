@@ -5,7 +5,7 @@ import ImageCarousel from './ImageCarousel';
 import TabPanelInfo from './TabPanelInfo';
 import { Typography, Grid } from '@mui/material';
 
-const TabPanel = ({ items }) => {
+const TabPanel = ({ items, accountId }) => {
   const { currentUser } = useAuth();
 
   return (
@@ -16,9 +16,7 @@ const TabPanel = ({ items }) => {
             return (
               <Grid item xs={12} md={4} key={item.id} sx={{ paddingBottom: '8%' }}>
                 <TabPanelInfo objectInit={item} likeFun={ItemApi.likeOrUnlikeItemAsync} />
-                {currentUser && (
-                  <ImageCarousel images={item.images} navigateURL={`../account/${currentUser.accountId}/items/${item.id}`} />
-                )}
+                {currentUser && <ImageCarousel images={item.images} navigateURL={`../account/${accountId}/items/${item.id}`} />}
               </Grid>
             );
           })}

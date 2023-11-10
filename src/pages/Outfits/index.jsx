@@ -43,7 +43,7 @@ const Outfits = () => {
             Add Outfit
           </Button>
         )}
-        {outfits && <OutfitTabPanel outfits={outfits} />}
+        {outfits && <OutfitTabPanel outfits={outfits} accountId={accountId} />}
       </Container>
     </Box>
   );

@@ -43,19 +43,21 @@ const Items = () => {
           flexDirection: 'column',
         }}
       >
-        <Tabs
-          sx={{ padding: '1%', maxWidth: '90%' }}
-          value={selectedTab}
-          onChange={(event, newValue) => setSelectedTab(newValue)}
-          variant="scrollable"
-          scrollButtons={false}
-        >
-          <CustomTab label="All"></CustomTab>
-          <CustomTab label="Torso"></CustomTab>
-          <CustomTab label="Legs"></CustomTab>
-          <CustomTab label="Footwear"></CustomTab>
-          <CustomTab label="Accesories"></CustomTab>
-        </Tabs>
+        {items && (
+          <Tabs
+            sx={{ padding: '1%', maxWidth: '90%' }}
+            value={selectedTab}
+            onChange={(event, newValue) => setSelectedTab(newValue)}
+            variant="scrollable"
+            scrollButtons={false}
+          >
+            <CustomTab label="All"></CustomTab>
+            <CustomTab label="Torso"></CustomTab>
+            <CustomTab label="Legs"></CustomTab>
+            <CustomTab label="Footwear"></CustomTab>
+            <CustomTab label="Accesories"></CustomTab>
+          </Tabs>
+        )}
         {currentUser && currentUser.accountId === accountId && (
           <Button
             sx={{ backgroundColor: '#00FF00', alignSelf: 'flex-end' }}
@@ -64,11 +66,19 @@ const Items = () => {
             Add Item
           </Button>
         )}
-        {items && selectedTab === 0 && <ItemsTabPanel items={items} />}
-        {items && selectedTab === 1 && <ItemsTabPanel items={items.filter((data) => data.cloathingType === 0)} />}
-        {items && selectedTab === 2 && <ItemsTabPanel items={items.filter((data) => data.cloathingType === 1)} />}
-        {items && selectedTab === 3 && <ItemsTabPanel items={items.filter((data) => data.cloathingType === 2)} />}
-        {items && selectedTab === 4 && <ItemsTabPanel items={items.filter((data) => data.cloathingType === 3)} />}
+        {items && selectedTab === 0 && <ItemsTabPanel items={items} accountId={accountId} />}
+        {items && selectedTab === 1 && (
+          <ItemsTabPanel items={items.filter((data) => data.cloathingType === 0)} accountId={accountId} />
+        )}
+        {items && selectedTab === 2 && (
+          <ItemsTabPanel items={items.filter((data) => data.cloathingType === 1)} accountId={accountId} />
+        )}
+        {items && selectedTab === 3 && (
+          <ItemsTabPanel items={items.filter((data) => data.cloathingType === 2)} accountId={accountId} />
+        )}
+        {items && selectedTab === 4 && (
+          <ItemsTabPanel items={items.filter((data) => data.cloathingType === 3)} accountId={accountId} />
+        )}
       </Container>
     </Box>
   );

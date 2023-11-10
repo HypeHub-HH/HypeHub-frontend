@@ -7,7 +7,7 @@ import { Box, Typography, LinearProgress, Container, Grid, Divider, Tab, Tabs, s
 import ItemsTabPanel from '../../components/layout/ItemsTabPanel';
 
 const Outfit = () => {
-  const { outfitId } = useParams();
+  const { accountId, outfitId } = useParams();
   const [selectedTab, setSelectedTab] = React.useState(0);
   const [outfit, setOutfit] = React.useState(null);
 
@@ -40,7 +40,7 @@ const Outfit = () => {
                 <ImagesGallery images={outfit.images} />
               </Grid>
               <Grid item xs={12} md={6}>
-                <Info outfitInit={outfit} />
+                <Info outfitInit={outfit} accountId={accountId}/>
               </Grid>
             </Grid>
             <Divider>
