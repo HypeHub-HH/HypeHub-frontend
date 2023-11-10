@@ -13,4 +13,8 @@ export class AccountApi {
   static getAccountWithOutfitsAsync = async (accountId) => await axios.get(`${baseURL}/Account/${accountId}/Outfits`);
 
   static getItemsFromAccountAsync = async (accountId) => await axios.get(`${baseURL}/Account/${accountId}/Items`);
+
+  static updateAccountAvatarAsync = async (body) => await authorizedApi.put(`/Account/Avatar`, body);
+
+  static updateAccountPrivacyAsync = async (body) => await authorizedApi.put(`/Account/Privacy`, body);
 }

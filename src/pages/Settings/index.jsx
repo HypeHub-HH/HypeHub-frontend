@@ -1,129 +1,109 @@
 import {
   Container,
   Box,
-  TextField,
-  List,
   Avatar,
   ListItemText,
-  Divider,
   ListItem,
   ListItemAvatar,
   Button,
-  Switch,
+  LinearProgress,
   Typography,
 } from '@mui/material';
 import React from 'react';
 import { useAuth } from '../../context/AuthContext';
 import Grid from '@mui/material/Unstable_Grid2/Grid2';
-import BadgeIcon from '@mui/icons-material/Badge';
-import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 import EditIcon from '@mui/icons-material/Edit';
-import SaveIcon from '@mui/icons-material/Save';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
-import readFile from '../../utils/ReadFile';
-import { postImage } from '../../api/ImageBBApi';
+import { postImages } from '../../api/ImageBBApi';
+import RoundImageCropper from './RoundImageCropper';
+import AccountDetails from './AccountDetails';
+import SaveIcon from '@mui/icons-material/Save';
+import { AccountApi } from '../../api/AccountApi';
+import BasicAlerts from '../../components/ui/BasicAlerts';
 
-const Settings2 = () => {
+const Settings = () => {
   const { currentUser } = useAuth();
   const [avatar, setAvatar] = React.useState(currentUser?.avatarURL);
-  const [accoutType, setAccountType] = React.useState(currentUser.isPrivate);
   const [editAvatar, setEditAvatar] = React.useState(false);
-  const [editAccoutType, setEditAccoutType] = React.useState(false);
+  const [newAvatarWasAdded, setNewAvatarWasAdded] = React.useState(false)
+  const [updatingInProgress, setUpdatingInProgress] = React.useState(false);
+  const [openSuccessAlert, setOpenSuccessAlert] = React.useState(false);
+  const [openFailedAlert, setOpenFailedAlert] = React.useState(false);
 
-  const handleSaveEditAccoutType = () => {
-    setEditAccoutType(false);
-  };
-
-  const onFileChange = async (e) => {
-    if (e.target.files && e.target.files.length > 0) {
-      const file = e.target.files[0];
-      let imageDataUrl = await readFile(file);
-      setAvatar(imageDataUrl);
-    }
+  const handleRefreshClick = () => {
+    window.location.reload();
   };
 
   const handleSaveAvatar = async () => {
-    var newAvatar = await postImage(avatar);
-}
-  console.log(accoutType);
+    setUpdatingInProgress(true)
+    try {
+      let newAvatar = await postImages([avatar]);
+      let parsedAvatar = JSON.stringify({AvatarUrl: newAvatar[0]});
+      let result = await AccountApi.updateAccountAvatarAsync(parsedAvatar);
+      currentUser.avatarURL = result.AvatarUrl;
+      setUpdatingInProgress(false)
+      handleRefreshClick();
+      setOpenSuccessAlert(true)
+      setNewAvatarWasAdded(false)
+    } catch (error) {
+      console.error(error);
+      setUpdatingInProgress(false)
+      setOpenFailedAlert(true)
+      setNewAvatarWasAdded(false)      
+    }
+  };
+
   return (
     <Box>
       <Container>
-        <Grid container mt={3} display={'flex'} alignItems={'flex-start'}>
-          <Grid xs={12} md={6} display={'flex'} flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
-            <ListItem>
-              <ListItemAvatar>
-                <Avatar>
-                  <PhotoCameraIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary={'Avatar'} />
-              {!editAvatar && (
-                <Button onClick={() => setEditAvatar(true)}>
-                  <EditIcon />
-                </Button>
-              )}
-            </ListItem>
-            <Box component="img" src={avatar} sx={{width:300}} />
-            {editAvatar && (
-              <>
-                <Box display={'flex'}>
-                  <TextField name="upload-photo" type="file" margin="normal" onChange={(e) => onFileChange(e)} />
-                  <Button>
-                    <SaveIcon fontSize="large" />
-                  </Button>
-                </Box>
-              </>
-            )}
-          </Grid>
-          <Grid xs={12} md={6}>
-            <List>
-              <ListItem>
-                <ListItemAvatar>
-                  <Avatar>
-                    <BadgeIcon />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary={currentUser.userName} secondary="Username" />
-              </ListItem>
-              <Divider variant="inset" component="li" />
-              <ListItem>
-                <ListItemAvatar>
-                  <Avatar>
-                    <AlternateEmailIcon />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary={currentUser.email} secondary="Email" />
-              </ListItem>
-              <Divider variant="inset" component="li" />
-              <ListItem>
-                <ListItemAvatar>
-                  <Avatar>
-                    <VisibilityIcon />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary={accoutType ? 'Private' : 'Public'} secondary="Account type" />
-                {!editAccoutType ? (
-                  <Button onClick={() => setEditAccoutType(true)}>
-                    <EditIcon />
-                  </Button>
-                ) : (
-                  <>
-                    <Switch checked={accoutType} onChange={(e) => setAccountType(e.target.checked)} />
-                    <Button onClick={() => handleSaveEditAccoutType()}>
-                      <SaveIcon />
+        {!updatingInProgress ? (
+          <Grid container mt={3} display={'flex'} alignItems={'flex-start'}>
+            <Grid xs={12} md={6} display={'flex'} flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
+              {editAvatar ? (
+                <RoundImageCropper setAvatar={setAvatar} setEditAvatar={setEditAvatar} setNewAvatarWasAdded={setNewAvatarWasAdded}/>
+              ) : (
+                <>
+                  <Box component="img" src={avatar} sx={{ width: 300, heigh: 300, borderRadius: '50%' }} />
+                  <ListItem>
+                    <ListItemAvatar>
+                      <Avatar>
+                        <PhotoCameraIcon />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText primary={'Avatar'} />
+                    <Button onClick={() => setEditAvatar(true)}>
+                      <EditIcon />
                     </Button>
-                  </>
-                )}
-              </ListItem>
-              <Divider variant="inset" component="li" />
-            </List>
+                    {newAvatarWasAdded && (
+                      <Button onClick={() => handleSaveAvatar()}>
+                        <SaveIcon fontSize="large" />
+                      </Button>
+                    )}
+                  </ListItem>
+                </>
+              )}
+            </Grid>
+            <Grid xs={12} md={6}>
+              <AccountDetails setUpdatingInProgress={setUpdatingInProgress} setOpenSuccessAlert={setOpenSuccessAlert} setOpenFailedAlert={setOpenFailedAlert}/>
+            </Grid>
           </Grid>
-        </Grid>
+        ) : (
+          <Box mt={'20%'}>
+            <Typography align="center">Your account is being updated. Please wait.</Typography>
+            <LinearProgress color="secondary" variant="indeterminate" />
+          </Box>
+        )}
       </Container>
+      <BasicAlerts
+        openSuccessAlert={openSuccessAlert}
+        openFailedAlert={openFailedAlert}
+        setOpenSuccessAlert={setOpenSuccessAlert}
+        setOpenFailedAlert={setOpenFailedAlert}
+        successText={'Update was succesfull!'}
+        faildedText={'An error has occurred during updating your account!'}
+      />
     </Box>
   );
 };
 
-export default Settings2;
+export default Settings;

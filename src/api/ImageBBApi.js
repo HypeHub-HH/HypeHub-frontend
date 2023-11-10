@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const apiKey = process.env.REACT_APP_IMG_BB_KEY;
 
-export async function postImage(images) {
+export async function postImages(images) {
   const uploadPromises = images.map((image) => {
     return new Promise(async (resolve, reject) => {
       try {

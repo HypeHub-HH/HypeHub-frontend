@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { Button, Container, Typography, Box, LinearProgress, Snackbar, Alert } from '@mui/material';
+import { Button, Container, Typography, Box, LinearProgress } from '@mui/material';
 import ItemForm from './ItemForm';
 import SelectedImages from './ImagesSection';
 import { useNavigate } from 'react-router-dom';
-import { postImage } from '../../api/ImageBBApi';
+import { postImages } from '../../api/ImageBBApi';
 import { ItemApi } from '../../api/ItemApi';
 import BasicAlerts from '../../components/ui/BasicAlerts';
 import { useAuth } from '../../context/AuthContext';
@@ -34,7 +34,7 @@ const AddItem = () => {
           Colorway: formData.get('colorway'),
           Price: parseFloat(formData.get('price')),
           PurchaseDate: new Date(formData.get('date')),
-          Images: await postImage(selectedImages),
+          Images: await postImages(selectedImages),
         });
         let serverResponse = await ItemApi.createItemAsync(parsedItem);
         console.log(serverResponse);

@@ -4,7 +4,8 @@ import Cropper from 'react-easy-crop';
 import getCroppedImg from '../../utils/canvaUtils';
 import readFile from '../../utils/ReadFile';
 
-const ImageCropper = ({ setSelectedImages, selectedImages }) => {
+
+const RoundImageCropper = ({ setAvatar, setEditAvatar,setNewAvatarWasAdded,setOpenFailedAlert }) => {
   const [crop, setCrop] = React.useState({ x: 0, y: 0 });
   const [zoom, setZoom] = React.useState(1);
   const [imageSrc, setImageSrc] = React.useState(null);
@@ -20,14 +21,17 @@ const ImageCropper = ({ setSelectedImages, selectedImages }) => {
   const showCroppedImage = async () => {
     try {
       const croppedImageUrl = await getCroppedImg(imageSrc, croppedAreaPixels);
-      setSelectedImages([...selectedImages, croppedImageUrl]);
+      setAvatar(croppedImageUrl);
       setImageSrc(null);
+      setEditAvatar(false);
+      setNewAvatarWasAdded(true);
     } catch (e) {
       console.error(e);
     }
   };
   const onCropComplete = (croppedArea, croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels);
+    
   };
 
   return (
@@ -39,7 +43,9 @@ const ImageCropper = ({ setSelectedImages, selectedImages }) => {
               image={imageSrc}
               crop={crop}
               zoom={zoom}
-              aspect={3 / 4}
+              aspect={1}
+              cropShape="round"
+              showGrid={false}
               onCropChange={setCrop}
               onZoomChange={setZoom}
               onCropComplete={onCropComplete}
@@ -49,7 +55,7 @@ const ImageCropper = ({ setSelectedImages, selectedImages }) => {
             <Typography>Zoom</Typography>
             <Slider value={zoom} min={1} max={3} step={0.1} aria-labelledby="Zoom" onChange={(e, zoom) => setZoom(zoom)} />
             <Box display={'flex'} justifyContent={'space-between'}>
-              <Button variant="contained" color="primary" onClick={() => setImageSrc(null)}>
+              <Button variant="contained" color="primary" onClick={() => setEditAvatar(false)}>
                 Cancel
               </Button>
               <Button variant="contained" color="secondary" onClick={() => showCroppedImage()}>
@@ -59,11 +65,14 @@ const ImageCropper = ({ setSelectedImages, selectedImages }) => {
           </Box>
         </Box>
       ) : (
-        <TextField name="upload-photo" type="file" margin="normal" fullWidth onChange={onFileChange}></TextField>
+        <Box display={'flex'} justifyContent={'center'} alignItems={'center'} flexDirection={'column'}>
+        <Typography>Chose an image to add</Typography>
+        <TextField name="upload-photo" type="file" margin="normal" onChange={(e) => onFileChange(e)} />
+      </Box>
       )}
     </>
   );
 };
 
 
-export default ImageCropper;
+export default RoundImageCropper;
