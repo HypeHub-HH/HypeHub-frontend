@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { AccountApi } from '../../api/AccountApi';
 import { OutfitApi } from '../../api/OutfitApi';
-import { postImage } from '../../api/ImageBBApi';
+import { postImages } from '../../api/ImageBBApi';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import BasicAlerts from '../../components/ui/BasicAlerts';
 import ImagesSection from '../../components/layout/cropper/ImagesSection';
 import SelectItems from './ItemsStep';
 import NameStep from './NameStep';
@@ -23,6 +24,8 @@ const AddOutfit = () => {
   const [areImagesValid, setAreImagesValid] = React.useState({ result: null, message: null });
   const [selectedImages, setSelectedImages] = React.useState([]);
   const [isUploading, setIsUploading] = React.useState(false);
+  const [openSuccessAlert, setOpenSuccessAlert] = React.useState(false);
+  const [openFailedAlert, setOpenFailedAlert] = React.useState(false);
   const steps = ['Name', 'Items', 'Images'];
 
   const handleNext = async (e) => {
@@ -43,11 +46,13 @@ const AddOutfit = () => {
       var outfit = JSON.stringify({
         Name: name,
         Items: selectedItems.map((item) => item.id),
-        Images: await postImage(selectedImages),
+        Images: await postImages(selectedImages),
       });
       let response = await OutfitApi.createOutfitAsync(outfit);
+      setOpenSuccessAlert(true);
       navigate(`/account/${currentUser.accountId}/outfits/${response.data.id}`);
     } catch (error) {
+      setOpenFailedAlert(true);
       console.error(error);
     }
   };
@@ -135,6 +140,14 @@ const AddOutfit = () => {
           </Box>
         )}
       </Container>
+      <BasicAlerts
+        openSuccessAlert={openSuccessAlert}
+        openFailedAlert={openFailedAlert}
+        setOpenSuccessAlert={setOpenSuccessAlert}
+        setOpenFailedAlert={setOpenFailedAlert}
+        successText={'You created new Outfit!'}
+        faildedText={'An error has occurred during creation of your outfit!'}
+      />
     </Box>
   );
 };

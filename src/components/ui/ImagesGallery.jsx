@@ -1,12 +1,10 @@
 import * as React from 'react';
-import { Box, styled } from '@mui/system';
-import { useTheme } from '@mui/material/styles';
+import { Box } from '@mui/system';
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
 import noImage from '../../assets/no-item-image.png';
 
 const ImagesGallery = ({ images }) => {
-  const theme = useTheme();
   let imagesURLs = images.map((image) => {
     return {
       original: image.url,
