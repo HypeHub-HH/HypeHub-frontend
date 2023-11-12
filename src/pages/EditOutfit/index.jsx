@@ -1,28 +1,33 @@
 import * as React from 'react';
-import BasicAlerts from '../../components/ui/BasicAlerts';
-import ImagesSection from '../../components/layout/cropper/ImagesSection';
+import NavButtons from '../../components/layout/NavButtons';
 import SelectItems from '../../components/layout/ItemsStep';
 import NameStep from '../../components/layout/NameStep';
-import NavButtons from '../../components/layout/NavButtons';
+import BasicAlerts from '../../components/ui/BasicAlerts';
+import ImagesSection from '../../components/layout/cropper/ImagesSection';
 import { AccountApi } from '../../api/AccountApi';
 import { OutfitApi } from '../../api/OutfitApi';
 import { postImages } from '../../api/ImageBBApi';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Box, Container, Typography, LinearProgress, Stepper, Step, StepLabel } from '@mui/material';
 
-const AddOutfit = () => {
+const EditOutfit = () => {
+  const location = useLocation();
   const navigate = useNavigate();
-  const { accountId } = useParams();
+  const { accountId, outfitId } = useParams();
   const { currentUser } = useAuth();
   const [activeStep, setActiveStep] = React.useState(0);
+  const prevOutfitName = location.state?.name;
+  const [name, setName] = React.useState(location.state?.name);
   const [items, setItems] = React.useState(null);
-  const [selectedItems, setSelectedItems] = React.useState([]);
-  const [name, setName] = React.useState('');
-  const [isNameValid, setIsNameValid] = React.useState({ result: null, message: null });
-  const [areImagesValid, setAreImagesValid] = React.useState({ result: null, message: null });
-  const [selectedImages, setSelectedImages] = React.useState([]);
+  const prevOutfitItems = location.state?.items;
+  const [selectedItems, setSelectedItems] = React.useState([...location.state?.items]);
+  const [isNameValid, setIsNameValid] = React.useState({ result: true, message: null });
+  const prevOutfitImages = location.state?.images;
+  const [selectedImages, setSelectedImages] = React.useState([...location.state?.images.map((image) => image.url)]);
+  const [areImagesValid, setAreImagesValid] = React.useState({ result: true, message: null });
   const [isUploading, setIsUploading] = React.useState(false);
   const [openSuccessAlert, setOpenSuccessAlert] = React.useState(false);
   const [openFailedAlert, setOpenFailedAlert] = React.useState(false);
@@ -33,32 +38,74 @@ const AddOutfit = () => {
     if (activeStep === 0) {
       validateName();
       if (isNameValid.result) setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    } else if (activeStep === 1) setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    else if (activeStep === 2) {
+    } else if (activeStep === 1) {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    } else if (activeStep === 2) {
       validateImages();
-      if (areImagesValid.result) axiosCreateOutfit();
+      if (areImagesValid.result) updateOutfit();
     }
   };
-  const axiosCreateOutfit = async () => {
+  const updateOutfit = async () => {
     try {
       setIsUploading(true);
-      var outfit = JSON.stringify({
-        Name: name,
-        Items: selectedItems.map((item) => item.id),
-        Images: await postImages(selectedImages),
-      });
-      let response = await OutfitApi.createOutfitAsync(outfit);
+      await axiosUpdateOutfit();
+      await axiosUpdateItems();
+      await axiosUpdateImages();
       setOpenSuccessAlert(true);
-      navigate(`/account/${currentUser.accountId}/outfits/${response.data.id}`);
+      navigate(`/account/${currentUser.accountId}/outfits/${outfitId}`);
     } catch (error) {
       setOpenFailedAlert(true);
       console.error(error);
     }
   };
+  const axiosUpdateOutfit = async () => {
+    if (prevOutfitName !== name) {
+      var outfit = JSON.stringify({
+        Id: outfitId,
+        Name: name,
+      });
+      await OutfitApi.updateOutfitAsync(outfit);
+    }
+  };
+  const axiosUpdateItems = async () => {
+    var itemsToDelete = prevOutfitItems.filter((prevItem) => !selectedItems.some((item) => item.id === prevItem.id));
+    var itemsToAdd = selectedItems.filter((item) => !prevOutfitItems.some((prevItem) => prevItem.id === item.id));
+    if (itemsToDelete.length > 0) {
+      for (const item of itemsToDelete) {
+        await OutfitApi.removeItemFromOutfitAsync(outfitId, item.id);
+      }
+    }
+    if (itemsToAdd.length > 0) {
+      for (const item of itemsToAdd) {
+        await OutfitApi.addItemToOutfitAsync(outfitId, item.id);
+      }
+    }
+  };
+  const axiosUpdateImages = async () => {
+    var imagesToDelete = prevOutfitImages.filter((prevImage) => !selectedImages.some((image) => image === prevImage.url));
+    var imagesToAdd = selectedImages.filter((image) => image.includes('data:image/jpeg;base64'));
+    if (imagesToDelete.length > 0) {
+      for (const image of imagesToDelete) {
+        var t = await OutfitApi.deleteImageAsync(image.id);
+      }
+    }
+
+    if (imagesToAdd.length > 0) {
+      var images = await postImages(imagesToAdd);
+      for (const image of images) {
+        var outfitImage = JSON.stringify({
+          OutfitId: outfitId,
+          Url: image,
+        });
+        var res = await OutfitApi.createImageAsync(outfitImage);
+      }
+    }
+  };
   const axiosItems = async () => {
     try {
       const response = await AccountApi.getItemsFromAccountAsync(accountId);
-      setItems(response.data);
+      var filteredItems = response.data.filter((incomingitem) => !selectedItems.some((item) => incomingitem.id === item.id));
+      setItems(filteredItems);
     } catch (error) {
       console.error(error);
     }
@@ -103,7 +150,7 @@ const AddOutfit = () => {
       >
         {!isUploading ? (
           <>
-            <Typography variant="h4">Create Outfit</Typography>
+            <Typography variant="h4">Update Outfit</Typography>
             <Stepper activeStep={activeStep} sx={{ width: '100%', padding: '2%' }}>
               {steps.map((label) => {
                 return (
@@ -134,7 +181,7 @@ const AddOutfit = () => {
           </>
         ) : (
           <Box mt={'20%'}>
-            <Typography align="center">Your outfit is being created...</Typography>
+            <Typography align="center">Your outfit is being updated...</Typography>
             <LinearProgress color="secondary" variant="indeterminate" />
           </Box>
         )}
@@ -144,11 +191,11 @@ const AddOutfit = () => {
         openFailedAlert={openFailedAlert}
         setOpenSuccessAlert={setOpenSuccessAlert}
         setOpenFailedAlert={setOpenFailedAlert}
-        successText={'You have created new Outfit!'}
-        faildedText={'An error has occurred during creation of your outfit!'}
+        successText={'You have updated your Outfit!'}
+        faildedText={'An error has occurred during update of your outfit!'}
       />
     </Box>
   );
 };
 
-export default AddOutfit;
+export default EditOutfit;

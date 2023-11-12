@@ -1,9 +1,8 @@
 import * as React from 'react';
-import ImageCarousel from '../../components/layout/ImageCarousel';
+import ImageCarousel from './ImageCarousel';
 import { Container, Typography, Button, Grid } from '@mui/material';
 
 const ItemsToAdd = ({ items, setItems, selectedItems, setSelectedItems, filteredItems }) => {
-
   const handleAddToOutfit = (item) => {
     setSelectedItems([...selectedItems, item]);
     let index = items.findIndex((i) => i.id === item.id);

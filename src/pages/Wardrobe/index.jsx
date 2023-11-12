@@ -24,7 +24,6 @@ const OtherAccount = () => {
   const axiosOutfits = async () => {
     try {
       const response = await AccountApi.getAccountWithOutfitsAsync(accountId);
-	  console.log(response.data);
       setOutfits(response.data.outfits);
       setAccountInfo({
         id: response.data.id,
@@ -52,8 +51,8 @@ const OtherAccount = () => {
         }}
       >
         {accountInfo && <AccountInfo accountInfo={accountInfo} />}
-        {items && <AccountItems items={items} accountId={accountId}/>}
-        {outfits && <AccountOutfits outfits={outfits} accountId={accountId}/>}
+        {items && <AccountItems items={items} accountId={accountId} />}
+        {outfits && <AccountOutfits outfits={outfits} accountId={accountId} />}
       </Container>
     </Box>
   );

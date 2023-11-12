@@ -18,9 +18,10 @@ export class OutfitApi {
 
   static likeOrUnlikeOutfitAsync = async (outfitId) => await authorizedApi.put(`/Outfits/Like/${outfitId}`);
 
-  static addItemToOutfitAsync = async (outfitId, body) => await authorizedApi.post(`/Outfits/${outfitId}/Items`, body);
+  static addItemToOutfitAsync = async (outfitId, itemId) => await authorizedApi.post(`/Outfits/${outfitId}/Items/${itemId}`);
 
-  static removeItemFromOutfitAsync = async (outfitId, body) => await authorizedApi.delete(`/Outfits/${outfitId}/Items`, body);
+  static removeItemFromOutfitAsync = async (outfitId, itemId) =>
+    await authorizedApi.delete(`/Outfits/${outfitId}/Items/${itemId}`);
 
   static createImageAsync = async (body) => await authorizedApi.post(`/Outfits/Images`, body);
 

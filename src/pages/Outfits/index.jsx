@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Container, Tab, Tabs, Button, styled } from '@mui/material';
+import { Box, Container, Button } from '@mui/material';
 import OutfitTabPanel from '../../components/layout/OutfitTabPanel';
 import { AccountApi } from '../../api/AccountApi';
 import { useAuth } from '../../context/AuthContext';

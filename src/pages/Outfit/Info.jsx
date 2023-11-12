@@ -49,7 +49,7 @@ const Info = ({ outfitInit, accountId }) => {
   };
   const deleteOutfit = async () => {
     try {
-      const response = await OutfitApi.deleteOutfitAsync(outfit.id);
+      await OutfitApi.deleteOutfitAsync(outfit.id);
       navigate(-1);
     } catch (error) {
       console.error(error);
@@ -101,7 +101,15 @@ const Info = ({ outfitInit, accountId }) => {
               <Button variant="contained" color="primary" onClick={() => setPopUpDeleteOutfit(true)}>
                 Delete
               </Button>
-              <Button variant="contained" color="secondary" onClick={() => navigate('..')}>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() =>
+                  navigate(`../account/${accountId}/outfits/${outfit.id}/edit`, {
+                    state: { name: outfit.name, items: outfit.items, images: outfit.images },
+                  })
+                }
+              >
                 Edit
               </Button>
             </Box>
