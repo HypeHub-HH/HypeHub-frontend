@@ -19,14 +19,13 @@ const Item = () => {
   const fetchItem = async () => {
     try {
       const response = await ItemApi.getItemAsync(itemId);
-      console.log(response.data);
       setFetchedItem(response.data);
     } catch (error) {
       console.error(error);
     }
   };
 
-  React.useEffect(() => {Changed Outfit
+  React.useEffect(() => {
     fetchItem();
   }, []);
 
