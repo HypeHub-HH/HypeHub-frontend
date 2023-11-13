@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { TextField, MenuItem, Select, InputLabel, FormControl } from '@mui/material';
+import { TextField, MenuItem, Select, InputLabel, FormControl,Button } from '@mui/material';
 
-const ItemDetails = ({ fetchedItem }) => {
+const ItemDetails = ({fetchedItem}) => {
   const [categoryValue, setCategoryValue] = React.useState(fetchedItem.cloathingType);
   const categories = [
-    { name: 'Torso', value: 1 },
-    { name: 'Legs', value: 2 },
-    { name: 'Footwear', value: 3 },
-    { name: 'Accesories', value: 4 },
+    { name: 'Torso', value: 0 },
+    { name: 'Legs', value: 1 },
+    { name: 'Footwear', value: 2 },
+    { name: 'Accesories', value: 3 },
   ];
  
   return (
@@ -87,11 +87,12 @@ const ItemDetails = ({ fetchedItem }) => {
         id="string"
         type="date"
         label="Date of purchase"
-        defaultValue={fetchedItem.purchaseDate.split('T')[0]}
+        defaultValue={fetchedItem.purchaseDate == null ? null : fetchedItem.purchaseDate.split('T')[0] }
         inputProps={{ min: '1970-01-24', max: new Date().toISOString().split('T')[0] }}
         fullWidth
         variant="outlined"
       />
+      
     </>
   );
 };

@@ -58,8 +58,11 @@ const Item = () => {
               </Grid>
             </Grid>
             <Box display={'flex'} justifyContent={'flex-end'}>
-              <Button variant="contained" onClick={() => handleDelete()}>
+            <Button variant="contained" onClick={() => handleDelete()}>
                 Delete item
+              </Button>
+              <Button variant="contained" onClick={() => navigate(`/account/${currentUser.accountId}/items/${fetchedItem.id}/edit`)} sx={{backgroundColor: '#0EA5E9', marginLeft: 1}}>
+                Edit item
               </Button>
             </Box>
           </>

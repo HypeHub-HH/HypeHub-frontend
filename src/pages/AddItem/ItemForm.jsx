@@ -4,10 +4,10 @@ import { TextField, MenuItem, Select, InputLabel, FormControl } from '@mui/mater
 const ItemForm = () => {
   const [categoryValue, setCategoryValue] = React.useState('');
   const categories = [
-    { name: 'Torso', value: '1' },
-    { name: 'Legs', value: '2' },
-    { name: 'Footwear', value: '3' },
-    { name: 'Accesories', value: '4' },
+    { name: 'Torso', value: 0 },
+    { name: 'Legs', value: 1 },
+    { name: 'Footwear', value: 2 },
+    { name: 'Accesories', value: 3 },
   ];
 
   return (
