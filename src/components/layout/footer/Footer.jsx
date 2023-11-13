@@ -14,14 +14,11 @@ export default function Footer() {
     >
       <Container maxWidth="lg">
         <Grid container spacing={5} display={'flex'} justifyContent={'center'} alignSelf={'center'}>
-          <Grid item xs={6} sm={5}>
+          <Grid item xs={12} sm={9}>
             <Hello />
           </Grid>
-          <Grid item xs={3} sm={3}>
+          <Grid item xs={12} sm={3}>
             <AboutUs />
-          </Grid>
-          <Grid item xs={3} sm={4}>
-            TBD
           </Grid>
         </Grid>
         <Box mt={5}>

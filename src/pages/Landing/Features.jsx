@@ -10,14 +10,11 @@ import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 
 const Features = () => {
   const ImgContainer = styled(Box)(({ theme }) => ({
-    maxWidth: '50%',
-    height: 'auto',
+    maxWidth: '60%',
     display: 'flex',
     justifyContent: 'center',
     [theme.breakpoints.down('md')]: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
+      maxWidth: '30%',
     },
   }));
 
@@ -34,6 +31,11 @@ const Features = () => {
     justifyContent: 'flex-start',
     alignItems: 'center',
     marginTop: '2dvh',
+    [theme.breakpoints.down('md')]: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
   }));
 
   const FeaturesText = styled(Typography)(({ theme }) => ({
@@ -46,11 +48,11 @@ const Features = () => {
   }));
 
   const LargeText = styled(Typography)(({ theme }) => ({
-    fontSize: '24px',
+    fontSize: '23px',
     color: '#000',
     fontWeight: '700',
     [theme.breakpoints.down('md')]: {
-      fontSize: '12px',
+      fontSize: '20px',
     },
   }));
 
@@ -58,38 +60,57 @@ const Features = () => {
     <Box padding="3%" sx={{ backgroundColor: 'greySecondary.main' }}>
       <Container>
         <FeaturesText>Features:</FeaturesText>
-        <Grid container display={'flex'} justifyContent={'space-evenly'} alignItems={'center'}>
-          <GridIcon xs={2}>
+        <Grid container display={'flex'} justifyContent={'space-evenly'} alignItems={'flex-start'} spacing={2}>
+          <GridIcon xs={12} md={2}>
             <ImgContainer component="img" src={Add} alt="Add item image." />
-          </GridIcon>
-          <GridIcon xs={1}>
-            <ImgContainer component="img" src={Arrow} alt="Right arrow image." />
-          </GridIcon>
-          <GridIcon xs={2}>
-            <ImgContainer component="img" src={Idea} alt="Create outfit image." />
-          </GridIcon>
-          <GridIcon xs={1}>
-            <ImgContainer component="img" src={Arrow} alt="Right arrow image." />
-          </GridIcon>
-          <GridIcon xs={2}>
-            <ImgContainer component="img" src={Heart} alt="Like image." />
-          </GridIcon>
-          <GridIcon xs={1}>
-            <ImgContainer component="img" src={Arrow} alt="Right arrow image." />
-          </GridIcon>
-          <GridIcon xs={2}>
-            <ImgContainer component="img" src={Community} alt="Community image." />
-          </GridIcon>
-        </Grid>
-        <Grid container display={'flex'} justifyContent={'space-around'}>
-          <GridText xs={2}>
             <LargeText>Add your items</LargeText>
             <Typography align="center">
               It's like having your entire wardrobe at your fingertips, making it easy to keep track of your style
               essentials.
             </Typography>
-          </GridText>
-          <Grid xs={1}></Grid>
+          </GridIcon>
+          <GridIcon xs={0} md={1}>
+            <ImgContainer component="img" src={Arrow} alt="Right arrow image." />
+          </GridIcon>
+          <GridIcon xs={12} md={2}>
+            <ImgContainer component="img" src={Idea} alt="Create outfit image." />
+            <LargeText>Create Outfits</LargeText>
+            <Typography align="center">
+              Express your creativity! Mix and match your wardrobe items to create stylish outfits.
+            </Typography>
+          </GridIcon>
+          <GridIcon xs={0} md={1}>
+            <ImgContainer component="img" src={Arrow} alt="Right arrow image." />
+          </GridIcon>
+          <GridIcon xs={12} md={2}>
+            <ImgContainer component="img" src={Heart} alt="Like image." />
+            <LargeText>Express Yourself</LargeText>
+            <Typography align="center">
+              Share your fashion insights! Post pictures of your outfits, ask for feedback, and write reviews on
+              clothing items.
+            </Typography>
+          </GridIcon>
+          <GridIcon xs={0} md={1}>
+            <ImgContainer component="img" src={Arrow} alt="Right arrow image." />
+          </GridIcon>
+          <GridIcon xs={12} md={2}>
+            <ImgContainer component="img" src={Community} alt="Community image." />
+            <LargeText>Connect</LargeText>
+            <Typography align="center">
+              It's a space where you can build relationships with people who have similar fashion interests and get
+              inspired by their style choices.
+            </Typography>
+          </GridIcon>
+        </Grid>
+        <Grid container display={'flex'} justifyContent={'space-around'}>
+          {/* <GridText xs={2}>
+            <LargeText>Add your items</LargeText>
+            <Typography align="center">
+              It's like having your entire wardrobe at your fingertips, making it easy to keep track of your style
+              essentials.
+            </Typography>
+          </GridText> */}
+          {/* <Grid xs={1}></Grid>
           <GridText xs={2}>
             <LargeText>Create Outfits</LargeText>
             <Typography align="center">
@@ -111,7 +132,7 @@ const Features = () => {
               It's a space where you can build relationships with people who have similar fashion interests and get
               inspired by their style choices.
             </Typography>
-          </GridText>
+          </GridText> */}
         </Grid>
       </Container>
     </Box>
