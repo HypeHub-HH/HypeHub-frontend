@@ -61,10 +61,9 @@ const EditOutfit = () => {
   const axiosUpdateOutfit = async () => {
     if (prevOutfitName !== name) {
       var outfit = JSON.stringify({
-        Id: outfitId,
         Name: name,
       });
-      await OutfitApi.updateOutfitAsync(outfit);
+      await OutfitApi.updateOutfitAsync(outfitId, outfit);
     }
   };
   const axiosUpdateItems = async () => {
@@ -86,7 +85,7 @@ const EditOutfit = () => {
     var imagesToAdd = selectedImages.filter((image) => image.includes('data:image/jpeg;base64'));
     if (imagesToDelete.length > 0) {
       for (const image of imagesToDelete) {
-        var t = await OutfitApi.deleteImageAsync(image.id);
+        await OutfitApi.deleteImageAsync(image.id);
       }
     }
 
@@ -97,7 +96,7 @@ const EditOutfit = () => {
           OutfitId: outfitId,
           Url: image,
         });
-        var res = await OutfitApi.createImageAsync(outfitImage);
+        await OutfitApi.createImageAsync(outfitImage);
       }
     }
   };

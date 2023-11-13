@@ -26,13 +26,13 @@ const Item = () => {
     }
   };
 
-  React.useEffect(() => {
+  React.useEffect(() => {Changed Outfit
     fetchItem();
   }, []);
 
   const handleDelete = async () => {
     try {
-      const response = await ItemApi.deleteItemAsync(fetchedItem.id);
+      await ItemApi.deleteItemAsync(fetchedItem.id);
       setOpenSuccesDeleteDialog(true);
     } catch (error) {
       console.error(error);
@@ -58,10 +58,14 @@ const Item = () => {
               </Grid>
             </Grid>
             <Box display={'flex'} justifyContent={'flex-end'}>
-            <Button variant="contained" onClick={() => handleDelete()}>
+              <Button variant="contained" onClick={() => handleDelete()}>
                 Delete item
               </Button>
-              <Button variant="contained" onClick={() => navigate(`/account/${currentUser.accountId}/items/${fetchedItem.id}/edit`)} sx={{backgroundColor: '#0EA5E9', marginLeft: 1}}>
+              <Button
+                variant="contained"
+                onClick={() => navigate(`/account/${currentUser.accountId}/items/${fetchedItem.id}/edit`)}
+                sx={{ backgroundColor: '#0EA5E9', marginLeft: 1 }}
+              >
                 Edit item
               </Button>
             </Box>

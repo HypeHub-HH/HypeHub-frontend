@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TextField, MenuItem, Select, InputLabel, FormControl,Button } from '@mui/material';
+import { TextField, MenuItem, Select, InputLabel, FormControl } from '@mui/material';
 
 const ItemDetails = ({fetchedItem}) => {
   const [categoryValue, setCategoryValue] = React.useState(fetchedItem.cloathingType);
