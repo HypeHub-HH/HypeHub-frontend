@@ -37,7 +37,8 @@ const Outfits = () => {
       >
         {currentUser && currentUser.accountId === accountId && (
           <Button
-            sx={{ backgroundColor: '#00FF00', alignSelf: 'flex-end', marginTop: '3%' }}
+          variant='contained'
+            sx={{ backgroundColor: '#0EA5E9', alignSelf: 'flex-end', marginTop: '3%' }}
             onClick={() => navigate(`../account/${currentUser.accountId}/outfits/addNewOutfit`)}
           >
             Add Outfit

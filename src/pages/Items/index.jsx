@@ -60,7 +60,8 @@ const Items = () => {
         )}
         {currentUser && currentUser.accountId === accountId && (
           <Button
-            sx={{ backgroundColor: '#00FF00', alignSelf: 'flex-end' }}
+          variant='contained'
+            sx={{ backgroundColor: '#0EA5E9', alignSelf: 'flex-end' }}
             onClick={() => navigate(`../account/${currentUser.accountId}/items/addNewItem`)}
           >
             Add Item
