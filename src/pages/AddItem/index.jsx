@@ -28,7 +28,7 @@ const AddItem = () => {
         setIsUploading(true);
         var parsedItem = JSON.stringify({
           Name: name,
-          Category: category,
+          CloathingType: category,
           Brand: formData.get('brand'),
           Model: formData.get('model'),
           Colorway: formData.get('colorway'),
@@ -38,7 +38,7 @@ const AddItem = () => {
         });
         let serverResponse = await ItemApi.createItemAsync(parsedItem);
         setOpenSuccessAlert(true);
-        navigate(`/account/${currentUser.accountId}/items/${serverResponse.data.id}`);
+        navigate(`/account/${currentUser?.accountId}/items/${serverResponse.data.id}`);
       }
     } catch (error) {
       setOpenSuccessAlert(true);

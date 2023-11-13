@@ -15,6 +15,7 @@ import Outfit from './pages/Outfit';
 import Settings from './pages/Settings';
 import AddOutfit from './pages/AddOutfit';
 import EditOutfit from './pages/EditOutfit';
+import EditItem from './pages/EditItem/index.jsx';
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
           <Route path="/account/:accountId/settings" element={<Settings />} />
           <Route path="/account/:accountId/items" element={<Items />} />
           <Route path="/account/:accountId/items/:itemId" element={<Item />} />
+          <Route path="/account/:accountId/items/:itemId/edit" element={<EditItem />} />
           <Route path="/account/:accountId/items/addNewItem" element={<AddItem />} />
           <Route path="/account/:accountId/outfits" element={<Outfits />} />
           <Route path="/account/:accountId/outfits/:outfitId" element={<Outfit />} />
