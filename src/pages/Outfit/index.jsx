@@ -40,7 +40,7 @@ const Outfit = () => {
                 <ImagesGallery images={outfit.images} />
               </Grid>
               <Grid item xs={12} md={6}>
-                <Info outfitInit={outfit} accountId={accountId}/>
+                <Info outfitInit={outfit} accountId={accountId} />
               </Grid>
             </Grid>
             <Divider>
@@ -71,11 +71,19 @@ const Outfit = () => {
                 <CustomTab label="Footwear" sx={{ fontSize: '1.5rem' }}></CustomTab>
                 <CustomTab label="Accesories" sx={{ fontSize: '1.5rem' }}></CustomTab>
               </Tabs>
-              {selectedTab === 0 && <ItemsTabPanel items={outfit.items} />}
-              {selectedTab === 1 && <ItemsTabPanel items={outfit.items.filter((data) => data.cloathingType === 0)} />}
-              {selectedTab === 2 && <ItemsTabPanel items={outfit.items.filter((data) => data.cloathingType === 1)} />}
-              {selectedTab === 3 && <ItemsTabPanel items={outfit.items.filter((data) => data.cloathingType === 2)} />}
-              {selectedTab === 4 && <ItemsTabPanel items={outfit.items.filter((data) => data.cloathingType === 3)} />}
+              {selectedTab === 0 && <ItemsTabPanel items={outfit.items} accountId={accountId} />}
+              {selectedTab === 1 && (
+                <ItemsTabPanel items={outfit.items.filter((data) => data.cloathingType === 0)} accountId={accountId} />
+              )}
+              {selectedTab === 2 && (
+                <ItemsTabPanel items={outfit.items.filter((data) => data.cloathingType === 1)} accountId={accountId} />
+              )}
+              {selectedTab === 3 && (
+                <ItemsTabPanel items={outfit.items.filter((data) => data.cloathingType === 2)} accountId={accountId} />
+              )}
+              {selectedTab === 4 && (
+                <ItemsTabPanel items={outfit.items.filter((data) => data.cloathingType === 3)} accountId={accountId} />
+              )}
             </Box>
           </>
         ) : (

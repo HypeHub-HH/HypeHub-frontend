@@ -12,7 +12,7 @@ export class OutfitApi {
 
   static createOutfitAsync = async (body) => await authorizedApi.post(`/Outfits`, body);
 
-  static updateOutfitAsync = async (body) => await authorizedApi.put(`/Outfits`, body);
+  static updateOutfitAsync = async (outfitId, body) => await authorizedApi.put(`/Outfits/${outfitId}`, body);
 
   static deleteOutfitAsync = async (outfitId) => await authorizedApi.delete(`/Outfits/${outfitId}`);
 
