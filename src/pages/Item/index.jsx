@@ -1,4 +1,4 @@
-import { Box, Button, Typography, LinearProgress, Dialog, DialogContent } from '@mui/material';
+import { Box, Button, Typography, LinearProgress, Dialog, DialogContent, Stack } from '@mui/material';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { ItemApi } from '../../api/ItemApi';
@@ -10,9 +10,9 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
 const Item = () => {
-  const { itemId } = useParams();
+  const { accountId, itemId } = useParams();
   const [fetchedItem, setFetchedItem] = React.useState(null);
-  const [openSuccesDeleteDialog, setOpenSuccesDeleteDialog] = React.useState(false);
+  const [popUpDeleteItem, setPopUpDeleteItem] = React.useState(false);
   const navigate = useNavigate();
   const { currentUser } = useAuth();
 
@@ -33,15 +33,10 @@ const Item = () => {
   const handleDelete = async () => {
     try {
       const response = await ItemApi.deleteItemAsync(fetchedItem.id);
-      setOpenSuccesDeleteDialog(true);
+      navigate(`/account/${currentUser.accountId}/items`);
     } catch (error) {
       console.error(error);
     }
-  };
-
-  const handleDialogClose = () => {
-    setOpenSuccesDeleteDialog(false);
-    navigate(`/account/${currentUser.accountId}/items`);
   };
 
   return (
@@ -57,14 +52,20 @@ const Item = () => {
                 <Info item={fetchedItem} setFetchedItem={setFetchedItem} />
               </Grid>
             </Grid>
-            <Box display={'flex'} justifyContent={'flex-end'}>
-            <Button variant="contained" onClick={() => handleDelete()}>
-                Delete item
-              </Button>
-              <Button variant="contained" onClick={() => navigate(`/account/${currentUser.accountId}/items/${fetchedItem.id}/edit`)} sx={{backgroundColor: '#0EA5E9', marginLeft: 1}}>
-                Edit item
-              </Button>
-            </Box>
+            {currentUser && currentUser.accountId === accountId && (
+              <Box display={'flex'} justifyContent={'flex-end'}>
+                <Button variant="contained" onClick={() => setPopUpDeleteItem(true)}>
+                  Delete item
+                </Button>
+                <Button
+                  variant="contained"
+                  onClick={() => navigate(`/account/${currentUser.accountId}/items/${fetchedItem.id}/edit`)}
+                  sx={{ backgroundColor: '#0EA5E9', marginLeft: 1 }}
+                >
+                  Edit item
+                </Button>
+              </Box>
+            )}
           </>
         ) : (
           <Box mt={'20%'}>
@@ -72,21 +73,17 @@ const Item = () => {
             <LinearProgress color="secondary" variant="indeterminate" />
           </Box>
         )}
-        <Dialog open={openSuccesDeleteDialog} onClose={() => handleDialogClose()}>
-          <DialogContent
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              flexDirection: 'column',
-            }}
-          >
-            <Typography component="h1" variant="h4" align="center" color={'green'}>
-              Successfully deleted!
-            </Typography>
-            <Button variant="contained" color="success" onClick={() => handleDialogClose()}>
-              Go to items
-            </Button>
+        <Dialog open={popUpDeleteItem} onClose={() => setPopUpDeleteItem(false)}>
+          <DialogContent>
+            <Typography variant="h5">Are you sure you want to delete your item?</Typography>
+            <Stack spacing={7} mt={'7%'} direction="row" display="flex" justifyContent="center" alignItems="center">
+              <Button variant="contained" color="primary" onClick={() => setPopUpDeleteItem(false)}>
+                Cancel
+              </Button>
+              <Button variant="contained" color="secondary" onClick={() => handleDelete()}>
+                Yes
+              </Button>
+            </Stack>
           </DialogContent>
         </Dialog>
       </Container>
