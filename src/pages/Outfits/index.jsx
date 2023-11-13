@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { Box, Container, Button } from '@mui/material';
-import OutfitTabPanel from '../../components/layout/OutfitTabPanel';
 import { AccountApi } from '../../api/AccountApi';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import OutfitTabPanel from '../../components/layout/OutfitTabPanel';
+import { Box, Container, Button } from '@mui/material';
 
 const Outfits = () => {
   const navigate = useNavigate();

@@ -1,9 +1,9 @@
 import * as React from 'react';
-import defaultIcon from '../../assets/defaultAccountIcon.png';
-import { Container, Typography, Avatar, Stack, styled } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { OutfitApi } from '../../api/OutfitApi';
+import defaultIcon from '../../assets/defaultAccountIcon.png';
 import Likes from '../../components/ui/Likes';
+import { Container, Typography, Avatar, Stack, styled } from '@mui/material';
 
 const PostInfo = ({ outfitInit }) => {
   const navigate = useNavigate();

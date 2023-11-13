@@ -1,12 +1,11 @@
 import * as React from 'react';
-import { Box, Container, Typography, styled } from '@mui/material';
-import Grid from '@mui/material/Unstable_Grid2';
 import Add from '../../assets/plus.png';
 import Idea from '../../assets/idea.png';
 import Heart from '../../assets/heart.png';
 import Community from '../../assets/community.png';
 import Arrow from '../../assets/right-arrow.png';
-import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
+import Grid from '@mui/material/Unstable_Grid2';
+import { Box, Container, Typography, styled } from '@mui/material';
 
 const Features = () => {
   const ImgContainer = styled(Box)(({ theme }) => ({
@@ -18,14 +17,14 @@ const Features = () => {
     },
   }));
 
-  const GridIcon = styled(Grid2)(({ theme }) => ({
+  const GridIcon = styled(Grid)(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
   }));
 
-  const GridText = styled(Grid2)(({ theme }) => ({
+  const GridText = styled(Grid)(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start',
@@ -103,36 +102,6 @@ const Features = () => {
           </GridIcon>
         </Grid>
         <Grid container display={'flex'} justifyContent={'space-around'}>
-          {/* <GridText xs={2}>
-            <LargeText>Add your items</LargeText>
-            <Typography align="center">
-              It's like having your entire wardrobe at your fingertips, making it easy to keep track of your style
-              essentials.
-            </Typography>
-          </GridText> */}
-          {/* <Grid xs={1}></Grid>
-          <GridText xs={2}>
-            <LargeText>Create Outfits</LargeText>
-            <Typography align="center">
-              Express your creativity! Mix and match your wardrobe items to create stylish outfits.
-            </Typography>
-          </GridText>
-          <Grid xs={1}></Grid>
-          <GridText xs={2}>
-            <LargeText>Express Yourself</LargeText>
-            <Typography align="center">
-              Share your fashion insights! Post pictures of your outfits, ask for feedback, and write reviews on
-              clothing items.
-            </Typography>
-          </GridText>
-          <Grid xs={1}></Grid>
-          <GridText xs={2}>
-            <LargeText>Connect</LargeText>
-            <Typography align="center">
-              It's a space where you can build relationships with people who have similar fashion interests and get
-              inspired by their style choices.
-            </Typography>
-          </GridText> */}
         </Grid>
       </Container>
     </Box>

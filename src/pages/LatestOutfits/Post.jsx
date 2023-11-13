@@ -1,8 +1,8 @@
 import * as React from 'react';
-import ImageCarousel from '../../components/layout/ImageCarousel';
-import { Box, Typography, styled } from '@mui/material';
-import PostInfo from './PostInfo';
 import { useAuth } from '../../context/AuthContext';
+import ImageCarousel from '../../components/layout/ImageCarousel';
+import PostInfo from './PostInfo';
+import { Box, Typography, styled } from '@mui/material';
 
 const Post = ({ outfit }) => {
   const { currentUser } = useAuth();

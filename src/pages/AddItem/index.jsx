@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { Button, Container, Typography, Box, LinearProgress } from '@mui/material';
-import ItemForm from './ItemForm';
-import SelectedImages from '../../components/layout/cropper/ImagesSection';
+import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { postImages } from '../../api/ImageBBApi';
 import { ItemApi } from '../../api/ItemApi';
+import ItemForm from './ItemForm';
+import SelectedImages from '../../components/layout/cropper/ImagesSection';
 import BasicAlerts from '../../components/ui/BasicAlerts';
-import { useAuth } from '../../context/AuthContext';
+import { Button, Container, Typography, Box, LinearProgress } from '@mui/material';
 
 const AddItem = () => {
   const formRef = React.useRef();
@@ -28,13 +28,13 @@ const AddItem = () => {
         setIsUploading(true);
         var parsedItem = JSON.stringify({
           Name: name,
-          CloathingType: category,
+          CloathingType: parseInt(category),
           Brand: formData.get('brand'),
           Model: formData.get('model'),
           Colorway: formData.get('colorway'),
           Price: parseFloat(formData.get('price')),
           PurchaseDate: new Date(formData.get('date')),
-          Images: await postImages(selectedImages),
+          Images: await postImages(selectedImages)
         });
         let serverResponse = await ItemApi.createItemAsync(parsedItem);
         setOpenSuccessAlert(true);

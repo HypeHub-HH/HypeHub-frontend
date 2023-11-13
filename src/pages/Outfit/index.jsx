@@ -1,10 +1,10 @@
 import * as React from 'react';
-import ImagesGallery from '../../components/ui/ImagesGallery';
-import Info from './Info';
 import { OutfitApi } from '../../api/OutfitApi';
 import { useParams } from 'react-router-dom';
-import { Box, Typography, LinearProgress, Container, Grid, Divider, Tab, Tabs, styled } from '@mui/material';
+import ImagesGallery from '../../components/ui/ImagesGallery';
+import Info from './Info';
 import ItemsTabPanel from '../../components/layout/ItemsTabPanel';
+import { Box, Typography, LinearProgress, Container, Grid, Divider, Tab, Tabs, styled } from '@mui/material';
 
 const Outfit = () => {
   const { accountId, outfitId } = useParams();

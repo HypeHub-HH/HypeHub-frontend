@@ -1,9 +1,9 @@
 import * as React from 'react';
-import Footer from '../../components/layout/footer/Footer';
 import Hero from './Hero';
 import EmailSender from './EmailSender';
 import Details from './Details';
 import Features from './Features';
+import Footer from '../../components/layout/footer/Footer';
 import NavbarUnAuthorized from '../../components/layout/navbar/NavbarUnAuthorized';
 import SuccessfullySignUpForm from '../../components/layout/authentication/SuccessfullySignUpForm';
 

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Box, Typography, List, ListItem, ListItemText, ListItemAvatar, Avatar ,Divider} from '@mui/material';
 import { ItemApi } from '../../api/ItemApi';
 import Likes from '../../components/ui/Likes';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
@@ -7,6 +6,7 @@ import AbcIcon from '@mui/icons-material/Abc';
 import ColorLensIcon from '@mui/icons-material/ColorLens';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import { Box, Typography, List, ListItem, ListItemText, ListItemAvatar, Avatar ,Divider} from '@mui/material';
 
 const Info = ({ item, setFetchedItem }) => {
   const [likes, setLikes] = React.useState(null);

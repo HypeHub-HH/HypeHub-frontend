@@ -1,7 +1,7 @@
 import * as React from 'react';
 import emailjs from '@emailjs/browser';
-import { Grid, TextField, Button, Box, Container, Typography } from '@mui/material';
 import BasicAlerts from '../../components/ui/BasicAlerts';
+import { Grid, TextField, Button, Box, Container, Typography } from '@mui/material';
 
 const EmailSender = () => {
   const form = React.useRef();

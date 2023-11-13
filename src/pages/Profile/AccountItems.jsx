@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Box, Divider, Typography, Tab, Tabs, styled, Button } from '@mui/material';
 import ItemsTabPanel from '../../components/layout/ItemsTabPanel.jsx';
+import { Box, Divider, Typography, Tab, Tabs, styled, Button } from '@mui/material';
 
 const AccountItems = ({ items, accountId }) => {
   const [selectedTab, setSelectedTab] = React.useState(0);

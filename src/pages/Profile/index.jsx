@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { AccountApi } from '../../api/AccountApi.js';
-import { Box, Container,LinearProgress,Typography } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import AccountInfo from './AccountInfo.jsx';
 import AccountItems from './AccountItems.jsx';
 import AccountOutfits from './AccountOutfits.jsx';
+import { Box, Container,LinearProgress,Typography } from '@mui/material';
 
 const Profile = () => {
   const { accountId } = useParams();

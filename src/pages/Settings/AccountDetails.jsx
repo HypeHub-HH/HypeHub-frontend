@@ -1,12 +1,12 @@
-import { List, Avatar, ListItemText, Divider, ListItem, ListItemAvatar, Button, Switch } from '@mui/material';
 import React from 'react';
+import { AccountApi } from '../../api/AccountApi';
+import { useAuth } from '../../context/AuthContext';
 import BadgeIcon from '@mui/icons-material/Badge';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
-import { AccountApi } from '../../api/AccountApi';
-import { useAuth } from '../../context/AuthContext';
+import { List, Avatar, ListItemText, Divider, ListItem, ListItemAvatar, Button, Switch } from '@mui/material';
 
 const AccountDetails = ({setUpdatingInProgress, setOpenSuccessAlert, setOpenFailedAlert }) => {
   const { currentUser } = useAuth();

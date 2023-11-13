@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Box, Button, Slider, TextField, Typography } from '@mui/material';
 import Cropper from 'react-easy-crop';
 import getCroppedImg from '../../utils/canvaUtils';
 import readFile from '../../utils/ReadFile';
+import { Box, Button, Slider, TextField, Typography } from '@mui/material';
 
 
 const RoundImageCropper = ({ setAvatar, setEditAvatar,setNewAvatarWasAdded,setOpenFailedAlert }) => {

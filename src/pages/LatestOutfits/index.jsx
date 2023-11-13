@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { OutfitApi } from '../../api/OutfitApi';
 import CustomButton from '../../components/ui/CustomButton';
-import { Box, Container } from '@mui/material';
 import Post from './Post';
+import { Box, Container } from '@mui/material';
 
 const LatestOutfits = () => {
   const [currPage, setCurrPage] = React.useState(1);

@@ -19,7 +19,6 @@ const Item = () => {
   const fetchItem = async () => {
     try {
       const response = await ItemApi.getItemAsync(itemId);
-      console.log(response.data);
       setFetchedItem(response.data);
     } catch (error) {
       console.error(error);
@@ -42,7 +41,7 @@ const Item = () => {
   return (
     <Box>
       <Container>
-        {fetchedItem !== null ? (
+        {fetchedItem ? (
           <>
             <Grid container display={'flex'} justifyContent={'space-around'} mt={'4%'}>
               <Grid xs={12} md={6}>

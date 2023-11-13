@@ -1,10 +1,9 @@
 import * as React from 'react';
-import Likes from '../../components/ui/Likes';
-import defaultIcon from '../../assets/defaultAccountIcon.png';
 import { OutfitApi } from '../../api/OutfitApi';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import Divider from '@mui/material/Divider';
+import Likes from '../../components/ui/Likes';
+import defaultIcon from '../../assets/defaultAccountIcon.png';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import {
   Box,
@@ -19,6 +18,7 @@ import {
   Dialog,
   DialogContent,
   Stack,
+  Divider
 } from '@mui/material';
 
 const Info = ({ outfitInit, accountId }) => {
@@ -96,24 +96,22 @@ const Info = ({ outfitInit, accountId }) => {
           <Likes likes={outfit.likes} setLikes={setLikes} likeOrUnlikeFunc={axiosLikeOrUnlikeOutfitAsync} id={outfit.id} />
         </ListItem>
         {currentUser && currentUser.accountId === accountId && (
-          <ListItem>
-            <Box display="flex" width="100%" justifyContent="space-around" alignItems="center">
-              <Button variant="contained" color="primary" onClick={() => setPopUpDeleteOutfit(true)}>
-                Delete
-              </Button>
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={() =>
-                  navigate(`../account/${accountId}/outfits/${outfit.id}/edit`, {
-                    state: { name: outfit.name, items: outfit.items, images: outfit.images },
-                  })
-                }
-              >
-                Edit
-              </Button>
-            </Box>
-          </ListItem>
+          <Box display={'flex'} justifyContent={'flex-end'}>
+            <Button variant="contained" onClick={() => setPopUpDeleteOutfit(true)}>
+              Delete outfit
+            </Button>
+            <Button
+              variant="contained"
+              onClick={() =>
+                navigate(`../account/${accountId}/outfits/${outfit.id}/edit`, {
+                  state: { name: outfit.name, items: outfit.items, images: outfit.images },
+                })
+              }
+              sx={{ backgroundColor: '#0EA5E9', marginLeft: 1 }}
+            >
+              Edit outfit
+            </Button>
+          </Box>
         )}
       </List>
 

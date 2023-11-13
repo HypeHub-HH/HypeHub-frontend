@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { Avatar, Typography, Stack, List, ListItem, ListItemAvatar, ListItemText, Divider } from '@mui/material';
 import defaultIcon from '../../assets/defaultAccountIcon.png';
 import CheckroomIcon from '@mui/icons-material/Checkroom';
 import AccessibilityIcon from '@mui/icons-material/Accessibility';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { Avatar, Typography, Stack, List, ListItem, ListItemAvatar, ListItemText, Divider } from '@mui/material';
 
 const AccountInfo = ({ accountInfo, numberOfItems, numberOfItemsLikes, numberOfOutfits, numberOfOutfitsLikes }) => {
   return (

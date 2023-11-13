@@ -1,3 +1,14 @@
+import React from 'react';
+import { useAuth } from '../../context/AuthContext';
+import { postImages } from '../../api/ImageBBApi';
+import { AccountApi } from '../../api/AccountApi';
+import Grid from '@mui/material/Unstable_Grid2/Grid2';
+import RoundImageCropper from './RoundImageCropper';
+import AccountDetails from './AccountDetails';
+import BasicAlerts from '../../components/ui/BasicAlerts';
+import EditIcon from '@mui/icons-material/Edit';
+import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
+import SaveIcon from '@mui/icons-material/Save';
 import {
   Container,
   Box,
@@ -9,17 +20,6 @@ import {
   LinearProgress,
   Typography,
 } from '@mui/material';
-import React from 'react';
-import { useAuth } from '../../context/AuthContext';
-import Grid from '@mui/material/Unstable_Grid2/Grid2';
-import EditIcon from '@mui/icons-material/Edit';
-import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
-import { postImages } from '../../api/ImageBBApi';
-import RoundImageCropper from './RoundImageCropper';
-import AccountDetails from './AccountDetails';
-import SaveIcon from '@mui/icons-material/Save';
-import { AccountApi } from '../../api/AccountApi';
-import BasicAlerts from '../../components/ui/BasicAlerts';
 
 const Settings = () => {
   const { currentUser } = useAuth();

@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { styled, Typography } from '@mui/material';
-import { Box, Container } from '@mui/system';
 import wardrobeImage from '../../assets/wardrobe.jpg';
+import { styled, Typography, Box, Container } from '@mui/material';
 
 const Details = () => {
   const CustomBox = styled(Box)(({ theme }) => ({

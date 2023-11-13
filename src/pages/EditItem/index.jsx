@@ -5,9 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import { ItemApi } from '../../api/ItemApi';
 import { postImages } from '../../api/ImageBBApi';
 import ItemDetails from './ItemDetails';
-import { Box, Container, LinearProgress, Typography, Button } from '@mui/material';
 import SelectedImages from './ImagesSection';
 import BasicAlerts from '../../components/ui/BasicAlerts';
+import { Box, Container, LinearProgress, Typography, Button } from '@mui/material';
 
 const EditItem = () => {
   const { itemId } = useParams();

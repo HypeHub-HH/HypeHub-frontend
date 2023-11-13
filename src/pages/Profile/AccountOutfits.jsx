@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Box, Divider, Typography } from '@mui/material';
 import OutfitTabPanel from '../../components/layout/OutfitTabPanel.jsx';
+import { Box, Divider, Typography } from '@mui/material';
 
 const AccountOutfits = ({ outfits, accountId }) => {
   return (
