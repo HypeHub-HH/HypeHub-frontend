@@ -42,7 +42,6 @@ const EditItem = () => {
       if (name !== '' && category !== '') {
         setIsUploading(true);
         var parsedItem = JSON.stringify({
-          Id: fetchedItem.id,
           Name: name,
           CloathingType: parseInt(category),
           Brand: formData.get('brand'),
@@ -55,7 +54,7 @@ const EditItem = () => {
         let uploadedImagesWithItemId = uploadedImagesToImageBB.map((url) => ({ ItemId: fetchedItem.id, Url: url }));
         await Promise.all(uploadedImagesWithItemId.map(async (imageId) => await ItemApi.createImageAsync(imageId)));       
         await Promise.all(deletedImages.map(async (imageId) => await ItemApi.deleteImageAsync(imageId)));
-        await ItemApi.updateItemAsync(parsedItem);
+        await ItemApi.updateItemAsync(itemId, parsedItem);
         await fetchItem()
         setDeletedImages([])
         setAddedImages([])

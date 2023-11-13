@@ -8,13 +8,13 @@ export class ItemApi {
 
   static createItemAsync = async (body) => await authorizedApi.post(`/Items`, body);
 
-  static updateItemAsync = async (body) => await authorizedApi.put(`/Items`, body);
+  static updateItemAsync = async (itemId, body) => await authorizedApi.put(`/Items/${itemId}`, body);
 
   static deleteItemAsync = async (itemId) => await authorizedApi.delete(`/Items/${itemId}`);
 
   static createImageAsync = async (body) => await authorizedApi.post(`/Items/Images`, body);
 
-  static deleteImageAsync = async (imageId) => await authorizedApi.delete(`/Items/Images?imageId=${imageId}`);
+  static deleteImageAsync = async (imageId) => await authorizedApi.delete(`/Items/Images/${imageId}`);
 
   static likeOrUnlikeItemAsync = async (itemId) => await authorizedApi.put(`/Items/${itemId}/like`);
 }

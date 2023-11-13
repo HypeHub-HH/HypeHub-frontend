@@ -69,36 +69,25 @@ const EditOutfit = () => {
   const axiosUpdateItems = async () => {
     var itemsToDelete = prevOutfitItems.filter((prevItem) => !selectedItems.some((item) => item.id === prevItem.id));
     var itemsToAdd = selectedItems.filter((item) => !prevOutfitItems.some((prevItem) => prevItem.id === item.id));
-    if (itemsToDelete.length > 0) {
-      for (const item of itemsToDelete) {
-        await OutfitApi.removeItemFromOutfitAsync(outfitId, item.id);
-      }
-    }
-    if (itemsToAdd.length > 0) {
-      for (const item of itemsToAdd) {
-        await OutfitApi.addItemToOutfitAsync(outfitId, item.id);
-      }
-    }
+    await Promise.all(itemsToDelete.map(async (item) => await OutfitApi.removeItemFromOutfitAsync(outfitId, item.id)));
+    await Promise.all(itemsToAdd.map(async (item) => await OutfitApi.addItemToOutfitAsync(outfitId, item.id)));
   };
   const axiosUpdateImages = async () => {
     var imagesToDelete = prevOutfitImages.filter((prevImage) => !selectedImages.some((image) => image === prevImage.url));
     var imagesToAdd = selectedImages.filter((image) => image.includes('data:image/jpeg;base64'));
-    if (imagesToDelete.length > 0) {
-      for (const image of imagesToDelete) {
-        await OutfitApi.deleteImageAsync(image.id);
-      }
-    }
-
-    if (imagesToAdd.length > 0) {
-      var images = await postImages(imagesToAdd);
-      for (const image of images) {
-        var outfitImage = JSON.stringify({
-          OutfitId: outfitId,
-          Url: image,
-        });
-        await OutfitApi.createImageAsync(outfitImage);
-      }
-    }
+    await Promise.all(imagesToDelete.map(async (image) => await OutfitApi.deleteImageAsync(outfitId, image.id)));
+    var images = await postImages(imagesToAdd);
+    await Promise.all(
+      images.map(
+        async (image) =>
+          await OutfitApi.createImageAsync(
+            JSON.stringify({
+              OutfitId: outfitId,
+              Url: image,
+            })
+          )
+      )
+    );
   };
   const axiosItems = async () => {
     try {
