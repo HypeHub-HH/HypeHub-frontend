@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { Box, Typography, List, ListItem, ListItemText, ListItemAvatar, Avatar } from '@mui/material';
+import { Box, Typography, List, ListItem, ListItemText, ListItemAvatar, Avatar ,Divider} from '@mui/material';
 import { ItemApi } from '../../api/ItemApi';
 import Likes from '../../components/ui/Likes';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
-import Divider from '@mui/material/Divider';
 import AbcIcon from '@mui/icons-material/Abc';
 import ColorLensIcon from '@mui/icons-material/ColorLens';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';

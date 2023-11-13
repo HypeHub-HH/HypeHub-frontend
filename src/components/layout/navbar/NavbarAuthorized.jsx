@@ -12,7 +12,7 @@ const NavbarAuthorized = () => {
 
   const settings = [
     {
-      Name: 'Wardrobe',
+      Name: 'Profile',
       Fun: () => navigate(`../account/${currentUser.accountId}`),
     },
     {

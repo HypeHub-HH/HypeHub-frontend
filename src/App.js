@@ -9,7 +9,7 @@ import Items from './pages/Items';
 import Item from './pages/Item';
 import AddItem from './pages/AddItem';
 import LatestOutfits from './pages/LatestOutfits';
-import Wardrobe from './pages/Wardrobe';
+import Wardrobe from './pages/Profile';
 import Outfits from './pages/Outfits';
 import Outfit from './pages/Outfit';
 import Settings from './pages/Settings';
