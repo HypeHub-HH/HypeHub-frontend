@@ -6,7 +6,7 @@ import { Box, Container } from '@mui/material';
 
 const LatestOutfits = () => {
   const [currPage, setCurrPage] = React.useState(1);
-  const [latestOutfits, setLatestOutfits] = React.useState(null);
+  const [latestOutfits, setLatestOutfits] = React.useState([]);
   const [wasLastList, setWasLastList] = React.useState(false);
 
   const axiosLatestOutfits = async () => {
@@ -37,7 +37,7 @@ const LatestOutfits = () => {
           paddingTop: '1%',
         }}
       >
-        {latestOutfits &&
+        {latestOutfits.length > 0 &&
           latestOutfits.map((outfit) => (
             <Post key={outfit.id} outfit={outfit} />
           ))}
