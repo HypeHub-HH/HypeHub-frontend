@@ -8,10 +8,10 @@ import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
 import { List, Avatar, ListItemText, Divider, ListItem, ListItemAvatar, Button, Switch } from '@mui/material';
 
-const AccountDetails = ({setUpdatingInProgress, setOpenSuccessAlert, setOpenFailedAlert }) => {
+const AccountDetails = ({setUpdatingInProgress, setOpenSuccessAlert, setOpenFailedAlert,accoutType,setAccountType }) => {
   const { currentUser } = useAuth();
   const [editAccoutType, setEditAccoutType] = React.useState(false);
-  const [accoutType, setAccountType] = React.useState(currentUser?.isPrivate);
+
 
   const handleSaveEditAccoutType = async () => {
     setUpdatingInProgress(true);
@@ -19,7 +19,8 @@ const AccountDetails = ({setUpdatingInProgress, setOpenSuccessAlert, setOpenFail
       let parsedPrivacy = JSON.stringify({
         IsPrivate: accoutType,
       });
-      await AccountApi.updateAccountPrivacyAsync(parsedPrivacy);
+      let result = await AccountApi.updateAccountPrivacyAsync(parsedPrivacy);
+      setAccountType(result.data.isPrivate)
       setEditAccoutType(false);
       setUpdatingInProgress(false);
       setOpenSuccessAlert(true)
