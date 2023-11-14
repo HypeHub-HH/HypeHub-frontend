@@ -21,6 +21,7 @@ import {
 } from '@mui/material';
 
 const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn, setSuccessfullySignUp }) => {
+  const [checking, setChecking] = React.useState(false);
   const [errors, setErrors] = React.useState(null);
   const [showPassword, setShowPassword] = React.useState(false);
   const [email, setEmail] = React.useState('');
@@ -38,25 +39,20 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn, setSuccessfull
     setErrors(null);
     validateEmail();
   }, [email]);
-
   React.useEffect(() => {
     if (isEmailValid.result === true) axiosCheckIfEmailExist();
   }, [triggerAxiosEmail]);
-
   React.useEffect(() => {
     setErrors(null);
     validateUsername();
   }, [username]);
-
   React.useEffect(() => {
     if (isUsernameValid.result === true) axiosCheckIfUsernameExist();
   }, [triggerAxiosUsername]);
-
   React.useEffect(() => {
     setErrors(null);
     validatePassword();
   }, [password]);
-
   const axiosCheckIfEmailExist = async () => {
     try {
       setCheckEmail(true);
@@ -91,6 +87,7 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn, setSuccessfull
   };
   const axiosRegister = async () => {
     try {
+      setChecking(true);
       await AuthenticationApi.signUpAsync({
         email: email,
         username: username,
@@ -101,9 +98,10 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn, setSuccessfull
     } catch (error) {
       setErrors(error.response.data.Errors);
       console.error(error);
+    } finally {
+      setChecking(false);
     }
   };
-
   const handleSubmit = (event) => {
     event.preventDefault();
     validateEmail();
@@ -113,7 +111,6 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn, setSuccessfull
       axiosRegister();
     }
   };
-
   const validateEmail = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     let result = emailRegex.test(email);
@@ -123,7 +120,6 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn, setSuccessfull
       setTriggerAxiosEmail(!triggerAxiosEmail);
     } else setIsEmailValid({ result: false, message: 'Invalid Email format.' });
   };
-
   const validateUsername = () => {
     let validationResult = isUsernameValid.result;
     let messages = [];
@@ -148,7 +144,6 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn, setSuccessfull
       setIsUsernameValid({ result: validationResult, messages: messages });
     }
   };
-
   const validatePassword = () => {
     let validationResult = isPasswordValid.result;
     let messages = [];
@@ -190,7 +185,6 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn, setSuccessfull
       setIsPasswordValid({ result: validationResult, messages: messages });
     }
   };
-
   const SubmitButton = styled(Button)(({ theme }) => ({
     backgroundColor: '#0F172A',
     color: 'white',
@@ -206,7 +200,6 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn, setSuccessfull
       borderColor: '#0EA5E9',
     },
   }));
-
   const LinkText = styled(Typography)(({ theme }) => ({
     cursor: 'pointer',
     '&:hover': {
@@ -217,116 +210,131 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn, setSuccessfull
   return (
     <Dialog open={openSignUp} onClose={() => setOpenSignUp(false)}>
       <DialogContent>
-        <Typography component="h1" variant="h4" align="center">
-          Sign Up
-        </Typography>
-        {errors !== null &&
-          errors.map((error) => (
-            <Typography variant="h6" align="center" color={'#db6969'}>
-              {error}
+        {checking ? (
+          <Box display="flex" alignItems="center" flexDirection="column">
+            <CircularProgress color="grey" align="center" size="6rem" thickness="2" />
+            <Typography variant="h6" align="center" mt="20%">
+              Signing up...
             </Typography>
-          ))}
-        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
-          <FormControl
-            fullWidth
-            error={!isEmailValid.result && isEmailValid.message !== null}
-            margin="normal"
-            variant="outlined"
-            onChange={(e) => setEmail(e.target.value)}
-          >
-            <InputLabel htmlFor="email">Email</InputLabel>
-            <OutlinedInput
-              id="email"
-              name="email"
-              type="text"
-              label="Email"
-              autoComplete="email"
-              endAdornment={
-                <InputAdornment position="end">
-                  {<CircularProgress sx={{ display: checkEmail ? 'block' : 'none' }} color="grey" />}
-                </InputAdornment>
-              }
-            />
-            {!isEmailValid.result && isEmailValid.message !== null && <FormHelperText>{isEmailValid.message}</FormHelperText>}
-          </FormControl>
-          <FormControl
-            fullWidth
-            error={!isUsernameValid.result && isUsernameValid.messages.length !== 0}
-            margin="normal"
-            variant="outlined"
-            onChange={(e) => setUsername(e.target.value)}
-          >
-            <InputLabel htmlFor="username">Username</InputLabel>
-            <OutlinedInput
-              id="username"
-              name="username"
-              type="text"
-              label="Username"
-              autoComplete="nickname"
-              endAdornment={
-                <InputAdornment position="end">
-                  {<CircularProgress sx={{ display: checkUsername ? 'block' : 'none' }} color="grey" />}
-                </InputAdornment>
-              }
-            />
-            {!isUsernameValid.result &&
-              isUsernameValid.messages !== null &&
-              isUsernameValid.messages.map((message) => {
-                return <FormHelperText key={message}>{message}</FormHelperText>;
-              })}
-          </FormControl>
-          <FormControl
-            fullWidth
-            error={!isPasswordValid.result && isPasswordValid.messages.length !== 0}
-            margin="normal"
-            variant="outlined"
-            onChange={(e) => setPassword(e.target.value)}
-          >
-            <InputLabel htmlFor="password">Password</InputLabel>
-            <OutlinedInput
-              id="password"
-              name="password"
-              label="Password"
-              type={showPassword ? 'text' : 'password'}
-              autoComplete="new-password"
-              variant="filled"
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton aria-label="toggle password visibility" onClick={() => setShowPassword((show) => !show)} edge="end">
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
-            />
-            {!isPasswordValid.result &&
-              isPasswordValid.messages !== null &&
-              isPasswordValid.messages.map((message) => {
-                return <FormHelperText key={message}>{message}</FormHelperText>;
-              })}
-          </FormControl>
-          <SubmitButton fullWidth margin="normal" type="submit">
-            SIGN UP
-          </SubmitButton>
-          <Divider>OR</Divider>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              margin: '16px 0 0 0',
-            }}
-          >
-            <LinkText
-              onClick={() => {
-                setOpenSignUp(false);
-                setOpenSignIn(true);
-              }}
-              variant="body1"
-            >
-              Already have an account? Sign In
-            </LinkText>
           </Box>
-        </Box>
+        ) : (
+          <>
+            <Typography component="h1" variant="h4" align="center">
+              Sign Up
+            </Typography>
+            {errors !== null &&
+              errors.map((error) => (
+                <Typography variant="h6" align="center" color={'#db6969'}>
+                  {error}
+                </Typography>
+              ))}
+            <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
+              <FormControl
+                fullWidth
+                error={!isEmailValid.result && isEmailValid.message !== null}
+                margin="normal"
+                variant="outlined"
+                onChange={(e) => setEmail(e.target.value)}
+              >
+                <InputLabel htmlFor="email">Email</InputLabel>
+                <OutlinedInput
+                  id="email"
+                  name="email"
+                  type="text"
+                  label="Email"
+                  autoComplete="email"
+                  endAdornment={
+                    <InputAdornment position="end">
+                      {<CircularProgress sx={{ display: checkEmail ? 'block' : 'none' }} color="grey" />}
+                    </InputAdornment>
+                  }
+                />
+                {!isEmailValid.result && isEmailValid.message !== null && <FormHelperText>{isEmailValid.message}</FormHelperText>}
+              </FormControl>
+              <FormControl
+                fullWidth
+                error={!isUsernameValid.result && isUsernameValid.messages.length !== 0}
+                margin="normal"
+                variant="outlined"
+                onChange={(e) => setUsername(e.target.value)}
+              >
+                <InputLabel htmlFor="username">Username</InputLabel>
+                <OutlinedInput
+                  id="username"
+                  name="username"
+                  type="text"
+                  label="Username"
+                  autoComplete="nickname"
+                  endAdornment={
+                    <InputAdornment position="end">
+                      {<CircularProgress sx={{ display: checkUsername ? 'block' : 'none' }} color="grey" />}
+                    </InputAdornment>
+                  }
+                />
+                {!isUsernameValid.result &&
+                  isUsernameValid.messages !== null &&
+                  isUsernameValid.messages.map((message) => {
+                    return <FormHelperText key={message}>{message}</FormHelperText>;
+                  })}
+              </FormControl>
+              <FormControl
+                fullWidth
+                error={!isPasswordValid.result && isPasswordValid.messages.length !== 0}
+                margin="normal"
+                variant="outlined"
+                onChange={(e) => setPassword(e.target.value)}
+              >
+                <InputLabel htmlFor="password">Password</InputLabel>
+                <OutlinedInput
+                  id="password"
+                  name="password"
+                  label="Password"
+                  type={showPassword ? 'text' : 'password'}
+                  autoComplete="new-password"
+                  variant="filled"
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={() => setShowPassword((show) => !show)}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                />
+                {!isPasswordValid.result &&
+                  isPasswordValid.messages !== null &&
+                  isPasswordValid.messages.map((message) => {
+                    return <FormHelperText key={message}>{message}</FormHelperText>;
+                  })}
+              </FormControl>
+              <SubmitButton fullWidth margin="normal" type="submit">
+                SIGN UP
+              </SubmitButton>
+              <Divider>OR</Divider>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  margin: '16px 0 0 0',
+                }}
+              >
+                <LinkText
+                  onClick={() => {
+                    setOpenSignUp(false);
+                    setOpenSignIn(true);
+                  }}
+                  variant="body1"
+                >
+                  Already have an account? Sign In
+                </LinkText>
+              </Box>
+            </Box>
+          </>
+        )}
       </DialogContent>
     </Dialog>
   );

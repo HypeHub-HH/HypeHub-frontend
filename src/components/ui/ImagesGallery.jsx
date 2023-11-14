@@ -23,7 +23,13 @@ const ImagesGallery = ({ images }) => {
       }}
     >
       {images.length > 0 ? (
-        <ImageGallery items={imagesURLs} showPlayButton={false} thumbnailPosition={'left'} showBullets={true} />
+        <ImageGallery
+          items={imagesURLs}
+          showFullscreenButton={false}
+          showPlayButton={false}
+          thumbnailPosition={'left'}
+          showBullets={true}
+        />
       ) : (
         <img src={noImage} alt="noImage" style={{ maxWidth: '100%', maxHeight: '100%' }} />
       )}
