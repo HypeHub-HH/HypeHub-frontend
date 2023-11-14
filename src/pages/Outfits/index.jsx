@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import OutfitTabPanel from '../../components/layout/OutfitTabPanel';
-import { Box, Container, Button } from '@mui/material';
+import { Box, Container, Button, Typography, LinearProgress } from '@mui/material';
 
 const Outfits = () => {
   const navigate = useNavigate();
@@ -35,16 +35,25 @@ const Outfits = () => {
           flexDirection: 'column',
         }}
       >
-        {currentUser && currentUser.accountId === accountId && (
-          <Button
-          variant='contained'
-            sx={{ backgroundColor: '#0EA5E9', alignSelf: 'flex-end', marginTop: '3%' }}
-            onClick={() => navigate(`../account/${currentUser.accountId}/outfits/addNewOutfit`)}
-          >
-            Add Outfit
-          </Button>
+        {outfits ? (
+          <>
+            <OutfitTabPanel outfits={outfits} accountId={accountId} />
+            {currentUser && currentUser.accountId === accountId && (
+              <Button
+                variant="contained"
+                sx={{ backgroundColor: '#0EA5E9', alignSelf: 'flex-end', marginTop: '3%' }}
+                onClick={() => navigate(`../account/${currentUser.accountId}/outfits/addNewOutfit`)}
+              >
+                Add Outfit
+              </Button>
+            )}
+          </>
+        ) : (
+          <Box mt={'20%'}>
+            <Typography align="center">Outfits are being loaded. Please wait...</Typography>
+            <LinearProgress color="secondary" variant="indeterminate" />
+          </Box>
         )}
-        {outfits && <OutfitTabPanel outfits={outfits} accountId={accountId} />}
       </Container>
     </Box>
   );

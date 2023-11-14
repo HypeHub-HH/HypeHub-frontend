@@ -18,7 +18,7 @@ const EditItem = () => {
   const [fetchedItem, setFetchedItem] = React.useState(null);
   const [deletedImages, setDeletedImages] = React.useState([]);
   const [addedImages, setAddedImages] = React.useState([]);
-  
+
   const [isUploading, setIsUploading] = React.useState(false);
   const [openSuccessAlert, setOpenSuccessAlert] = React.useState(false);
   const [openFailedAlert, setOpenFailedAlert] = React.useState(false);
@@ -32,7 +32,7 @@ const EditItem = () => {
     }
   };
 
-  const handleSubmit = async (e) => {   
+  const handleSubmit = async (e) => {
     e.preventDefault();
     formRef.current.reportValidity();
     const formData = new FormData(formRef.current);
@@ -52,12 +52,12 @@ const EditItem = () => {
         });
         let uploadedImagesToImageBB = await postImages(addedImages);
         let uploadedImagesWithItemId = uploadedImagesToImageBB.map((url) => ({ ItemId: fetchedItem.id, Url: url }));
-        await Promise.all(uploadedImagesWithItemId.map(async (imageId) => await ItemApi.createImageAsync(imageId)));       
+        await Promise.all(uploadedImagesWithItemId.map(async (imageId) => await ItemApi.createImageAsync(imageId)));
         await Promise.all(deletedImages.map(async (imageId) => await ItemApi.deleteImageAsync(imageId)));
         await ItemApi.updateItemAsync(itemId, parsedItem);
-        await fetchItem()
-        setDeletedImages([])
-        setAddedImages([])
+        await fetchItem();
+        setDeletedImages([]);
+        setAddedImages([]);
         setOpenSuccessAlert(true);
         setIsUploading(false);
       }
@@ -70,30 +70,41 @@ const EditItem = () => {
     fetchItem();
   }, []);
 
-
   return (
     <Box padding={'2%'}>
       <Container>
         {!isUploading ? (
           <>
-            {fetchedItem && (
+            {fetchedItem ? (
               <>
-              <form ref={formRef} onSubmit={handleSubmit}>
-                <Typography variant="h4">Edit details</Typography>     
-                <ItemDetails fetchedItem={fetchedItem} handleSubmit={handleSubmit} />               
-                <SelectedImages
-                  images={fetchedItem.images}
-                  deletedImages={deletedImages}
-                  setDeletedImages={setDeletedImages}
-                  addedImages={addedImages}
-                  setAddedImages={setAddedImages}
-                />
-                <Box display={'flex'} justifyContent={'flex-end'}>
-                <Button variant='contained' onClick={()=>navigate(`/account/${currentUser.accountId}/items/${fetchedItem.id}`)}>Cancel</Button>
-                <Button variant='contained' type="submit" sx={{backgroundColor: '#0EA5E9', marginLeft: 1}}>Save details</Button>            
-                </Box>
+                <form ref={formRef} onSubmit={handleSubmit}>
+                  <Typography variant="h4">Edit details</Typography>
+                  <ItemDetails fetchedItem={fetchedItem} handleSubmit={handleSubmit} />
+                  <SelectedImages
+                    images={fetchedItem.images}
+                    deletedImages={deletedImages}
+                    setDeletedImages={setDeletedImages}
+                    addedImages={addedImages}
+                    setAddedImages={setAddedImages}
+                  />
+                  <Box display={'flex'} justifyContent={'flex-end'}>
+                    <Button
+                      variant="contained"
+                      onClick={() => navigate(`/account/${currentUser.accountId}/items/${fetchedItem.id}`)}
+                    >
+                      Cancel
+                    </Button>
+                    <Button variant="contained" type="submit" sx={{ backgroundColor: '#0EA5E9', marginLeft: 1 }}>
+                      Save details
+                    </Button>
+                  </Box>
                 </form>
               </>
+            ) : (
+              <Box mt={'20%'}>
+                <Typography align="center">Item is being loaded. Please wait...</Typography>
+                <LinearProgress color="secondary" variant="indeterminate" />
+              </Box>
             )}
           </>
         ) : (

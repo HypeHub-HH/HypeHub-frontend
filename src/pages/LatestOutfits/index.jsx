@@ -2,7 +2,7 @@ import * as React from 'react';
 import { OutfitApi } from '../../api/OutfitApi';
 import CustomButton from '../../components/ui/CustomButton';
 import Post from './Post';
-import { Box, Container } from '@mui/material';
+import { Box, Container, Typography, LinearProgress } from '@mui/material';
 
 const LatestOutfits = () => {
   const [currPage, setCurrPage] = React.useState(1);
@@ -37,17 +37,25 @@ const LatestOutfits = () => {
           paddingTop: '1%',
         }}
       >
-        {latestOutfits.length > 0 &&
-          latestOutfits.map((outfit) => (
-            <Post key={outfit.id} outfit={outfit} />
-          ))}
-        {!wasLastList && (
-          <CustomButton
-            backgroundColor="#CBD5E1"
-            color="black"
-            buttonText="Load more"
-            onClick={() => setCurrPage(currPage + 1)}
-          />
+        {latestOutfits.length > 0 ? (
+          <>
+            {latestOutfits.map((outfit) => (
+              <Post key={outfit.id} outfit={outfit} />
+            ))}
+            {!wasLastList && (
+              <CustomButton
+                backgroundColor="#CBD5E1"
+                color="black"
+                buttonText="Load more"
+                onClick={() => setCurrPage(currPage + 1)}
+              />
+            )}
+          </>
+        ) : (
+          <Box mt={'20%'}>
+            <Typography align="center">Latest users outfits are being loaded. Please wait...</Typography>
+            <LinearProgress color="secondary" variant="indeterminate" />
+          </Box>
         )}
       </Container>
     </Box>

@@ -110,7 +110,7 @@ const Settings = () => {
           </Grid>
         ) : (
           <Box mt={'20%'}>
-            <Typography align="center">Your account is being updated. Please wait.</Typography>
+            <Typography align="center">Your account is being updated. Please wait...</Typography>
             <LinearProgress color="secondary" variant="indeterminate" />
           </Box>
         )}

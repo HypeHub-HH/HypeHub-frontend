@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import ItemsTabPanel from '../../components/layout/ItemsTabPanel';
-import { Box, Container, Tab, Tabs, Button, styled } from '@mui/material';
+import { Box, Container, Tab, Tabs, Button, styled, LinearProgress, Typography } from '@mui/material';
 
 const Items = () => {
   const navigate = useNavigate();
@@ -43,42 +43,50 @@ const Items = () => {
           flexDirection: 'column',
         }}
       >
-        {items && (
-          <Tabs
-            sx={{ padding: '1%', maxWidth: '90%' }}
-            value={selectedTab}
-            onChange={(event, newValue) => setSelectedTab(newValue)}
-            variant="scrollable"
-            scrollButtons={false}
-          >
-            <CustomTab label="All"></CustomTab>
-            <CustomTab label="Torso"></CustomTab>
-            <CustomTab label="Legs"></CustomTab>
-            <CustomTab label="Footwear"></CustomTab>
-            <CustomTab label="Accesories"></CustomTab>
-          </Tabs>
-        )}
-        {currentUser && currentUser.accountId === accountId && (
-          <Button
-          variant='contained'
-            sx={{ backgroundColor: '#0EA5E9', alignSelf: 'flex-end' }}
-            onClick={() => navigate(`../account/${currentUser.accountId}/items/addNewItem`)}
-          >
-            Add Item
-          </Button>
-        )}
-        {items && selectedTab === 0 && <ItemsTabPanel items={items} accountId={accountId} />}
-        {items && selectedTab === 1 && (
-          <ItemsTabPanel items={items.filter((data) => data.cloathingType === 0)} accountId={accountId} />
-        )}
-        {items && selectedTab === 2 && (
-          <ItemsTabPanel items={items.filter((data) => data.cloathingType === 1)} accountId={accountId} />
-        )}
-        {items && selectedTab === 3 && (
-          <ItemsTabPanel items={items.filter((data) => data.cloathingType === 2)} accountId={accountId} />
-        )}
-        {items && selectedTab === 4 && (
-          <ItemsTabPanel items={items.filter((data) => data.cloathingType === 3)} accountId={accountId} />
+        {items ? (
+          <>
+            <Tabs
+              sx={{ padding: '1%', maxWidth: '90%' }}
+              value={selectedTab}
+              onChange={(event, newValue) => setSelectedTab(newValue)}
+              variant="scrollable"
+              scrollButtons={false}
+            >
+              <CustomTab label="All"></CustomTab>
+              <CustomTab label="Torso"></CustomTab>
+              <CustomTab label="Legs"></CustomTab>
+              <CustomTab label="Footwear"></CustomTab>
+              <CustomTab label="Accesories"></CustomTab>
+            </Tabs>
+
+            {currentUser && currentUser.accountId === accountId && (
+              <Button
+                variant="contained"
+                sx={{ backgroundColor: '#0EA5E9', alignSelf: 'flex-end' }}
+                onClick={() => navigate(`../account/${currentUser.accountId}/items/addNewItem`)}
+              >
+                Add Item
+              </Button>
+            )}
+            {items && selectedTab === 0 && <ItemsTabPanel items={items} accountId={accountId} />}
+            {items && selectedTab === 1 && (
+              <ItemsTabPanel items={items.filter((data) => data.cloathingType === 0)} accountId={accountId} />
+            )}
+            {items && selectedTab === 2 && (
+              <ItemsTabPanel items={items.filter((data) => data.cloathingType === 1)} accountId={accountId} />
+            )}
+            {items && selectedTab === 3 && (
+              <ItemsTabPanel items={items.filter((data) => data.cloathingType === 2)} accountId={accountId} />
+            )}
+            {items && selectedTab === 4 && (
+              <ItemsTabPanel items={items.filter((data) => data.cloathingType === 3)} accountId={accountId} />
+            )}
+          </>
+        ) : (
+          <Box mt={'20%'}>
+            <Typography align="center">Items are being loaded. Please wait...</Typography>
+            <LinearProgress color="secondary" variant="indeterminate" />
+          </Box>
         )}
       </Container>
     </Box>
