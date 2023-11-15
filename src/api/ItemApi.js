@@ -17,4 +17,6 @@ export class ItemApi {
   static deleteImageAsync = async (imageId) => await authorizedApi.delete(`/Items/Images/${imageId}`);
 
   static likeOrUnlikeItemAsync = async (itemId) => await authorizedApi.put(`/Items/${itemId}/like`);
+
+  static CheckIfItemIsInAnyOutfitAsync = async(itemId) => await axios.get(`${baseURL}/Items/${itemId}/isInOutfit`);
 }

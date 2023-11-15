@@ -13,6 +13,7 @@ const Item = () => {
   const { accountId, itemId } = useParams();
   const [fetchedItem, setFetchedItem] = React.useState(null);
   const [popUpDeleteItem, setPopUpDeleteItem] = React.useState(false);
+  const [popUpDeleteItemError, setPopUpDeleteItemError] = React.useState(false);
   const navigate = useNavigate();
   const { currentUser } = useAuth();
 
@@ -31,8 +32,14 @@ const Item = () => {
 
   const handleDelete = async () => {
     try {
-      const response = await ItemApi.deleteItemAsync(fetchedItem.id);
-      navigate(`/account/${currentUser.accountId}/items`);
+      if((await ItemApi.CheckIfItemIsInAnyOutfitAsync(fetchedItem.id)).data){
+        setPopUpDeleteItemError(true)
+        setPopUpDeleteItem(false)
+      }
+      else{
+        const response = await ItemApi.deleteItemAsync(fetchedItem.id);
+        navigate(`/account/${currentUser.accountId}/items`);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -83,6 +90,11 @@ const Item = () => {
                 Yes
               </Button>
             </Stack>
+          </DialogContent>
+        </Dialog>
+        <Dialog open={popUpDeleteItemError} onClose={() => setPopUpDeleteItemError(false)}>
+          <DialogContent>
+            <Typography variant="h5">You can't delete an item which is used in your outfit.</Typography>
           </DialogContent>
         </Dialog>
       </Container>
