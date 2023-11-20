@@ -4,7 +4,8 @@ import Idea from '../../assets/idea.png';
 import Heart from '../../assets/heart.png';
 import Community from '../../assets/community.png';
 import Arrow from '../../assets/right-arrow.png';
-import { Box, Container, Typography, styled, Grid } from '@mui/material';
+import { Box, Container, Typography, styled } from '@mui/material';
+import Grid from '@mui/material/Unstable_Grid2/Grid2';
 
 const Features = () => {
   const ImgContainer = styled(Box)(({ theme }) => ({
