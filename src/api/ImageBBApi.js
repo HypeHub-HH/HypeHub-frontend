@@ -34,7 +34,6 @@ export async function postImages(images) {
     return uploadedImages;
 }
 
-
 function extractBase64FromDataURL(dataURL) {
   const parts = dataURL.split(',');
   if (parts.length === 2) {
