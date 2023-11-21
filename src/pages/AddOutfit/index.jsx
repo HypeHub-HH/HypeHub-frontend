@@ -66,7 +66,7 @@ const AddOutfit = () => {
     }
   };
   const validateName = () => {
-    const lengthRegex = /^[^\s]{4,30}$/;
+    const lengthRegex = /^.{4,30}$/;
     let lengthResult = lengthRegex.test(name);
     if (isNameValid.result === null) setIsNameValid({ result: false, message: null });
     else {

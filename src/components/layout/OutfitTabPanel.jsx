@@ -9,14 +9,12 @@ const OutfitTabPanel = ({ outfits, accountId }) => {
   const { currentUser } = useAuth();
 
   return (
-    <Grid container spacing={6} mt={'1%'} sx={{ maxWidth: '100%' }}>
+    <Grid container spacing={6} mt={'1%'} sx={{ width: '100%' }}>
       {outfits.map((outfit) => {
         return (
           <Grid xs={12} md={4} key={outfit.id} sx={{ paddingBottom: '8%' }}>
             <TabPanelInfo objectInit={outfit} likeFun={OutfitApi.likeOrUnlikeOutfitAsync} />
-            {currentUser && (
-              <ImageCarousel images={outfit.images} navigateURL={`../account/${accountId}/outfits/${outfit.id}`} />
-            )}
+            {currentUser && <ImageCarousel images={outfit.images} navigateURL={`../account/${accountId}/outfits/${outfit.id}`} />}
           </Grid>
         );
       })}

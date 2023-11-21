@@ -95,7 +95,7 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn, setSuccessfull
       });
       setSuccessfullySignUp(true);
       setOpenSignUp(false);
-    } catch (error) {git pull
+    } catch (error) {
       setErrors(error.response.data.Errors);
       console.error(error);
     } finally {
@@ -124,7 +124,7 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn, setSuccessfull
     let validationResult = isUsernameValid.result;
     let messages = [];
     const alphanumericRegex = /^[a-zA-Z0-9_-]+$/;
-    const lengthRegex = /^[^\s]{4,255}$/;
+    const lengthRegex = /^[^\s]{4,15}$/;
     let alphanumericResult = alphanumericRegex.test(username);
     let lengthResult = lengthRegex.test(username);
     if (validationResult === null) setIsUsernameValid({ result: false, messages: [] });
