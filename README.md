@@ -1,4 +1,7 @@
 <h1 align="center">HypeHub <img align="center" alt="logo" width="50px" src="https://github.com/HypeHub-HH/HypeHub-backend/assets/119299967/926fff61-999d-45b5-949f-6398f0c725af" /></h1>
+
+<p align="center"><a href="https://hypehub.azurewebsites.net" target="_blank" rel="noreferrer" >Visit site</a></p>
+
 <p>Frontend part of our mini social media platform born from passion for coding and streatwear. </br>
 Users can add cloathing items to wardrobe, create and share outfits, express opinion and many more.</br>
 - Project based on React.js framework</br>
