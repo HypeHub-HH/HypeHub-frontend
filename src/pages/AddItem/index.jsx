@@ -34,7 +34,7 @@ const AddItem = () => {
           Colorway: formData.get('colorway'),
           Price: parseFloat(formData.get('price')),
           PurchaseDate: new Date(formData.get('date')),
-          Images: await postImages(selectedImages)
+          Images: await postImages(selectedImages),
         });
         let serverResponse = await ItemApi.createItemAsync(parsedItem);
         setOpenSuccessAlert(true);
@@ -42,6 +42,8 @@ const AddItem = () => {
       }
     } catch (error) {
       setOpenSuccessAlert(true);
+    } finally {
+      setIsUploading(false);
     }
   };
 

@@ -37,7 +37,6 @@ const Outfits = () => {
       >
         {outfits ? (
           <>
-            <OutfitTabPanel outfits={outfits} accountId={accountId} />
             {currentUser && currentUser.accountId === accountId && (
               <Button
                 variant="contained"
@@ -47,6 +46,7 @@ const Outfits = () => {
                 Add Outfit
               </Button>
             )}
+            <OutfitTabPanel outfits={outfits} accountId={accountId} />
           </>
         ) : (
           <Box mt={'20%'}>

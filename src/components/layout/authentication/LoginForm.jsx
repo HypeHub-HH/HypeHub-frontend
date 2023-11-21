@@ -33,15 +33,14 @@ const LoginForm = ({ openSignIn, setOpenSignIn, setOpenSignUp }) => {
   const [isPasswordValid, setIsPasswordValid] = React.useState({ result: null, message: null });
 
   React.useEffect(() => {
-    setError(null);
     validateEmailOrUsername();
   }, [emailOrUsername]);
   React.useEffect(() => {
-    setError(null);
     validatePassword();
   }, [password]);
   const axiosLogin = async () => {
     try {
+      setError(null);
       setChecking(true);
       const response = await AuthenticationApi.signInAsync({
         emailOrUsername: emailOrUsername,
@@ -108,98 +107,104 @@ const LoginForm = ({ openSignIn, setOpenSignIn, setOpenSignUp }) => {
   return (
     <Dialog open={openSignIn} onClose={() => setOpenSignIn(false)}>
       <DialogContent>
-        {checking ? (
+        {/* {checking ? ( */}
+        {checking && (
           <Box display="flex" alignItems="center" flexDirection="column">
             <CircularProgress color="grey" align="center" size="6rem" thickness="2" />
             <Typography variant="h6" align="center" mt="20%">
               Signing in...
             </Typography>
           </Box>
-        ) : (
-          <>
-            <Typography component="h1" variant="h4" align="center">
-              Sign In
-            </Typography>
-            {error !== null && (
-              <Typography variant="h6" align="center" color={'#db6969'}>
-                {error}
-              </Typography>
-            )}
-            <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
-              <FormControl
-                fullWidth
-                error={!isEmailOrUsernameValid.result && isEmailOrUsernameValid.message !== null}
-                margin="normal"
-                variant="outlined"
-                onChange={(e) => setEmailOrUsername(e.target.value)}
-              >
-                <InputLabel htmlFor="emailOrUsername">Email or username</InputLabel>
-                <OutlinedInput
-                  id="emailOrUsername"
-                  name="emailOrUsername"
-                  type="text"
-                  label="Email or username"
-                  autoComplete="email"
-                />
-                {!isEmailOrUsernameValid.result && isEmailOrUsernameValid.message !== null && (
-                  <FormHelperText>{isEmailOrUsernameValid.message}</FormHelperText>
-                )}
-              </FormControl>
-              <FormControl
-                fullWidth
-                error={!isPasswordValid.result && isPasswordValid.message !== null}
-                margin="normal"
-                variant="outlined"
-                onChange={(e) => setPassword(e.target.value)}
-              >
-                <InputLabel htmlFor="password">Password</InputLabel>
-                <OutlinedInput
-                  id="password"
-                  name="password"
-                  label="Password"
-                  type={showPassword ? 'text' : 'password'}
-                  autoComplete="current-password"
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={() => setShowPassword((show) => !show)}
-                        edge="end"
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                />
-                {!isPasswordValid.result && isPasswordValid.message !== null && (
-                  <FormHelperText>{isPasswordValid.message}</FormHelperText>
-                )}
-              </FormControl>
-              <SubmitButton fullWidth margin="normal" type="submit">
-                SIGN IN
-              </SubmitButton>
-              <Divider>OR</Divider>
-              <Box
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  margin: '16px 0 0 0',
-                }}
-              >
-                <LinkText
-                  onClick={() => {
-                    setOpenSignIn(false);
-                    setOpenSignUp(true);
-                  }}
-                  variant="body1"
-                >
-                  Don't have an account? Sign Up
-                </LinkText>
-              </Box>
-            </Box>
-          </>
         )}
+        {/* ) : ( */}
+        {/* <> */}
+        {!checking && (
+          <Typography component="h1" variant="h4" align="center">
+            Sign In
+          </Typography>
+        )}
+        {error && (
+          <Typography variant="h6" align="center" color={'#db6969'}>
+            {error}
+          </Typography>
+        )}
+        {!checking && (
+          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
+            <FormControl
+              fullWidth
+              error={!isEmailOrUsernameValid.result && isEmailOrUsernameValid.message !== null}
+              margin="normal"
+              variant="outlined"
+              onChange={(e) => setEmailOrUsername(e.target.value)}
+            >
+              <InputLabel htmlFor="emailOrUsername">Email or username</InputLabel>
+              <OutlinedInput
+                id="emailOrUsername"
+                name="emailOrUsername"
+                type="text"
+                label="Email or username"
+                autoComplete="email"
+              />
+              {!isEmailOrUsernameValid.result && isEmailOrUsernameValid.message !== null && (
+                <FormHelperText>{isEmailOrUsernameValid.message}</FormHelperText>
+              )}
+            </FormControl>
+            <FormControl
+              fullWidth
+              error={!isPasswordValid.result && isPasswordValid.message !== null}
+              margin="normal"
+              variant="outlined"
+              onChange={(e) => setPassword(e.target.value)}
+            >
+              <InputLabel htmlFor="password">Password</InputLabel>
+              <OutlinedInput
+                id="password"
+                name="password"
+                label="Password"
+                type={showPassword ? 'text' : 'password'}
+                autoComplete="current-password"
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={() => setShowPassword((show) => !show)}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+              {!isPasswordValid.result && isPasswordValid.message !== null && (
+                <FormHelperText>{isPasswordValid.message}</FormHelperText>
+              )}
+            </FormControl>
+            <SubmitButton fullWidth margin="normal" type="submit">
+              SIGN IN
+            </SubmitButton>
+            <Divider>OR</Divider>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                margin: '16px 0 0 0',
+              }}
+            >
+              <LinkText
+                onClick={() => {
+                  setOpenSignIn(false);
+                  setOpenSignUp(true);
+                }}
+                variant="body1"
+              >
+                Don't have an account? Sign Up
+              </LinkText>
+            </Box>
+          </Box>
+        )}
+        {/* </> */}
+        {/* )} */}
       </DialogContent>
     </Dialog>
   );

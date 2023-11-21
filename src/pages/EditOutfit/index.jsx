@@ -56,6 +56,8 @@ const EditOutfit = () => {
     } catch (error) {
       setOpenFailedAlert(true);
       console.error(error);
+    } finally {
+      setIsUploading(false);
     }
   };
   const axiosUpdateOutfit = async () => {
@@ -75,7 +77,7 @@ const EditOutfit = () => {
   const axiosUpdateImages = async () => {
     var imagesToDelete = prevOutfitImages.filter((prevImage) => !selectedImages.some((image) => image === prevImage.url));
     var imagesToAdd = selectedImages.filter((image) => image.includes('data:image/jpeg;base64'));
-    await Promise.all(imagesToDelete.map(async (image) => await OutfitApi.deleteImageAsync(outfitId, image.id)));
+    await Promise.all(imagesToDelete.map(async (image) => await OutfitApi.deleteImageAsync(image.id)));
     var images = await postImages(imagesToAdd);
     await Promise.all(
       images.map(

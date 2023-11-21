@@ -95,7 +95,7 @@ const RegisterForm = ({ openSignUp, setOpenSignUp, setOpenSignIn, setSuccessfull
       });
       setSuccessfullySignUp(true);
       setOpenSignUp(false);
-    } catch (error) {
+    } catch (error) {git pull
       setErrors(error.response.data.Errors);
       console.error(error);
     } finally {

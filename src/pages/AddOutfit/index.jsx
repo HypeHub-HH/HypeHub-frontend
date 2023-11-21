@@ -53,6 +53,8 @@ const AddOutfit = () => {
     } catch (error) {
       setOpenFailedAlert(true);
       console.error(error);
+    } finally {
+      setIsUploading(false);
     }
   };
   const axiosItems = async () => {

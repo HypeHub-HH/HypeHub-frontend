@@ -63,6 +63,8 @@ const EditItem = () => {
       }
     } catch (error) {
       setOpenFailedAlert(true);
+    } finally {
+      setIsUploading(false);
     }
   };
 
